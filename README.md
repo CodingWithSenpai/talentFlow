@@ -161,3 +161,11 @@ Start the development servers:
 - `bun run db:migrate`: Run Drizzle migrations.
 - `bun run db:push`: Push schema changes directly to the database.
 - `bun run db:studio`: Open Drizzle Studio to view/edit data.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is licensed under the MIT License.
