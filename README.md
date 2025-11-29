@@ -55,7 +55,7 @@ This project is a monorepo organized as follows:
 This starter utilizes [Hono RPC](https://hono.dev/docs/guides/rpc) to provide end-to-end type safety between the backend and frontend.
 
 - **Backend**: Routes defined in `api/hono/src/routers` are exported as `AppType`.
-- **Frontend**: The client in `web/next/src/lib/api/client.ts` imports `AppType` to infer request/response types automatically.
+- **Frontend**: The client at `web/next/src/lib/api/client.ts` infers `AppType` request/response types.
 
 ### Usage Example
 
@@ -81,7 +81,7 @@ const data = await res.json()
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/the-saas-starter.git
+   git clone https://github.com/nrjdalal/the-saas-starter.git
    cd the-saas-starter
    ```
 
