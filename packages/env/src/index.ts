@@ -23,19 +23,24 @@ export const env = createEnv({
     GITHUB_CLIENT_SECRET: process.env.CI
       ? z.string().default("Generate at `https://github.com/settings/developers`")
       : z.string().min(1),
-    HONO_APP_URL: z.url().default("http://localhost:4000"),
-    HONO_TRUSTED_ORIGINS: z
-      .string()
-      .default("http://localhost:3000")
-      .transform((s) => s.split(",")),
+    HONO_APP_URL: process.env.CI ? z.url().default("http://localhost:4000") : z.url(),
+    HONO_TRUSTED_ORIGINS: process.env.CI
+      ? z
+          .string()
+          .default("http://localhost:3000")
+          .transform((s) => s.split(","))
+      : z
+          .string()
+          .min(1)
+          .transform((s) => s.split(",")),
     POSTGRES_URL: process.env.CI
       ? z.string().default("Generate using `bunx pglaunch -k`")
       : z.url(),
   },
   clientPrefix: "NEXT_PUBLIC_",
   client: {
-    NEXT_PUBLIC_API_URL: z.url().default("http://localhost:4000"),
-    NEXT_PUBLIC_APP_URL: z.url().default("http://localhost:3000"),
+    NEXT_PUBLIC_API_URL: process.env.CI ? z.url().default("http://localhost:4000") : z.url(),
+    NEXT_PUBLIC_APP_URL: process.env.CI ? z.url().default("http://localhost:3000") : z.url(),
   },
   runtimeEnv: process.env,
   emptyStringAsUndefined: true,
