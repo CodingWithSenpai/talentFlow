@@ -1,10 +1,11 @@
 import { createEnv } from "@t3-oss/env-core"
+import { config } from "dotenv"
+import path from "node:path"
 import { z } from "zod"
 
 if (typeof window === "undefined") {
   try {
-    const path = require("path")
-    require("dotenv").config({ path: path.resolve(process.cwd(), "../../.env") })
+    config({ path: path.resolve(process.cwd(), "../../.env") })
   } catch (e) {
     console.error(e)
   }
