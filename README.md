@@ -33,6 +33,9 @@ mv graph.svg .github/assets/graph-build.svg
 
 - **Analytics**:
   - [ ] [Posthog](https://posthog.com)
+- **Documentation**:
+  - [ ] [Fumadocs](https://fumadocs.dev)
+  - [ ] [Scalar](https://scalar.com)
 - **Internationalization**:
   - [ ] [i18next](https://www.i18next.com)
   - [ ] [next-intl](https://next-intl.dev)
