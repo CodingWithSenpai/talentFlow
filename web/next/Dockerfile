@@ -8,7 +8,7 @@ RUN turbo prune @web/next --docker
 
 FROM base AS builder
 WORKDIR /app
-COPY --from=prepare /app/.env ./.env
+COPY --from=prepare /app/.env .
 COPY --from=prepare /app/.github/ ./.github/
 COPY --from=prepare /app/out/json/ .
 COPY --from=prepare /app/out/bun.lock .
@@ -19,9 +19,12 @@ RUN bun run build
 
 FROM base AS runner
 WORKDIR /app
-COPY --from=builder /app/web/next/.next/standalone ./
-COPY --from=builder /app/web/next/.next/static ./web/next/.next/static
-COPY --from=builder /app/web/next/public ./web/next/public
+COPY --from=builder /app/packages/ ./packages/
+COPY --from=builder /app/node_modules/ ./node_modules/
+COPY --from=builder /app/web/next/.next/ ./.next/
+COPY --from=builder /app/web/next/package.json .
+COPY --from=builder /app/web/next/public/ ./public/
+
 USER bun
-EXPOSE 4000
-CMD bun web/next/server.js
+CMD ["bun", "run", "start"]
+EXPOSE 3000

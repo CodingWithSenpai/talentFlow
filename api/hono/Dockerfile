@@ -8,7 +8,7 @@ RUN turbo prune @api/hono --docker
 
 FROM base AS builder
 WORKDIR /app
-COPY --from=prepare /app/.env ./.env
+COPY --from=prepare /app/.env .
 COPY --from=prepare /app/.github/ ./.github/
 COPY --from=prepare /app/out/json/ .
 COPY --from=prepare /app/out/bun.lock .
@@ -23,6 +23,7 @@ COPY --from=builder /app/api/hono/dist/ ./dist/
 COPY --from=builder /app/api/hono/package.json .
 COPY --from=builder /app/node_modules/ ./node_modules/
 COPY --from=builder /app/packages/ ./packages/
+
 USER bun
+CMD ["bun", "run", "start"]
 EXPOSE 4000
-CMD bun dist/index.mjs
