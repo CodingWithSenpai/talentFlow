@@ -90,14 +90,13 @@ const data = await res.json()
 ### Prerequisites
 
 - [Bun](https://bun.sh) (v1.3.0 or later)
-- [PostgreSQL](https://www.postgresql.org) (or a Docker container)
 
 ### Installation
 
-1. Clone the repository:
+1. Clone this template:
 
    ```bash
-   git clone https://github.com/nrjdalal/the-saas-starter.git
+   bunx gitpick https://github.com/nrjdalal/the-saas-starter
    cd the-saas-starter
    ```
 
