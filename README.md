@@ -29,6 +29,19 @@ mv graph.svg .github/assets/graph-build.svg
 - **Validation**: [Zod](https://zod.dev)
 - **Linting & Formatting**: [Oxlint](https://oxc.rs/docs/guide/usage/linter) + [Prettier](https://prettier.io)
 
+### Future Stack and Features
+
+- **Analytics**:
+  - [ ] [Posthog](https://posthog.com)
+- **Internationalization**:
+  - [ ] [i18next](https://www.i18next.com)
+  - [ ] [next-intl](https://next-intl.dev)
+- **Payment Processing**:
+  - [ ] [Autumn](https://useautumn.com)
+  - [ ] [Dodo](https://dodopayments.com)
+  - [ ] [Polar](https://polar.sh)
+  - [ ] [Stripe](https://stripe.com)
+
 ---
 
 ## 📂 Project Structure
