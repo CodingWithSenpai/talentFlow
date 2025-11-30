@@ -42,7 +42,7 @@ export default function Component() {
         )}
       >
         <Link href="/" className="font-bold">
-          ACME Inc.
+          Zero
         </Link>
         <div className="flex items-center gap-2.5">
           {session?.user ? (
