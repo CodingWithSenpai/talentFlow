@@ -7,7 +7,7 @@ import { RiGithubFill, RiGoogleFill } from "@remixicon/react"
 import { useForm } from "@tanstack/react-form"
 import { GalleryVerticalEnd, Loader2 } from "lucide-react"
 import { toast } from "sonner"
-import * as z from "zod"
+import { z } from "zod"
 
 import { signIn } from "@/lib/auth/client"
 import { Button } from "@/components/ui/button"
