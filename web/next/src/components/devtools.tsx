@@ -6,8 +6,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { CodeXml, ExternalLink } from "lucide-react"
 
 const config = {
-  GITHUB: "nrjdalal/the-next-starter",
-  VERCEL: "nrjdalals-projects/the-next-starter",
+  GITHUB: "nrjdalal/zerostarter",
+  VERCEL: "nrjdalals-projects/zerostarter",
 }
 
 const Links = [
