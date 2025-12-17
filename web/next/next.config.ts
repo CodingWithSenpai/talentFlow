@@ -8,7 +8,6 @@ getSafeEnv(env)
 const nextConfig: NextConfig = {
   reactCompiler: true,
   rewrites: async () => {
-    if (process.env.SKIP_ENV_VALIDATION === "true") return []
     return [
       {
         source: "/api/:path*",
