@@ -1,8 +1,17 @@
 import { defineConfig } from "tsdown"
 
-export default [
+const entries = [
+  "src/index.ts",
+  "src/api-hono.ts",
+  "src/auth.ts",
+  "src/db.ts",
+  "src/web-next.ts",
+] as const
+
+export default entries.map((entry) =>
   defineConfig({
-    entry: ["src/index.ts"],
+    entry: [entry],
+    outDir: "dist",
     minify: true,
   }),
-]
+)
