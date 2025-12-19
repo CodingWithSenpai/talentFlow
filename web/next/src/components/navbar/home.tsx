@@ -8,10 +8,10 @@ import { Loader2 } from "lucide-react"
 
 import { useSession } from "@/lib/auth/client"
 import { Button } from "@/components/ui/button"
-import Access from "@/components/access"
-import ModeToggle from "@/components/mode-toggle"
+import { Access } from "@/components/access"
+import { ModeToggle } from "@/components/mode-toggle"
 
-export default function Component() {
+export function Navbar() {
   const pathname = usePathname()
   const { data: session } = useSession()
 
