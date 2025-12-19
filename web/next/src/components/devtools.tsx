@@ -26,7 +26,7 @@ const Links = [
   },
 ]
 
-export default function Component() {
+export function DevTools() {
   const [expandDevtools, setExpandDevtools] = useState(false)
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
 

@@ -32,17 +32,31 @@ mv graph.svg .github/assets/graph-build.svg
 
 ### Future Stack and Features
 
+- **AI**
+  - [ ] [Vercel AI SDK](https://ai-sdk.dev)
 - **Analytics**:
   - [ ] [Posthog](https://posthog.com)
+- **Background Tasks**:
+  - [ ] [Inngest](https://www.inngest.com)
+  - [ ] [Trigger.dev](https://trigger.dev)
+- **Email**:
+  - [ ] [Resend](https://resend.com)
+  - [ ] [SendGrid](https://sendgrid.com)
 - **OpenAPI**:
   - [ ] [Scalar](https://scalar.com)
+- **Organization/teams**:
+  - [ ] [Better Auth](https://www.better-auth.com/docs/plugins/organization)
 - **Internationalization**:
   - [ ] [i18next](https://www.i18next.com)
   - [ ] [next-intl](https://next-intl.dev)
 - **Payment Processing**:
   - [ ] [Autumn](https://useautumn.com)
+  - [ ] [Creem](https://www.creem.io)
   - [ ] [Dodo](https://dodopayments.com)
+  - [ ] [Lemon Squeezy](https://www.lemonsqueezy.com)
+  - [ ] [Paddle](https://www.paddle.com)
   - [ ] [Polar](https://polar.sh)
+  - [ ] [Razorpay](https://razorpay.com)
   - [ ] [Stripe](https://stripe.com)
 
 ---

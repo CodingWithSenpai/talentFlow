@@ -25,7 +25,7 @@ const formSchema = z.object({
   email: z.email({ message: "Please enter a valid email address." }),
 })
 
-export default function Component() {
+export function Access() {
   const [loader, setLoader] = useState<"email" | "github" | "google" | null>(null)
 
   const form = useForm({
