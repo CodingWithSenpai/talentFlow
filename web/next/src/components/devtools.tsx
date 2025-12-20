@@ -6,8 +6,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { CodeXml, ExternalLink } from "lucide-react"
 
 const config = {
-  WebNext: "nrjdalals-projects/zerostarter.dev",
-  ApiHono: "nrjdalals-projects/api.zerostarter.dev",
+  WebNext: "nrjdalal/zerostarter.dev",
+  ApiHono: "nrjdalal/api.zerostarter.dev",
   Github: "nrjdalal/zerostarter",
 }
 
