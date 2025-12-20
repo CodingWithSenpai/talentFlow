@@ -1,70 +1,24 @@
 import type { Metadata } from "next"
-import { notFound } from "next/navigation"
 
-import { getMDXComponents } from "@/mdx-components"
-import { DocsBody, DocsDescription, DocsPage, DocsTitle } from "fumadocs-ui/layouts/docs/page"
-import { createRelativeLink } from "fumadocs-ui/mdx"
-
-import { config } from "@/lib/config"
+import {
+  createGenerateStaticParams,
+  generatePageMetadata,
+  getPageData,
+  renderPageContent,
+} from "@/lib/fumadocs"
 import { docsSource } from "@/lib/source"
 
 export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
-  const params = await props.params
-  const page = docsSource.getPage(params.slug)
-  if (!page) notFound()
-
-  const MDX = page.data.body
-
-  return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
-      <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
-      <DocsBody>
-        <MDX
-          components={getMDXComponents({
-            a: createRelativeLink(docsSource, page),
-          })}
-        />
-      </DocsBody>
-    </DocsPage>
-  )
+  const pageData = await getPageData(props.params, docsSource)
+  return renderPageContent(pageData)
 }
 
-export async function generateStaticParams() {
-  return docsSource.generateParams()
-}
+export const generateStaticParams = createGenerateStaticParams(docsSource)
 
 export async function generateMetadata(props: PageProps<"/docs/[[...slug]]">): Promise<Metadata> {
-  const params = await props.params
-  const page = docsSource.getPage(params.slug)
-  if (!page) notFound()
-
-  const pageUrl = `${config.app.url}${page.url}`
-  const slugPath = params.slug && params.slug.length > 0 ? params.slug.join("/") : ""
-  const imageUrl = `${config.app.url}/api/og/docs${slugPath ? `/${slugPath}` : ""}?t=${Date.now()}`
-
-  return {
-    title: page.data.title,
-    description: page.data.description,
-    openGraph: {
-      type: "website",
-      siteName: config.app.name,
-      url: pageUrl,
-      images: [
-        {
-          url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: page.data.title,
-        },
-      ],
-    },
-    other: {
-      "og:logo": `${config.app.url}/favicon.ico`,
-    },
-    twitter: {
-      card: "summary_large_image",
-      images: [imageUrl],
-    },
-  }
+  return generatePageMetadata(props.params, {
+    source: docsSource,
+    ogPath: "/api/og/docs",
+    ogType: "website",
+  })
 }
