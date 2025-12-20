@@ -24,21 +24,21 @@ export function CopyAsMarkdown({ url }: CopyAsMarkdownProps) {
 
       const response = await fetch(llmsUrl)
       if (!response.ok) {
-        throw new Error("Failed to fetch markdown!")
+        throw new Error("Failed to fetch markdown")
       }
 
       const markdown = await response.text()
 
       await navigator.clipboard.writeText(markdown)
       setIsCopied(true)
-      toast.success("Copied as markdown!")
+      toast.success("Copied as markdown")
 
       setTimeout(() => {
         setIsCopied(false)
       }, 2000)
     } catch (error) {
       console.error("Failed to copy markdown:", error)
-      toast.error("Failed to copy markdown!")
+      toast.error("Failed to copy markdown")
     } finally {
       setIsLoading(false)
     }
@@ -58,7 +58,7 @@ export function CopyAsMarkdown({ url }: CopyAsMarkdownProps) {
           {isCopied ? <Check className="size-4" /> : <Copy className="size-4" />}
         </Button>
       </TooltipTrigger>
-      <TooltipContent>{isCopied ? "Copied!" : "Copy as markdown"}</TooltipContent>
+      <TooltipContent>{isCopied ? "Copied as markdown" : "Copy as markdown"}</TooltipContent>
     </Tooltip>
   )
 }
