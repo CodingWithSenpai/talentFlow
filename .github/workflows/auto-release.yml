@@ -36,35 +36,15 @@ jobs:
         id: update-changelog
         run: |
           git checkout main
-          git fetch --tags origin || true
-          git fetch origin changelog || true
-
-          FROM_COMMIT=$(git log -1 --format="%H" -- CHANGELOG.md 2>/dev/null || echo "")
-          if [ -z "$FROM_COMMIT" ] || ! git rev-parse "$FROM_COMMIT" >/dev/null 2>&1; then
-            FROM_COMMIT=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
-            [ -z "$FROM_COMMIT" ] || git rev-parse "$FROM_COMMIT" >/dev/null 2>&1 || FROM_COMMIT=""
-          fi
-
-          if git show-ref --verify --quiet refs/remotes/origin/changelog; then
-            git checkout changelog
-            [ -f CHANGELOG.md ] && cp CHANGELOG.md /tmp/existing-changelog.md
-            git reset --hard main
-            [ -f /tmp/existing-changelog.md ] && mv /tmp/existing-changelog.md CHANGELOG.md
-          else
-            git checkout -b changelog main
-          fi
-
-          CHANGELOGEN_CMD="bunx changelogen --bump --no-commit --no-output"
-          [ -n "$FROM_COMMIT" ] && CHANGELOGEN_CMD="$CHANGELOGEN_CMD --from $FROM_COMMIT"
-          $CHANGELOGEN_CMD > /tmp/new-changelog.md 2>/dev/null || true
-
+          git branch -D changelog 2>/dev/null || true
+          git checkout -b changelog
+          bunx changelogen --bump --no-commit --no-output > /tmp/new-changelog.md 2>/dev/null || true
           if [ -s /tmp/new-changelog.md ]; then
             NEW_VERSION=$(awk '/^## / {if (found && /^## /) exit; found=1} found' /tmp/new-changelog.md)
             if [ -n "$NEW_VERSION" ]; then
               [ -s CHANGELOG.md ] && printf "%s\n\n%s" "$NEW_VERSION" "$(cat CHANGELOG.md)" > CHANGELOG.md || echo "$NEW_VERSION" > CHANGELOG.md
             fi
           fi
-
           if [ -n "$(git status --porcelain CHANGELOG.md package.json)" ]; then
             git add CHANGELOG.md package.json
             git commit -m "ci(changelog): update changelog and bump version"
