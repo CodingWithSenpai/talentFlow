@@ -2,8 +2,7 @@ name: auto-canary-into-main
 
 on:
   push:
-    branches:
-      - canary
+    branches: ["canary"]
   workflow_dispatch:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
@@ -22,13 +21,18 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
       - name: Check if PR already exists
         id: check-if-pr-exists
         run: |
           PR_RESPONSE=$(curl -sL -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             "https://api.github.com/repos/${{ github.repository }}/pulls?head=${{ github.repository_owner }}:canary&base=main&state=open")
 
-          PR_NUMBER=$(echo "$PR_RESPONSE" | jq -r '.[0].number // empty')
+          PR_NUMBER=$(echo "$PR_RESPONSE" | bunx fx 'x => x[0]?.number ?? null')
 
           if [ -z "$PR_NUMBER" ] || [ "$PR_NUMBER" == "null" ]; then
             echo "pr_exists=false" >> $GITHUB_OUTPUT
