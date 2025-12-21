@@ -123,10 +123,14 @@ jobs:
           fi
 
           # Create GitHub release payload using fx and save
-          echo "$CHANGELOG_CONTENT" | bunx fx -s "content => ({
+          # Stringify the changelog content first
+          ESCAPED_BODY=$(echo "$CHANGELOG_CONTENT" | bunx fx -s 'x => JSON.stringify(x)')
+
+          # Create the release payload object
+          echo "{\"body\":${ESCAPED_BODY}}" | bunx fx "x => ({
+            ...x,
             tag_name: 'v${VERSION}',
             name: 'v${VERSION}',
-            body: content,
             draft: false,
             prerelease: false
           })" save /tmp/release-payload.json
