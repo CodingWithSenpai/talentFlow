@@ -26,12 +26,40 @@ jobs:
         with:
           bun-version: latest
 
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Generate changelog and bump version
+        run: |
+          bunx changelogen --bump --no-commit || true
+          if [ -n "$(git status --porcelain)" ]; then
+            git add CHANGELOG.md package.json
+            git commit -m "chore: update changelog and bump version"
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git main
+          fi
+
       - name: Get version from package.json
         id: get-version
         run: |
+          git checkout main
           VERSION=$(bunx fx 'x => x.version' package.json)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Creating release for version: $VERSION"
+
+      - name: Update canary branch with changelog and version
+        run: |
+          git fetch origin canary || true
+          git checkout canary 2>/dev/null || git checkout -b canary origin/canary 2>/dev/null || git checkout -b canary
+          git checkout main -- CHANGELOG.md package.json
+          if [ -n "$(git status --porcelain CHANGELOG.md package.json)" ]; then
+            git add CHANGELOG.md package.json
+            git commit -m "chore: sync changelog and version from main"
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git canary
+          else
+            echo "No changes to sync to canary"
+          fi
 
       - name: Create GitHub Release
         run: |
