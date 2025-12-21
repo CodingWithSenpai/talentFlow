@@ -52,20 +52,36 @@ jobs:
             # Restore CHANGELOG.md if it existed
             if [ -f /tmp/existing-changelog.md ]; then
               mv /tmp/existing-changelog.md CHANGELOG.md
-              git add CHANGELOG.md
             fi
           else
             git checkout -b changelog main
           fi
 
-          # Generate changelog only for new commits since last tag
+          # Generate changelog only for new commits since last tag to a temp file
+          # Use --from to only get commits since the last tag, and --no-output to write to temp file
           if [ -n "$LAST_TAG" ]; then
-            bunx changelogen --from "$LAST_TAG" --bump --no-commit || true
+            bunx changelogen --from "$LAST_TAG" --bump --no-commit --no-output > /tmp/new-changelog.md 2>/dev/null || true
           else
-            bunx changelogen --bump --no-commit || true
+            bunx changelogen --bump --no-commit --no-output > /tmp/new-changelog.md 2>/dev/null || true
           fi
 
-          if [ -n "$(git status --porcelain)" ]; then
+          # Extract only the new version section and prepend to existing changelog
+          if [ -f /tmp/new-changelog.md ] && [ -s /tmp/new-changelog.md ]; then
+            # Extract the first version section (from first ## to next ## or end)
+            NEW_VERSION=$(awk '/^## / {if (found && /^## /) exit; found=1} found' /tmp/new-changelog.md)
+            
+            if [ -n "$NEW_VERSION" ]; then
+              if [ -f CHANGELOG.md ] && [ -s CHANGELOG.md ]; then
+                # Prepend new version to existing changelog
+                printf "%s\n\n%s" "$NEW_VERSION" "$(cat CHANGELOG.md)" > CHANGELOG.md
+              else
+                # No existing changelog, use the new one
+                echo "$NEW_VERSION" > CHANGELOG.md
+              fi
+            fi
+          fi
+
+          if [ -n "$(git status --porcelain CHANGELOG.md package.json)" ]; then
             git add CHANGELOG.md package.json
             git commit -m "chore: update changelog and bump version"
             git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git changelog --force
