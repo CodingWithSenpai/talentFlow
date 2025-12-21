@@ -9,6 +9,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   auto-release:
@@ -32,17 +33,50 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Generate changelog and bump version
+        id: generate-changelog
         run: |
+          git checkout main
+          BRANCH_NAME="chore/update-changelog-$(date +%s)"
+          git checkout -b $BRANCH_NAME
           bunx changelogen --bump --no-commit || true
           if [ -n "$(git status --porcelain)" ]; then
             git add CHANGELOG.md package.json
             git commit -m "chore: update changelog and bump version"
-            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git main
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git $BRANCH_NAME
+            echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
           fi
+
+      - name: Create PR for changelog and version bump
+        if: steps.generate-changelog.outputs.has_changes == 'true'
+        id: create-pr
+        run: |
+          PR_RESPONSE=$(curl -sL -X POST \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/pulls" \
+            -d "{\"title\": \"chore: update changelog and bump version\", \"head\": \"${{ steps.generate-changelog.outputs.branch_name }}\", \"base\": \"main\", \"body\": \"Automatically generated PR to update changelog and bump version after merge.\"}")
+
+          PR_NUMBER=$(echo "$PR_RESPONSE" | bunx fx 'x => x.number')
+          echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
+          echo "Created PR #$PR_NUMBER"
+
+      - name: Merge PR
+        if: steps.generate-changelog.outputs.has_changes == 'true'
+        run: |
+          sleep 2
+          curl -sL -X PUT \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.create-pr.outputs.pr_number }}/merge" \
+            -d "{\"merge_method\": \"squash\"}" || echo "PR merge may require review"
 
       - name: Get version from package.json
         id: get-version
         run: |
+          git fetch origin main
           git checkout main
           VERSION=$(bunx fx 'x => x.version' package.json)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
