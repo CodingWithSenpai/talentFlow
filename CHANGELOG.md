@@ -24,4 +24,4 @@
 
 ### ❤️ Contributors
 
-- Neeraj Dalal <admin@nrjdalal.com>
+- Neeraj Dalal
