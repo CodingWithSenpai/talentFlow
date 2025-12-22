@@ -1,0 +1,75 @@
+---
+title: Environment Variables
+description: Configure type-safe environment variables for your application.
+---
+
+## Overview
+
+This project uses a centralized, type-safe environment variable system. There's **one `.env` file to rule them all** at the project root, but each package only gets what it asks for through validation.
+
+## How It Works
+
+### Single Source of Truth
+
+All environment variables are stored in a single `.env` file at the project root. The `@packages/env` package automatically loads this file using `dotenv` configured in `packages/env/src/lib/utils.ts`.
+
+### Package-Specific Validation
+
+Each package defines only the environment variables it needs:
+
+- **`api-hono`**: `HONO_APP_URL`, `HONO_TRUSTED_ORIGINS`
+- **`auth`**: `BETTER_AUTH_SECRET`, `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `HONO_APP_URL`, `HONO_TRUSTED_ORIGINS`
+- **`db`**: `POSTGRES_URL`
+- **`web-next`**: `NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_API_URL`, `INTERNAL_API_URL`
+
+### Implementation
+
+Each package uses `@t3-oss/env-core` with Zod schemas for type-safe validation:
+
+```ts
+// packages/env/src/api-hono.ts
+import { createEnv } from "@t3-oss/env-core"
+import { z } from "zod"
+import "./lib/utils" // Loads root .env
+
+export const env = createEnv({
+  server: {
+    HONO_APP_URL: z.url(),
+    HONO_TRUSTED_ORIGINS: z.string().transform(...),
+  },
+  runtimeEnv: {
+    HONO_APP_URL: process.env.HONO_APP_URL,
+    HONO_TRUSTED_ORIGINS: process.env.HONO_TRUSTED_ORIGINS,
+  },
+})
+```
+
+### Usage in Packages
+
+Import the specific env for your package:
+
+```ts
+// api/hono/src/index.ts
+import { env } from "@packages/env/api-hono"
+// web/next/src/lib/config.ts
+import { env } from "@packages/env/web-next"
+```
+
+## Configuration
+
+1. Create a `.env` file at the project root
+2. Add all required variables (see `.env.example`)
+3. Each package automatically validates only what it needs at runtime
+4. Validation errors show exactly which variables are missing or invalid
+
+## Features
+
+- **Type Safety**: Full TypeScript inference from Zod schemas
+- **Runtime Validation**: Catches missing/invalid variables on startup
+- **Selective Access**: Packages only see variables they declare
+- **Skip Validation**: Set `SKIP_ENV_VALIDATION=true` to bypass (useful for CI)
+- **Auto-loading**: Root `.env` is automatically loaded by the utils module
+
+## Required Variables
+
+See the root `.env.example` for all required environment variables. Each package validates only its subset, so you can have all variables in one place without exposing unnecessary ones to each package.
