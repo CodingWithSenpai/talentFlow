@@ -36,8 +36,7 @@ jobs:
         id: update-changelog
         run: |
           git checkout main
-          git fetch origin changelog:changelog 2>/dev/null || true
-          FROM_COMMIT=$(git rev-parse changelog 2>/dev/null || git rev-parse HEAD~1 2>/dev/null || echo "")
+          FROM_COMMIT=$(git log -1 --format=%H -- CHANGELOG.md 2>/dev/null || echo "")
           git branch -D changelog 2>/dev/null || true
           git checkout -b changelog
           if [ -n "$FROM_COMMIT" ]; then
