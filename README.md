@@ -4,7 +4,7 @@ A modern, type-safe, and high-performance SaaS starter template built with a mon
 
 - **📚 Documentation**: For comprehensive documentation, visit **[https://zerostarter.dev/docs](https://zerostarter.dev/docs)**.
 - **🤖 AI/LLM Users**: For optimized documentation, use **[https://zerostarter.dev/llms.txt](https://zerostarter.dev/llms.txt)**.
-- **🐦 X**: Follow **[@nrjdalal](https://twitter.com/nrjdalal)** for updates.
+- **🐦 X**: Follow **[@nrjdalal](https://twitter.com/nrjdalal)** for updates and don't forget to star the repository!
 
 <!--
 ```bash
