@@ -3,8 +3,8 @@ import { config } from "dotenv"
 
 if (typeof window === "undefined") {
   try {
-    const envPath = path.resolve(process.cwd(), "../../.env")
     // Load base .env file
+    const envPath = path.resolve(process.cwd(), "../../.env")
     config({ path: envPath, quiet: true })
 
     // Load environment-specific .env file if NODE_ENV is set
