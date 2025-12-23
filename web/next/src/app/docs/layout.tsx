@@ -26,7 +26,7 @@ export default function Layout({ children }: LayoutProps<"/docs">) {
         <SidebarRail />
       </Sidebar>
       <main>
-        <SidebarTrigger className="fixed right-0 bottom-0 mr-6 mb-18 h-8 cursor-pointer border md:right-auto md:mb-48 md:rounded-l-none md:border-l-0">
+        <SidebarTrigger className="md:bg-sidebar! hover:md:bg-sidebar-accent! fixed right-0 bottom-0 mr-6 mb-18 h-8 cursor-pointer border md:right-auto md:mb-48 md:rounded-l-none md:border-l-0">
           <span>Docs</span>
         </SidebarTrigger>
         <RootProvider>
