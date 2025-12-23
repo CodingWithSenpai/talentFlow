@@ -1,3 +1,38 @@
+## v0.0.6
+
+[compare changes](https://github.com/nrjdalal/zerostarter/compare/e5ed86215f9d805e196e0df12cf329c6dfb52e5e...v0.0.6)
+
+### 🚀 Enhancements
+
+- Load extra env paths ([4de2a59](https://github.com/nrjdalal/zerostarter/commit/4de2a59))
+- Contributor username linking ([310382e](https://github.com/nrjdalal/zerostarter/commit/310382e))
+
+### 🩹 Fixes
+
+- **ui:** Sidebar button color ([531f285](https://github.com/nrjdalal/zerostarter/commit/531f285))
+- **ui:** Correct email error toast message ([929cd2f](https://github.com/nrjdalal/zerostarter/commit/929cd2f))
+
+### 💅 Refactors
+
+- Related to auto username generation ([78d2e87](https://github.com/nrjdalal/zerostarter/commit/78d2e87))
+
+### 🏡 Chore
+
+- Update .env.example ([3d090f5](https://github.com/nrjdalal/zerostarter/commit/3d090f5))
+- Better sidebar placement ([282ed0a](https://github.com/nrjdalal/zerostarter/commit/282ed0a))
+- Fix colors on menu button ([5960c11](https://github.com/nrjdalal/zerostarter/commit/5960c11))
+- Rearrange comment position ([9f3e3de](https://github.com/nrjdalal/zerostarter/commit/9f3e3de))
+- Minor script change to accomodate username switching ([4064ed9](https://github.com/nrjdalal/zerostarter/commit/4064ed9))
+
+### ✅ Tests
+
+- Email name replacement at changelog ([002f57a](https://github.com/nrjdalal/zerostarter/commit/002f57a))
+
+### ❤️ Contributors
+
+- Neeraj Dalal @nrjdalal
+- Surajgoraicse @surajgoraicse
+
 ## v0.0.5
 
 [compare changes](https://github.com/nrjdalal/zerostarter/compare/746a234a5aafcda90c6f15af49bd2911b7683580...v0.0.5)
