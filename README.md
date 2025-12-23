@@ -139,7 +139,7 @@ const data = await res.json()
 
    Create a `.env` file in the root directory with the following variables:
 
-   ```
+   ```env
    # -------------------- Server variables --------------------
 
    HONO_APP_URL=http://localhost:4000
@@ -151,6 +151,11 @@ const data = await res.json()
    # Generate at `https://github.com/settings/developers`
    GITHUB_CLIENT_ID=
    GITHUB_CLIENT_SECRET=
+
+   # Generate at `https://console.cloud.google.com/apis/credentials`
+   GOOGLE_CLIENT_ID=
+   GOOGLE_CLIENT_SECRET=
+
 
    # Generate using `bunx pglaunch -k`
    POSTGRES_URL=
@@ -180,10 +185,21 @@ const data = await res.json()
 
 This starter uses [Better Auth](https://better-auth.com) with GitHub as the provider.
 
+#### 1. Github
+
 1. Create a GitHub OAuth App at [GitHub Developer Settings](https://github.com/settings/developers).
 2. Set the **Homepage URL** to `http://localhost:3000`.
 3. Set the **Authorization callback URL** to `http://localhost:3000/api/auth/callback/github`.
 4. Copy the **Client ID** and **Client Secret** into your `.env` file.
+
+#### 2. Google
+
+1. Create a Google OAuth App in the [Google Cloud Console](https://console.cloud.google.com).
+2. Configure the OAuth consent screen (External).
+3. Create an **OAuth Client ID** (Application type: Web).
+4. Set the **Authorized JavaScript origins** to `http://localhost:3000`.
+5. Set the **Authorized redirect URI** to `http://localhost:3000/api/auth/callback/google`.
+6. Copy the **Client ID** and **Client Secret** into your `.env` file.
 
 ### Running the Application
 
