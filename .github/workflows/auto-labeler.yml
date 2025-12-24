@@ -36,6 +36,9 @@ jobs:
         with:
           bun-version: latest
 
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
       - name: Label impacted packages/apps
         uses: actions/github-script@v7
         with:
