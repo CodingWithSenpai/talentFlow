@@ -54,9 +54,9 @@ jobs:
             const config = {
               colors: {
                 api: '9333ea',
-                config: '6b7280',
                 dependencies: 'f59e0b',
                 docker: '0ea5e9',
+                misc: '6b7280',
                 packages: '3b82f6',
                 scripts: '8b5cf6',
                 web: 'f97316',
@@ -92,13 +92,14 @@ jobs:
               const fileName = pathParts[pathParts.length - 1];
               const [topLevel, secondLevel] = pathParts;
 
-              if (fileName === 'package.json' || fileName === 'bun.lock' || fileName === 'bun.lockb' || fileName === 'package-lock.json' || fileName === 'yarn.lock' || fileName === 'pnpm-lock.yaml') {
+              if (fileName === 'bun.lock' || fileName === 'bun.lockb' || fileName === 'package.json' || fileName === 'package-lock.json' || fileName === 'pnpm-lock.yaml' || fileName === 'yarn.lock') {
                 return '@dependencies';
               }
 
               if (fileName === 'Dockerfile' || fileName.startsWith('Dockerfile.')) {
                 return '@docker';
               }
+
               for (let i = pathParts.length; i > 0; i--) {
                 const dirPath = pathParts.slice(0, i).join('/');
                 if (packageMap.has(dirPath)) {
@@ -113,10 +114,10 @@ jobs:
               }
 
               if (pathParts.length === 1) {
-                return '@config';
+                return '@misc';
               }
 
-              return topLevel ? `@${topLevel}` : '@config';
+              return topLevel ? `@${topLevel}` : '@misc';
             };
 
             const ensureLabel = async (labelName) => {
