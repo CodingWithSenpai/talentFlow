@@ -52,32 +52,26 @@ export const config = {
           {
             title: "Introduction",
             url: "/docs",
-            icon: "BookOpen",
           },
           {
             title: "Architecture",
             url: "/docs/getting-started/architecture",
-            icon: "Building2",
           },
           {
             title: "Project Structure",
             url: "/docs/getting-started/project-structure",
-            icon: "FolderTree",
           },
           {
             title: "Type-Safe API Client",
             url: "/docs/getting-started/type-safe-api",
-            icon: "Code",
           },
           {
             title: "Installation",
             url: "/docs/getting-started/installation",
-            icon: "Download",
           },
           {
             title: "Scripts",
             url: "/docs/getting-started/scripts",
-            icon: "Terminal",
           },
         ],
       },
@@ -89,46 +83,38 @@ export const config = {
             {
               title: "Blog",
               url: "/docs/manage/blog",
-              icon: "FileText",
             },
             {
               title: "Documentation",
               url: "/docs/manage/documentation",
-              icon: "Book",
             },
             {
               title: "Feedback",
               url: "/docs/manage/feedback",
-              icon: "MessageSquare",
             },
           ],
           "Environment & Release": [
             {
               title: "Environment",
               url: "/docs/manage/environment",
-              icon: "Settings",
             },
             {
               title: "Release",
               url: "/docs/manage/release",
-              icon: "Rocket",
             },
           ],
           "Indexing and AI/LLM": [
             {
               title: "llms.txt",
               url: "/docs/manage/llms-txt",
-              icon: "Brain",
             },
             {
               title: "robots.txt",
               url: "/docs/manage/robots",
-              icon: "Bot",
             },
             {
               title: "Sitemap",
               url: "/docs/manage/sitemap",
-              icon: "Map",
             },
           ],
         },
@@ -139,7 +125,6 @@ export const config = {
           {
             title: "Vercel",
             url: "/docs/deployment/vercel",
-            icon: "Cloud",
           },
         ],
       },
@@ -149,7 +134,6 @@ export const config = {
           {
             title: "Contributing",
             url: "/docs/contributing",
-            icon: "GitBranch",
           },
         ],
       },
