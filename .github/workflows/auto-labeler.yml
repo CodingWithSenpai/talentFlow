@@ -43,115 +43,80 @@ jobs:
           script: |
             const fs = require('fs');
             const path = require('path');
-            const { execSync } = require('child_process');
+            const { globbySync } = require('globby');
 
             const { number: prNumber } = context.payload.pull_request;
             const { owner, repo } = context.repo;
 
             // Configuration
             const config = {
-              topLevelDirs: ['api', 'packages', 'marketing', 'web'],
               colors: {
                 api: '9333ea',
-                marketing: '10b981',
-                packages: '3b82f6',
-                web: 'f97316',
-                docker: '0ea5e9',
-                scripts: '8b5cf6',
-                workflows: 'ec4899',
-                docs: '14b8a6',
                 config: '6b7280',
+                docker: '0ea5e9',
+                packages: '3b82f6',
+                scripts: '8b5cf6',
+                web: 'f97316',
+                workflows: 'ec4899',
               },
             };
 
-            // Find all package.json files
-            const findPackageJsonFiles = () => {
-              try {
-                const tempScript = `
-                  const { globby } = await import('globby');
-                  const paths = await globby(['**/package.json'], {
-                    ignore: ['**/node_modules/**', '**/.git/**'],
-                    absolute: false
-                  });
-                  console.log(JSON.stringify(paths));
-                `;
-                fs.writeFileSync('/tmp/find-packages.mjs', tempScript);
-                const output = execSync('bun /tmp/find-packages.mjs', {
-                  encoding: 'utf-8',
-                  cwd: process.cwd()
-                });
-                fs.unlinkSync('/tmp/find-packages.mjs');
-                return JSON.parse(output.trim());
-              } catch {
-                // Fallback to find command
-                const output = execSync(
-                  'find . -name "package.json" -type f -not -path "*/node_modules/*" -not -path "*/.git/*"',
-                  { encoding: 'utf-8', cwd: process.cwd() }
-                );
-                return output
-                  .split('\n')
-                  .filter(Boolean)
-                  .map(p => p.replace(/^\.\//, ''));
-              }
-            };
+            // Find all package.json files and extract package names
+            const findPackages = () => {
+              const packageMap = new Map();
+              const paths = globbySync(['**/package.json'], {
+                gitignore: true,
+                ignore: ['**/node_modules/**']
+              });
 
-            // Build package directory map
-            const buildPackageMap = (packageJsonPaths) => {
-              const map = new Map();
-              for (const packageJsonPath of packageJsonPaths) {
-                const packageDir = path.dirname(packageJsonPath);
-                const [topLevel, packageName] = packageDir.split('/').filter(Boolean);
-                if (config.topLevelDirs.includes(topLevel) && packageName) {
-                  map.set(packageDir, `@${topLevel}/${packageName}`);
+              for (const pkgPath of paths) {
+                const dir = path.dirname(pkgPath);
+                try {
+                  const content = fs.readFileSync(pkgPath, 'utf-8');
+                  const pkg = JSON.parse(content);
+                  if (pkg.name) {
+                    packageMap.set(dir, `@${pkg.name}`);
+                  }
+                } catch (error) {
+                  console.warn(`Failed to parse ${pkgPath}:`, error.message);
                 }
               }
-              return map;
+              return packageMap;
             };
 
-            // Pattern matching: determine label for a file path
+            // Determine label for a file path
             const getLabelForFile = (filePath, packageMap) => {
               const pathParts = filePath.split('/').filter(Boolean);
               const fileName = pathParts[pathParts.length - 1];
-              const [topLevel, secondLevel, ...rest] = pathParts;
+              const [topLevel, secondLevel] = pathParts;
 
-              // Pattern 1: Dockerfiles → @docker
+              // Dockerfiles → @docker
               if (fileName === 'Dockerfile' || fileName.startsWith('Dockerfile.')) {
                 return '@docker';
               }
 
-              // Pattern 2: Root config files → @config
+              // Check if file belongs to a package/app (walk up directory tree)
+              for (let i = pathParts.length; i > 0; i--) {
+                const dirPath = pathParts.slice(0, i).join('/');
+                if (packageMap.has(dirPath)) {
+                  return packageMap.get(dirPath);
+                }
+              }
+
+              // .github directory mappings
+              if (topLevel === '.github') {
+                if (secondLevel === 'scripts') return '@scripts';
+                if (secondLevel === 'workflows') return '@workflows';
+                return '@workflows';
+              }
+
+              // Root level files → @config (dynamic detection)
               if (pathParts.length === 1) {
                 return '@config';
               }
 
-              // Pattern 3: File belongs to a tracked package/app
-              if (config.topLevelDirs.includes(topLevel)) {
-                for (let i = pathParts.length; i > 0; i--) {
-                  const dirPath = pathParts.slice(0, i).join('/');
-                  if (packageMap.has(dirPath)) {
-                    return packageMap.get(dirPath);
-                  }
-                }
-                // In tracked dir but no package.json found - use category name
-                return `@${topLevel}`;
-              }
-
-              // Pattern 4: Specific directory mappings
-              if (topLevel === '.github') {
-                if (secondLevel === 'scripts') return '@scripts';
-                if (secondLevel === 'workflows') return '@workflows';
-                return '@workflows'; // Default for other .github files
-              }
-
-              if (topLevel === 'marketing' && secondLevel === 'docs') {
-                return '@docs';
-              }
-
-              // Pattern 5: Other untracked directories - use directory name
-              if (topLevel?.startsWith('.')) {
-                return `@${topLevel.slice(1)}`;
-              }
-              return `@${topLevel}`;
+              // Default: use top-level directory name
+              return topLevel ? `@${topLevel}` : '@config';
             };
 
             // Ensure label exists
@@ -160,9 +125,11 @@ jobs:
                 await github.rest.issues.getLabel({ owner, repo, name: labelName });
               } catch (error) {
                 if (error.status === 404) {
-                  const category = labelName.includes('/') 
-                    ? labelName.split('/')[0].substring(1)
-                    : labelName.substring(1);
+                  // Extract category from label name
+                  let category = labelName.substring(1); // Remove @
+                  if (category.includes('/')) {
+                    category = category.split('/')[0];
+                  }
                   const color = config.colors[category] || '6b7280';
                   const description = `Auto-created label for ${labelName}`;
                   await github.rest.issues.createLabel({
@@ -180,10 +147,9 @@ jobs:
             };
 
             // Main execution
-            const packageJsonPaths = findPackageJsonFiles();
-            console.log(`Found ${packageJsonPaths.length} package.json file(s)`);
+            const packageMap = findPackages();
+            console.log(`Found ${packageMap.size} package(s): ${[...packageMap.values()].join(', ')}`);
 
-            const packageMap = buildPackageMap(packageJsonPaths);
             const files = await github.paginate(
               github.rest.pulls.listFiles,
               { owner, repo, pull_number: prNumber, per_page: 100 }
@@ -214,7 +180,7 @@ jobs:
             });
 
             // Match all labels that start with @ and are not approval labels
-            const labelPattern = /^@(api|packages|marketing|web|docker|scripts|workflows|docs|config|[\w-]+)(\/.+)?$/;
+            const labelPattern = /^@[\w/-]+$/;
             const approvalPattern = /^\d+\/\d+$|^APPROVED$/;
             const toRemove = currentLabels
               .map(l => l.name)
