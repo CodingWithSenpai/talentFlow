@@ -102,7 +102,7 @@ const res = await apiClient.health.$get()
 const data = await res.json()
 ```
 
-📖 **[Type-Safe API documentation] →](https://zerostarter.dev/docs/getting-started/type-safe-api)**
+📖 **[Type-Safe API documentation→](https://zerostarter.dev/docs/getting-started/type-safe-api)**
 
 ## 🚀 Quick Start
 
