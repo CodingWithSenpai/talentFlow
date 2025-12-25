@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
+import { env } from "@packages/env/web-next"
 import { ChevronRight } from "lucide-react"
 
 import { config } from "@/lib/config"
@@ -80,7 +81,6 @@ export function SidebarDocs() {
                         <SidebarMenuSub>
                           {items.map((item) => {
                             const isActive = isItemActive(item.url)
-
                             return (
                               <SidebarMenuSubItem key={item.url}>
                                 <SidebarMenuSubButton asChild isActive={isActive}>
@@ -107,6 +107,20 @@ export function SidebarDocs() {
           </SidebarMenu>
         </SidebarGroup>
       ))}
+      {env.NEXT_PUBLIC_USERJOT_URL && (
+        <SidebarGroup>
+          <SidebarGroupLabel className="pl-2.5">Support</SidebarGroupLabel>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link href={env.NEXT_PUBLIC_USERJOT_URL} target="_blank" rel="noopener noreferrer">
+                  <span>Feedback</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroup>
+      )}
     </>
   )
 }
