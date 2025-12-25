@@ -1,6 +1,6 @@
 import path from "node:path"
+import { isLocal, NODE_ENV } from "@/lib/constants"
 import { config } from "dotenv"
-import { isLocal, NODE_ENV } from "./constants"
 
 if (typeof window === "undefined") {
   try {
