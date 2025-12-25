@@ -7,7 +7,7 @@ A modern, type-safe, and high-performance SaaS starter template built with a mon
 - **🐦 X**: Follow **[@nrjdalal](https://twitter.com/nrjdalal)** for updates and don't forget to star the repository!
 
 > [!IMPORTANT]
-> **Release Candidate (RC) Status**: ZeroStarter is currently in **Release Candidate (RC)** status. All implemented features are stable and production-ready. We're actively adding new features and integrations day-by-day.
+> ZeroStarter is currently in **Release Candidate (RC)** status. All implemented features are stable and production-ready. We're actively adding new features and integrations day-by-day.
 
 <!--
 ```bash
@@ -24,6 +24,9 @@ mv graph.svg .github/assets/graph-build.svg
 -->
 
 ## Architecture and Tech Stack
+
+> [!NOTE]
+> For detailed information about the architecture and tech stack, see the [Architecture documentation](https://zerostarter.dev/docs/getting-started/architecture).
 
 ![Graph Build](./.github/assets/graph-build.svg)
 
@@ -74,6 +77,9 @@ mv graph.svg .github/assets/graph-build.svg
 
 ## 📂 Project Structure
 
+> [!NOTE]
+> For a detailed breakdown of the project structure, see the [Project Structure documentation](https://zerostarter.dev/docs/getting-started/project-structure).
+
 This project is a monorepo organized as follows:
 
 ```
@@ -93,6 +99,9 @@ This project is a monorepo organized as follows:
 
 ## 🔌 Type-Safe API Client
 
+> [!NOTE]
+> For comprehensive details and examples, see the [Type-Safe API documentation](https://zerostarter.dev/docs/getting-started/type-safe-api).
+
 This starter utilizes [Hono RPC](https://hono.dev/docs/guides/rpc) to provide end-to-end type safety between the backend and frontend.
 
 - **Backend**: Routes defined in `api/hono/src/routers` are exported as `AppType` at `api/hono/src/index.ts`.
@@ -111,6 +120,9 @@ const data = await res.json()
 ---
 
 ## ⚙️ Getting Started
+
+> [!NOTE]
+> For a complete step-by-step installation guide, see the [Installation documentation](https://zerostarter.dev/docs/getting-started/installation).
 
 ### Prerequisites
 
@@ -223,51 +235,18 @@ docker compose up
 
 ## 📜 Scripts
 
-### Development
-
-- `bun run dev`: Start the development servers.
-
-### Maintenance
-
-- `bun run clean`: Clean the cache and build artifacts.
-- `bun run lint`: Lint the codebase using Oxlint.
-- `bun run format`: Format the codebase using Prettier.
-- `bun run check-types`: Check the types of the codebase.
-
-### Production
-
-- `bun run build`: Build the applications.
-- `bun run start`: Start the production servers.
-
-### Database
-
-- `bun run db:generate`: Generate Drizzle migrations.
-- `bun run db:migrate`: Run Drizzle migrations.
-- `bun run db:studio`: Open Drizzle Studio to view/edit data.
+> [!NOTE]
+> For a complete list of available scripts and their usage, see the [Scripts documentation](https://zerostarter.dev/docs/getting-started/scripts).
 
 ## 📖 Deployment
 
-- **Frontend**:
-  - [Vercel](.github/docs/deployment/vercel.md#vercel)
-- **Backend**:
-  - [Vercel](.github/docs/deployment/vercel.md#vercel-1)
+> [!NOTE]
+> For detailed deployment instructions, see the [Deployment documentation](https://zerostarter.dev/docs/deployment/vercel).
 
 ## 🤝 Contributing
 
-Contributions welcome — any help is appreciated!
-
-- Fork the repo and create a branch (use descriptive names, e.g. `feat/{name}` or `fix/{name}`).
-- Make your changes, add tests if applicable, and run the checks:
-  - `bun run build`
-  - `bun run check-types`
-  - `bun run format`
-  - `bun run lint`
-- Follow the existing code style and commit message conventions (use conventional commits: feat, fix, docs, chore).
-- Open a PR describing the change, motivation, and any migration notes; link related issues.
-- For breaking changes or large features, open an issue first to discuss the approach.
-- By contributing you agree to the MIT license and the project's Code of Conduct.
-
-Thank you for helping improve ZeroStarter!
+> [!NOTE]
+> For detailed contribution guidelines and best practices, see the [Contributing documentation](https://zerostarter.dev/docs/contributing).
 
 ## 📄 License
 
