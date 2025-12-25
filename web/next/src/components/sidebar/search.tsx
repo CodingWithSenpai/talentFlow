@@ -30,7 +30,7 @@ export function SidebarSearch() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Press "s" to trigger search (Cmd/Ctrl+K)
-      if (e.key === "s" && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      if (e.key === "s" && !e.altKey && !e.ctrlKey && !e.metaKey) {
         const target = e.target as HTMLElement
         if (
           target.tagName === "INPUT" ||
