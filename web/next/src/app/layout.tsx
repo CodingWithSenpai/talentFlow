@@ -7,7 +7,7 @@ import { config } from "@/lib/config"
 import { Navbar } from "@/components/navbar/home"
 import { InnerProvider, OuterProvider } from "@/app/providers"
 
-import "./globals.css"
+import "@/app/globals.css"
 
 function getOgImageUrl(): string {
   const staticOgPath = join(process.cwd(), "public", "og", "home.png")
