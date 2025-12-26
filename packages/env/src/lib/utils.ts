@@ -43,8 +43,7 @@ export const getSafeEnv = (env: Record<string, unknown>, appName?: string) => {
   )
   // Only log in local environment
   if (isLocal(process.env.NODE_ENV)) {
-    const name = appName ?? "@packages/env"
-    console.log(`${name}:getSafeEnv:`, result)
+    console.log(`${appName ?? "@packages/env"}:getSafeEnv:`, result)
   }
   return result
 }
