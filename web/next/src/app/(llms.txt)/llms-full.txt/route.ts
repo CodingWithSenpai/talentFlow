@@ -1,8 +1,8 @@
+import blogMeta from "@/../content/blog/meta.json"
+import docsMeta from "@/../content/docs/meta.json"
+
 import { config } from "@/lib/config"
 import { blogSource, docsSource } from "@/lib/source"
-
-import blogMeta from "../../../content/blog/meta.json"
-import docsMeta from "../../../content/docs/meta.json"
 
 export const revalidate = false
 
