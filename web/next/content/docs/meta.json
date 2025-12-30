@@ -16,6 +16,7 @@
     "manage/robots",
     "manage/sitemap",
     "deployment/vercel",
+    "resources/infisical",
     "contributing"
   ]
 }
