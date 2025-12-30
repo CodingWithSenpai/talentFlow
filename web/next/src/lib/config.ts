@@ -124,6 +124,15 @@ export const config = {
         ],
       },
       {
+        label: "Resources",
+        items: [
+          {
+            title: "Infisical",
+            url: "/docs/resources/infisical",
+          },
+        ],
+      },
+      {
         label: "MIT",
         items: [
           {
