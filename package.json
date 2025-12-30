@@ -30,7 +30,7 @@
     "format": "prettier --write --ignore-unknown *",
     "postinstall": "bun .github/scripts/deps-manager.ts",
     "lint": "turbo lint --summarize",
-    "prepare": "bunx lefthook install",
+    "prepare": "lefthook install",
     "start": "turbo start"
   },
   "commitlint": {
