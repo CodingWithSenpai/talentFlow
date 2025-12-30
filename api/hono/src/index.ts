@@ -33,8 +33,8 @@ const routes = app
   })
   .route("/auth", authRouter)
   .route("/v1", v1Router)
-  .notFound((c) =>
-    c.json(
+  .notFound((c) => {
+    return c.json(
       {
         error: {
           code: "NOT_FOUND",
@@ -42,11 +42,9 @@ const routes = app
         },
       },
       404,
-    ),
-  )
+    )
+  })
   .onError((error, c) => {
-    console.error(error)
-
     if (error instanceof z.ZodError) {
       return c.json(
         {
@@ -59,7 +57,6 @@ const routes = app
         400,
       )
     }
-
     if (error instanceof Error) {
       return c.json(
         {
@@ -71,7 +68,6 @@ const routes = app
         500,
       )
     }
-
     return c.json(
       {
         error: {
