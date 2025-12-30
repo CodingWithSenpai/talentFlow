@@ -30,12 +30,8 @@
     "format": "prettier --write --ignore-unknown *",
     "postinstall": "bun .github/scripts/deps-manager.ts",
     "lint": "turbo lint --summarize",
-    "prepare": "bunx simple-git-hooks",
+    "prepare": "bunx lefthook install",
     "start": "turbo start"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "bunx lint-staged --verbose && bun run build",
-    "commit-msg": "bunx commitlint --edit $1"
   },
   "commitlint": {
     "extends": [
@@ -64,11 +60,11 @@
     "@types/bun": "catalog:",
     "@types/node": "catalog:",
     "globby": "catalog:",
+    "lefthook": "catalog:",
     "lint-staged": "catalog:",
     "oxlint": "catalog:",
     "prettier": "catalog:",
     "prettier-plugin-tailwindcss": "catalog:",
-    "simple-git-hooks": "catalog:",
     "sort-package-json": "catalog:",
     "turbo": "catalog:"
   },
@@ -111,6 +107,7 @@
     "globby": "^16.1.0",
     "hono": "^4.11.2",
     "input-otp": "^1.4.2",
+    "lefthook": "^2.0.13",
     "lint-staged": "^16.2.7",
     "lucide-react": "^0.562.0",
     "next": "^16.1.1",
@@ -128,7 +125,6 @@
     "react-resizable-panels": "^3.0.6",
     "recharts": "2.15.4",
     "shiki": "^3.20.0",
-    "simple-git-hooks": "^2.13.1",
     "sonner": "^2.0.7",
     "sort-package-json": "^3.6.0",
     "tailwind-merge": "^3.4.0",
