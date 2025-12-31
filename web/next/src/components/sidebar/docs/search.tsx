@@ -32,15 +32,18 @@ export function SidebarDocsSearch() {
       bubbles: true,
       cancelable: true,
     })
+    // Mark as synthetic to prevent infinite loop
+    const syntheticEvent = event as KeyboardEvent & { __synthetic?: boolean }
+    syntheticEvent.__synthetic = true
     document.dispatchEvent(event)
   }, [])
 
-  const dispatchSearchEvent = useCallback(() => {
+  const handleSearchTrigger = useCallback(() => {
     if (isMobile) {
       setOpenMobile(false)
     }
     triggerSearchEvent()
-  }, [isMobile, triggerSearchEvent])
+  }, [isMobile, setOpenMobile, triggerSearchEvent])
 
   useEffect(() => {
     const hotKey = [
@@ -53,6 +56,11 @@ export function SidebarDocsSearch() {
     ]
 
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignore synthetic events to prevent infinite loop
+      if ((e as KeyboardEvent & { __synthetic?: boolean }).__synthetic) {
+        return
+      }
+
       if (hotKey.every((v) => (typeof v.key === "string" ? e.key === v.key : v.key(e)))) {
         const target = e.target as HTMLElement
         if (
@@ -64,7 +72,7 @@ export function SidebarDocsSearch() {
         }
 
         e.preventDefault()
-        dispatchSearchEvent()
+        handleSearchTrigger()
       }
     }
 
@@ -72,14 +80,14 @@ export function SidebarDocsSearch() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
     }
-  }, [dispatchSearchEvent])
+  }, [handleSearchTrigger])
 
   return (
     <div className="relative">
       <SearchIcon className="text-muted-foreground pointer-events-none absolute top-1/2 left-2 size-4 -translate-y-1/2" />
       <SidebarInput
         placeholder="Search"
-        onClick={() => triggerSearchEvent()}
+        onClick={handleSearchTrigger}
         readOnly
         className={`cursor-pointer pl-8 ${isMobile ? "pr-3" : "pr-20"}`}
       />
