@@ -16,6 +16,7 @@ export function sortByMeta<T extends { url: string }>(
     const posB = positionMap.get(slugB)
 
     // Pages not in order go to the end
+    if (posA === undefined && posB === undefined) return 0
     if (posA === undefined) return 1
     if (posB === undefined) return -1
 
