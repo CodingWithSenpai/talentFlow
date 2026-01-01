@@ -44,8 +44,8 @@ export const techStack: Tech[] = [
   {
     name: "Turborepo",
     icon: {
-      light: "/landing/turborepo_light.svg",
-      dark: "/landing/turborepo_dark.svg",
+      light: "/landing/Turborepo_light.svg",
+      dark: "/landing/Turborepo_dark.svg",
     },
   },
   {
@@ -149,8 +149,8 @@ export const techStack: Tech[] = [
   {
     name: "Prettier",
     icon: {
-      light: "/landing/prettier_light.svg",
-      dark: "/landing/prettier_dark.svg",
+      light: "/landing/Prettier_light.svg",
+      dark: "/landing/Prettier_dark.svg",
     },
   },
   {
