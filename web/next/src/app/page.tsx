@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { TechMarquee } from "@/components/ui/marquee-tech"
 import { ApiStatus } from "@/components/api-status"
 
 export default async function Home() {
@@ -123,61 +124,7 @@ bun dev`
         </div>
 
         {/* Tech Stack Badges */}
-        <div className="bg-muted/30 relative z-10 overflow-hidden border-t py-8">
-          <div
-            className="text-muted-foreground flex items-center gap-12 text-sm whitespace-nowrap"
-            style={{
-              animation: "scroll-left 20s linear infinite",
-            }}
-          >
-            {[
-              "Turborepo",
-              "React",
-              "Next.js",
-              "Hono",
-              "TanStack Query",
-              "Better Auth",
-              "Tailwind CSS",
-              "Shadcn UI",
-              "Drizzle ORM",
-              "PostgreSQL",
-              "Bun",
-              "Zod",
-              "Fumadocs",
-              "tsdown",
-              "Oxlint",
-              "Prettier",
-              "TypeScript",
-              "Docker",
-              "Vercel",
-            ]
-              .flatMap((tech, index, array) => (index === array.length - 1 ? [tech] : [tech, "•"]))
-              .map((item, index) => (
-                <span
-                  key={`${item}-${index}`}
-                  className={
-                    item === "•" ? "opacity-25" : "hover:text-foreground transition-colors"
-                  }
-                >
-                  {item}
-                </span>
-              ))}
-          </div>
-          <style
-            dangerouslySetInnerHTML={{
-              __html: `
-            @keyframes scroll-left {
-              0% {
-                transform: translateX(0);
-              }
-              100% {
-                transform: translateX(-50%);
-              }
-            }
-          `,
-            }}
-          />
-        </div>
+        <TechMarquee />
       </section>
 
       {/* Features Section */}
