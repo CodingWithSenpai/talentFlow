@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 
 import { RiGithubFill } from "@remixicon/react"
@@ -30,6 +31,150 @@ import {
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ApiStatus } from "@/components/api-status"
+
+type Tech = {
+  name: string
+  icon: {
+    light: string
+    dark: string
+  }
+}
+
+export const techStack: Tech[] = [
+  {
+    name: "Turborepo",
+    icon: {
+      light: "/landing/Turborepo_light.svg",
+      dark: "/landing/Turborepo_dark.svg",
+    },
+  },
+  {
+    name: "React",
+    icon: {
+      light: "/landing/React_light.svg",
+      dark: "/landing/React_dark.svg",
+    },
+  },
+  {
+    name: "Next.js",
+    icon: {
+      light: "/landing/nextjs_icon_dark.svg",
+      dark: "/landing/nextjs_icon_dark.svg",
+    },
+  },
+  {
+    name: "Hono",
+    icon: {
+      light: "/landing/hono.svg",
+      dark: "/landing/hono.svg",
+    },
+  },
+  {
+    name: "Tanstack Query",
+    icon: {
+      light: "/landing/tanstack.svg",
+      dark: "/landing/tanstack.svg",
+    },
+  },
+  {
+    name: "Better Auth",
+    icon: {
+      light: "/landing/Better Auth_light.svg",
+      dark: "/landing/Better Auth_dark.svg",
+    },
+  },
+  {
+    name: "Tailwind CSS",
+    icon: {
+      light: "/landing/tailwindcss.svg",
+      dark: "/landing/tailwindcss.svg",
+    },
+  },
+  {
+    name: "Shadcn UI",
+    icon: {
+      light: "/landing/shadcn_ui_light.svg",
+      dark: "/landing/shadcn_ui_dark.svg",
+    },
+  },
+  {
+    name: "Drizzle ORM",
+    icon: {
+      light: "/landing/Drizzle ORM_light.svg",
+      dark: "/landing/Drizzle ORM_dark.svg",
+    },
+  },
+  {
+    name: "postgreSQL",
+    icon: {
+      light: "/landing/postgresql.svg",
+      dark: "/landing/postgresql.svg",
+    },
+  },
+  {
+    name: "Bun",
+    icon: {
+      light: "/landing/bun.svg",
+      dark: "/landing/bun.svg",
+    },
+  },
+  {
+    name: "Zod",
+    icon: {
+      light: "/landing/zod.svg",
+      dark: "/landing/zod.svg",
+    },
+  },
+  {
+    name: "Fumadocs",
+    icon: {
+      light: "/landing/fumadocs.svg",
+      dark: "/landing/fumadocs.svg",
+    },
+  },
+  {
+    name: "tsdown",
+    icon: {
+      light: "/landing/tsdown.svg",
+      dark: "/landing/tsdown.svg",
+    },
+  },
+  {
+    name: "Oxlint",
+    icon: {
+      light: "/landing/Oxlint.svg",
+      dark: "/landing/Oxlint.svg",
+    },
+  },
+  {
+    name: "Prettier",
+    icon: {
+      light: "/landing/Prettier_light.svg",
+      dark: "/landing/Prettier_dark.svg",
+    },
+  },
+  {
+    name: "TypeScript",
+    icon: {
+      light: "/landing/typescript.svg",
+      dark: "/landing/typescript.svg",
+    },
+  },
+  {
+    name: "Docker",
+    icon: {
+      light: "/landing/docker.svg",
+      dark: "/landing/docker.svg",
+    },
+  },
+  {
+    name: "Vercel",
+    icon: {
+      light: "/landing/Vercel_light.svg",
+      dark: "/landing/Vercel_dark.svg",
+    },
+  },
+]
 
 export default async function Home() {
   const typescriptCode = `import { apiClient } from "@/lib/api/client"
@@ -123,58 +268,41 @@ bun dev`
         </div>
 
         {/* Tech Stack Badges */}
-        <div className="bg-muted/30 relative z-10 overflow-hidden border-t py-8">
-          <div
-            className="text-muted-foreground flex items-center gap-12 text-sm whitespace-nowrap"
-            style={{
-              animation: "scroll-left 20s linear infinite",
-            }}
-          >
-            {[
-              "Turborepo",
-              "React",
-              "Next.js",
-              "Hono",
-              "TanStack Query",
-              "Better Auth",
-              "Tailwind CSS",
-              "Shadcn UI",
-              "Drizzle ORM",
-              "PostgreSQL",
-              "Bun",
-              "Zod",
-              "Fumadocs",
-              "tsdown",
-              "Oxlint",
-              "Prettier",
-              "TypeScript",
-              "Docker",
-              "Vercel",
-            ]
-              .flatMap((tech, index, array) => (index === array.length - 1 ? [tech] : [tech, "•"]))
-              .map((item, index) => (
-                <span
-                  key={`${item}-${index}`}
-                  className={
-                    item === "•" ? "opacity-25" : "hover:text-foreground transition-colors"
-                  }
-                >
-                  {item}
+        <div className="bg-muted/30 relative overflow-hidden border-t py-8">
+          <div className="animate-marquee flex w-max gap-12 px-6">
+            {[...techStack, ...techStack].map((tech, index) => (
+              <div
+                key={`${tech.name}-${index}`}
+                className="text-muted-foreground hover:text-foreground flex items-center gap-2 whitespace-nowrap transition-colors"
+              >
+                {/* LIGHT / DARK SVG swap */}
+                <span className="relative h-5 w-5 shrink-0">
+                  <Image src={tech.icon.light} alt={tech.name} fill className="block dark:hidden" />
+                  <Image src={tech.icon.dark} alt={tech.name} fill className="hidden dark:block" />
                 </span>
-              ))}
+
+                <span className="text-sm font-medium">{tech.name}</span>
+              </div>
+            ))}
           </div>
+
           <style
             dangerouslySetInnerHTML={{
               __html: `
-            @keyframes scroll-left {
-              0% {
-                transform: translateX(0);
-              }
-              100% {
-                transform: translateX(-50%);
-              }
-            }
-          `,
+        @keyframes marquee {
+          from {
+            transform: translate3d(0, 0, 0);
+          }
+          to {
+            transform: translate3d(-50%, 0, 0);
+          }
+        }
+
+        .animate-marquee {
+          animation: marquee 28s linear infinite;
+          will-change: transform;
+        }
+      `,
             }}
           />
         </div>
