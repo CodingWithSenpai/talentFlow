@@ -17,6 +17,7 @@ import {
 } from "react-icons/si"
 
 import { BetterAuthIcon } from "../icons/better-auth-icon"
+import { DrizzleIcon } from "../icons/drizzle-icon"
 import { TanStackIcon } from "../icons/tanstack-icon"
 
 const techStack = [
@@ -28,7 +29,7 @@ const techStack = [
   { name: "Better Auth", icon: BetterAuthIcon },
   { name: "Tailwind CSS", icon: SiTailwindcss },
   { name: "shadcn/ui", icon: SiReact },
-  { name: "Drizzle ORM", icon: FaDatabase },
+  { name: "Drizzle ORM", icon: DrizzleIcon },
   { name: "PostgreSQL", icon: SiPostgresql },
   { name: "Bun", icon: SiBun },
   { name: "Zod", icon: SiZod },
