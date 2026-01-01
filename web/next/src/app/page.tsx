@@ -86,8 +86,8 @@ export const techStack: Tech[] = [
   {
     name: "Next.js",
     icon: {
-      light: "/landing/nextjs-icon-dark.svg",
-      dark: "/landing/nextjs-icon-dark.svg",
+      light: "/landing/nextjs.svg",
+      dark: "/landing/nextjs.svg",
     },
   },
   {
