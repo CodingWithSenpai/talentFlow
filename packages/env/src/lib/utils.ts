@@ -1,4 +1,5 @@
 import path from "node:path"
+import { isLocal, NODE_ENV } from "@/lib/constants"
 import { config } from "dotenv"
 
 if (typeof window === "undefined") {
@@ -9,7 +10,7 @@ if (typeof window === "undefined") {
 
     // Load environment-specific .env file if NODE_ENV is set
     const nodeEnv = process.env.NODE_ENV
-    if (nodeEnv === "development" || nodeEnv === "production") {
+    if (nodeEnv && NODE_ENV.safeParse(nodeEnv).success) {
       const envSpecificPath = path.resolve(process.cwd(), `../../.env.${nodeEnv}`)
       config({ path: envSpecificPath, override: true, quiet: true })
     }
@@ -18,7 +19,7 @@ if (typeof window === "undefined") {
   }
 }
 
-export const getSafeEnv = (env: Record<string, unknown>) => {
+export const getSafeEnv = (env: Record<string, unknown>, appName?: string) => {
   const redactKeys = [
     "database_url",
     "db_url",
@@ -40,9 +41,9 @@ export const getSafeEnv = (env: Record<string, unknown>) => {
       return [key, value]
     }),
   )
-  // Only log in development mode
-  if (process.env.NODE_ENV === "development") {
-    console.log("@packages/env:getSafeEnv:", result)
+  // Only log in local environment
+  if (isLocal(process.env.NODE_ENV)) {
+    console.log(`${appName ?? "@packages/env"}:getSafeEnv:`, result)
   }
   return result
 }

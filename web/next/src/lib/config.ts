@@ -1,7 +1,5 @@
 import { env } from "@packages/env/web-next"
 
-const nodeEnv = (process.env.NODE_ENV as "development" | "production") || "development"
-
 // Server-only env vars
 const getInternalApiUrl = () => {
   if (typeof window === "undefined") {
@@ -24,13 +22,6 @@ export const config = {
   api: {
     url: env.NEXT_PUBLIC_API_URL,
     internalUrl: getInternalApiUrl(),
-  },
-
-  // Environment
-  env: {
-    isDevelopment: nodeEnv === "development",
-    isProduction: nodeEnv === "production",
-    nodeEnv,
   },
 
   // Social links
@@ -72,6 +63,10 @@ export const config = {
           {
             title: "Scripts",
             url: "/docs/getting-started/scripts",
+          },
+          {
+            title: "Roadmap",
+            url: "/docs/getting-started/roadmap",
           },
         ],
       },
@@ -125,6 +120,15 @@ export const config = {
           {
             title: "Vercel",
             url: "/docs/deployment/vercel",
+          },
+        ],
+      },
+      {
+        label: "Resources",
+        items: [
+          {
+            title: "Infisical",
+            url: "/docs/resources/infisical",
           },
         ],
       },

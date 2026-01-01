@@ -1,8 +1,8 @@
+import * as schema from "@/schema"
 import { env } from "@packages/env/db"
 import { SQL } from "bun"
 import { drizzle } from "drizzle-orm/bun-sql"
 import type { BunSQLDatabase } from "drizzle-orm/bun-sql"
-import * as schema from "./schema"
 
 type Database = BunSQLDatabase<typeof schema>
 
@@ -35,4 +35,4 @@ if (env.NODE_ENV === "production") {
 }
 
 export { db }
-export * from "./schema"
+export * from "@/schema"

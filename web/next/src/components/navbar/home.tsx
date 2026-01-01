@@ -21,23 +21,23 @@ const socialLinks = [
   {
     href: "https://x.com/nrjdalal",
     icon: RiTwitterXFill,
-    label: "X (Twitter)",
-  },
-  {
-    href: "https://github.com/nrjdalal/zerostarter",
-    icon: RiGithubFill,
-    label: "GitHub",
+    label: "X",
   },
   {
     href: "https://discord.gg/38FeAUmHSZ",
     icon: RiDiscordFill,
     label: "Discord",
   },
+  {
+    href: "https://github.com/nrjdalal/zerostarter",
+    icon: RiGithubFill,
+    label: "GitHub",
+  },
 ]
 
 function SocialLinks({ onClick }: { onClick?: () => void }) {
   return (
-    <div className="flex items-center gap-2.5">
+    <div className="flex items-center gap-5 md:gap-3">
       {socialLinks.map((link) => (
         <Tooltip key={link.href}>
           <TooltipTrigger asChild>
@@ -49,7 +49,7 @@ function SocialLinks({ onClick }: { onClick?: () => void }) {
               aria-label={link.label}
               onClick={onClick}
             >
-              <link.icon className="size-5" aria-hidden="true" />
+              <link.icon className="size-6" aria-hidden="true" />
             </a>
           </TooltipTrigger>
           <TooltipContent>{link.label}</TooltipContent>
@@ -66,10 +66,10 @@ export function Navbar() {
   const [toDashboard, setToDashboard] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
 
-  if (pathname?.startsWith("/x")) return null
+  if (pathname?.startsWith("/dashboard")) return null
 
   const navLinks = [
-    { href: "/docs", label: "Docs" },
+    { href: "/docs", label: "Documentation" },
     { href: "/blog", label: "Blog" },
   ]
 
@@ -108,16 +108,17 @@ export function Navbar() {
           </div>
 
           {session?.user ? (
-            <Link href="/x">
-              <Button
-                className="w-24 cursor-pointer"
-                size="sm"
-                variant="outline"
-                onClick={() => setToDashboard(true)}
-              >
+            <Button
+              asChild
+              className="w-24 cursor-pointer"
+              size="sm"
+              variant="outline"
+              onClick={() => setToDashboard(true)}
+            >
+              <Link href="/dashboard">
                 {toDashboard ? <Loader2 className="animate-spin" /> : "Dashboard"}
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           ) : (
             <Access />
           )}
@@ -172,6 +173,12 @@ export function Navbar() {
                     </Link>
                   )
                 })}
+                <Button asChild size="sm" className="mt-2 w-fit" onClick={() => setIsOpen(false)}>
+                  <a href={config.social.github} target="_blank" rel="noopener noreferrer">
+                    <RiGithubFill className="size-4" />
+                    Get ZeroStarter
+                  </a>
+                </Button>
               </nav>
               {/* Mobile Social Links */}
               <div className="mt-2.5 ml-4 flex items-center gap-2.5">

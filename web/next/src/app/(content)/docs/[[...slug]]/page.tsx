@@ -6,21 +6,21 @@ import {
   getPageData,
   renderPageContent,
 } from "@/lib/fumadocs"
-import { blogSource } from "@/lib/source"
+import { docsSource } from "@/lib/source"
 
 export default async function Page(props: { params: Promise<{ slug?: string[] }> }) {
-  const pageData = await getPageData(props.params, blogSource)
+  const pageData = await getPageData(props.params, docsSource)
   return renderPageContent(pageData)
 }
 
-export const generateStaticParams = createGenerateStaticParams(blogSource)
+export const generateStaticParams = createGenerateStaticParams(docsSource)
 
 export async function generateMetadata(props: {
   params: Promise<{ slug?: string[] }>
 }): Promise<Metadata> {
   return generatePageMetadata(props.params, {
-    source: blogSource,
-    ogPath: `/api/og/blog?t=${Date.now()}`,
-    ogType: "article",
+    source: docsSource,
+    ogPath: "/api/og/docs",
+    ogType: "website",
   })
 }
