@@ -3,7 +3,7 @@ import { Octokit } from "@octokit/rest"
 
 const CHANGELOG_PATH = "CHANGELOG.md"
 const EMAIL_REGEX =
-  /([^<\n]+?)\s*<((?!\.)(?!.*\.\.)([a-z0-9_'+\-.]*)[a-z0-9_'+.-]@([a-z0-9][a-z0-9-]*\.)+[a-z]{2,})>/gi
+  /<((?!\.)(?!.*\.\.)([a-z0-9_'+\-.]*)[a-z0-9_'+.-]@([a-z0-9][a-z0-9-]*\.)+[a-z]{2,})>/gi
 
 async function searchCommits(
   octokit: Octokit,
@@ -67,35 +67,59 @@ async function getUserInfoFromEmail(
 
 async function processChangelog() {
   const content = readFileSync(CHANGELOG_PATH, "utf-8")
-  const emailToUserInfo = new Map<string, { username: string | null; name: string | null }>()
+  const lines = content.split("\n")
 
-  const emails = new Set<string>()
-  const emailMatches = new Map<
-    string,
-    Array<{ fullMatch: string; nameBefore: string | undefined }>
-  >()
-  let match
-  while ((match = EMAIL_REGEX.exec(content)) !== null) {
-    const email = match[2]
-    const nameBefore = match[1]?.trim()
-    emails.add(email)
-    const matchInfo = { fullMatch: match[0], nameBefore }
-    const existing = emailMatches.get(email) || []
-    existing.push(matchInfo)
-    emailMatches.set(email, existing)
+  // Find all Contributors sections
+  const contributorSections: number[] = []
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].trim() === "### ❤️ Contributors") {
+      contributorSections.push(i)
+    }
   }
 
+  if (contributorSections.length === 0) {
+    console.log("No Contributors section found")
+    return
+  }
+
+  // Collect all emails from contributor bullet points
+  const emails = new Set<string>()
+  const emailToLineIndex = new Map<string, number[]>()
+
+  for (const sectionStart of contributorSections) {
+    // Process lines until we hit the next section (## or ###)
+    for (let i = sectionStart + 1; i < lines.length; i++) {
+      const line = lines[i]
+
+      // Stop at next section
+      if (line.startsWith("##")) {
+        break
+      }
+
+      // Process bullet points
+      if (line.trim().startsWith("-")) {
+        const emailMatch = line.match(EMAIL_REGEX)
+        if (emailMatch) {
+          const email = emailMatch[1]
+          emails.add(email)
+          const existing = emailToLineIndex.get(email) || []
+          existing.push(i)
+          emailToLineIndex.set(email, existing)
+        }
+      }
+    }
+  }
+
+  // Create Octokit instance once
   const token = process.env.GITHUB_TOKEN
   const octokit = new Octokit({
     auth: token,
     userAgent: "https://github.com/nrjdalal/zerostarter",
   })
 
+  // Fetch user info for each unique email
+  const emailToUserInfo = new Map<string, { username: string | null; name: string | null }>()
   for (const email of emails) {
-    if (emailToUserInfo.has(email)) {
-      continue
-    }
-
     const userInfo = await getUserInfoFromEmail(octokit, email)
     emailToUserInfo.set(email, userInfo)
     if (userInfo.username) {
@@ -108,32 +132,33 @@ async function processChangelog() {
     }
   }
 
-  let updatedContent = content
+  // Replace emails in contributor lines
+  const updatedLines = [...lines]
   for (const [email, userInfo] of emailToUserInfo) {
-    const matches = emailMatches.get(email)
-    if (!matches) continue
+    const lineIndices = emailToLineIndex.get(email) || []
 
-    if (userInfo.username) {
-      // Always use GitHub name if available, otherwise fall back to name before email, otherwise username
-      // This prevents duplicates when nameBefore matches GitHub name
-      const displayName = userInfo.name || matches[0]?.nameBefore || userInfo.username
-      const replacement = `${displayName} @${userInfo.username}`
-      // Replace all matches for this email (replace the full match including any name before email)
-      for (const matchInfo of matches) {
-        updatedContent = updatedContent.replaceAll(matchInfo.fullMatch, replacement)
-      }
-    } else {
-      // Remove lines containing any match for this email
-      for (const matchInfo of matches) {
-        updatedContent = updatedContent
-          .split("\n")
-          .filter((line) => !line.includes(matchInfo.fullMatch))
-          .join("\n")
+    for (const lineIndex of lineIndices) {
+      let line = updatedLines[lineIndex]
+
+      if (userInfo.username) {
+        // Replace everything from bullet point to <email> with Name @username
+        const displayName = userInfo.name || userInfo.username
+        // Match: "- " (optional) + any text + "<email>" and replace with "- " + displayName + " @username"
+        const bulletMatch = line.match(/^(-\s*)/)
+        const bullet = bulletMatch ? bulletMatch[1] : ""
+        line = line.replace(/^(-\s*)?.*<[^>]+>/, `${bullet}${displayName} @${userInfo.username}`)
+        updatedLines[lineIndex] = line
+      } else {
+        // Remove the line if no username found
+        updatedLines[lineIndex] = ""
       }
     }
   }
 
-  writeFileSync(CHANGELOG_PATH, updatedContent, "utf-8")
+  // Remove empty lines (removed contributor entries)
+  const finalContent = updatedLines.filter((line) => line !== "").join("\n")
+
+  writeFileSync(CHANGELOG_PATH, finalContent, "utf-8")
   console.log("Changelog updated successfully!")
 }
 
