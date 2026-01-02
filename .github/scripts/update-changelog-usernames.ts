@@ -117,7 +117,7 @@ async function processChangelog() {
       // Always use GitHub name if available, otherwise fall back to name before email, otherwise username
       // This prevents duplicates when nameBefore matches GitHub name
       const displayName = userInfo.name || matches[0]?.nameBefore || userInfo.username
-      const replacement = `${displayName} @${userInfo.username}`
+      const replacement = `- ${displayName} @${userInfo.username}`
       // Replace all matches for this email (replace the full match including any name before email)
       for (const matchInfo of matches) {
         updatedContent = updatedContent.replaceAll(matchInfo.fullMatch, replacement)
