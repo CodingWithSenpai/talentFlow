@@ -3,7 +3,7 @@ import { Octokit } from "@octokit/rest"
 
 const CHANGELOG_PATH = "CHANGELOG.md"
 const EMAIL_REGEX =
-  /([^<\n]+?)\s*<((?!\.)(?!.*\.\.)([a-z0-9_'+\-.]*)[a-z0-9_'+.-]@([a-z0-9][a-z0-9-]*\.)+[a-z]{2,})>/gi
+  /<((?!\.)(?!.*\.\.)([a-z0-9_'+\-.]*)[a-z0-9_'+.-]@([a-z0-9][a-z0-9-]*\.)+[a-z]{2,})>/gi
 
 async function searchCommits(
   octokit: Octokit,
@@ -67,35 +67,59 @@ async function getUserInfoFromEmail(
 
 async function processChangelog() {
   const content = readFileSync(CHANGELOG_PATH, "utf-8")
-  const emailToUserInfo = new Map<string, { username: string | null; name: string | null }>()
+  const lines = content.split("\n")
 
-  const emails = new Set<string>()
-  const emailMatches = new Map<
-    string,
-    Array<{ fullMatch: string; nameBefore: string | undefined }>
-  >()
-  let match
-  while ((match = EMAIL_REGEX.exec(content)) !== null) {
-    const email = match[2]
-    const nameBefore = match[1]?.trim()
-    emails.add(email)
-    const matchInfo = { fullMatch: match[0], nameBefore }
-    const existing = emailMatches.get(email) || []
-    existing.push(matchInfo)
-    emailMatches.set(email, existing)
+  // Find all Contributors sections
+  const contributorSections: number[] = []
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].trim() === "### ❤️ Contributors") {
+      contributorSections.push(i)
+    }
   }
 
+  if (contributorSections.length === 0) {
+    console.log("No Contributors section found")
+    return
+  }
+
+  // Collect all emails from contributor bullet points
+  const emails = new Set<string>()
+  const emailToLineIndex = new Map<string, number[]>()
+
+  for (const sectionStart of contributorSections) {
+    // Process lines until we hit the next section (## or ###)
+    for (let i = sectionStart + 1; i < lines.length; i++) {
+      const line = lines[i]
+
+      // Stop at next section
+      if (line.startsWith("##")) {
+        break
+      }
+
+      // Process bullet points
+      if (line.trim().startsWith("-")) {
+        const emailMatch = line.match(EMAIL_REGEX)
+        if (emailMatch) {
+          const email = emailMatch[1]
+          emails.add(email)
+          const existing = emailToLineIndex.get(email) || []
+          existing.push(i)
+          emailToLineIndex.set(email, existing)
+        }
+      }
+    }
+  }
+
+  // Create Octokit instance once
   const token = process.env.GITHUB_TOKEN
   const octokit = new Octokit({
     auth: token,
     userAgent: "https://github.com/nrjdalal/zerostarter",
   })
 
+  // Fetch user info for each unique email
+  const emailToUserInfo = new Map<string, { username: string | null; name: string | null }>()
   for (const email of emails) {
-    if (emailToUserInfo.has(email)) {
-      continue
-    }
-
     const userInfo = await getUserInfoFromEmail(octokit, email)
     emailToUserInfo.set(email, userInfo)
     if (userInfo.username) {
@@ -108,7 +132,8 @@ async function processChangelog() {
     }
   }
 
-  let updatedContent = content
+  // Replace emails in contributor lines
+  const updatedLines = [...lines]
   for (const [email, userInfo] of emailToUserInfo) {
     const matches = emailMatches.get(email)
     if (!matches) continue
@@ -133,7 +158,10 @@ async function processChangelog() {
     }
   }
 
-  writeFileSync(CHANGELOG_PATH, updatedContent, "utf-8")
+  // Remove empty lines (removed contributor entries)
+  const finalContent = updatedLines.filter((line) => line !== "").join("\n")
+
+  writeFileSync(CHANGELOG_PATH, finalContent, "utf-8")
   console.log("Changelog updated successfully!")
 }
 
