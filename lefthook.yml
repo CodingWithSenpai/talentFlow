@@ -6,6 +6,7 @@ pre-commit:
       stage_fixed: true
     build:
       run: bun run build
+      interactive: true
 
 commit-msg:
   commands:
