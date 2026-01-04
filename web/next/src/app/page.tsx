@@ -699,7 +699,9 @@ bun dev`
           </div>
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
-              <AccordionTrigger className="text-left">What is ZeroStarter?</AccordionTrigger>
+              <AccordionTrigger className="text-left hover:no-underline">
+                What is ZeroStarter?
+              </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
                 ZeroStarter is a modern, type-safe, and high-performance SaaS starter template built
                 with a monorepo architecture. It provides everything you need to launch a
@@ -708,7 +710,7 @@ bun dev`
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
-              <AccordionTrigger className="text-left">
+              <AccordionTrigger className="text-left hover:no-underline">
                 How is it different from other starter kits?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
@@ -719,7 +721,9 @@ bun dev`
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
-              <AccordionTrigger className="text-left">Is it production-ready?</AccordionTrigger>
+              <AccordionTrigger className="text-left hover:no-underline">
+                Is it production-ready?
+              </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
                 Yes! ZeroStarter is currently in Release Candidate (RC) status. All implemented
                 features are stable and production-ready. We're actively adding new features and
@@ -727,7 +731,7 @@ bun dev`
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-4">
-              <AccordionTrigger className="text-left">
+              <AccordionTrigger className="text-left hover:no-underline">
                 Can I use it for commercial projects?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
@@ -736,7 +740,7 @@ bun dev`
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-5">
-              <AccordionTrigger className="text-left">
+              <AccordionTrigger className="text-left hover:no-underline">
                 What technologies does it use?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
