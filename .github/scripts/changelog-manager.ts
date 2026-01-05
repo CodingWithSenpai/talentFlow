@@ -3,39 +3,67 @@ import { Octokit } from "@octokit/rest"
 
 const CHANGELOG_PATH = "CHANGELOG.md"
 
-function extractUsername(contributorLine: string): string | null {
-  // Remove the "- " prefix
+function extractEmailAndUsername(contributorLine: string): {
+  email: string | null
+  username: string | null
+} {
   const content = contributorLine.replace(/^-\s+/, "").trim()
 
   // Match markdown link format: Name ([@username](url))
   const markdownLinkMatch = content.match(/\(\[@(\w+)\]\(https?:\/\/github\.com\/[\w-]+\/?\)\)/)
   if (markdownLinkMatch) {
-    return markdownLinkMatch[1]
+    return { email: null, username: markdownLinkMatch[1] }
+  }
+
+  // Match email format: Name <email@domain.com>
+  const emailMatch = content.match(/<([^>]+)>/)
+  if (emailMatch) {
+    const email = emailMatch[1]
+    // If it's a GitHub noreply email, extract username directly
+    const githubEmailMatch = email.match(/^(\d+\+)?(\w+)@users\.noreply\.github\.com$/)
+    if (githubEmailMatch) {
+      return { email: null, username: githubEmailMatch[2] }
+    }
+    // Regular email - return email to search commits
+    return { email, username: null }
   }
 
   // Match direct @username format: Name @username
   const directMatch = content.match(/@(\w+)/)
   if (directMatch) {
-    return directMatch[1]
+    return { email: null, username: directMatch[1] }
   }
 
-  // Match email format: Name <email@domain.com>
-  // Try to extract username from GitHub email domain
-  const emailMatch = content.match(/<([^>]+)>/)
-  if (emailMatch) {
-    const email = emailMatch[1]
-    // If it's a GitHub noreply email, extract username
-    const githubEmailMatch = email.match(/^(\d+\+)?(\w+)@users\.noreply\.github\.com$/)
-    if (githubEmailMatch) {
-      return githubEmailMatch[2]
-    }
-    // Try to extract from regular email (username part before @)
-    const emailUsername = email.split("@")[0]
-    // This is a fallback - might not always be correct
-    return emailUsername
-  }
+  return { email: null, username: null }
+}
 
-  return null
+async function findUsernameByEmail(
+  octokit: Octokit,
+  email: string,
+  repoOwner: string,
+  repoName: string,
+): Promise<string | null> {
+  try {
+    const { data: commits } = await octokit.rest.repos.listCommits({
+      owner: repoOwner,
+      repo: repoName,
+      author: email,
+      per_page: 1,
+    })
+
+    return commits[0]?.author?.login ?? null
+  } catch {
+    return null
+  }
+}
+
+async function getFullNameByUsername(octokit: Octokit, username: string): Promise<string | null> {
+  try {
+    const { data: user } = await octokit.rest.users.getByUsername({ username })
+    return user.name
+  } catch {
+    return null
+  }
 }
 
 async function processChangelog() {
@@ -44,6 +72,9 @@ async function processChangelog() {
     console.error("GITHUB_TOKEN environment variable is required")
     process.exit(1)
   }
+
+  const repoOwner = process.env.GITHUB_REPOSITORY_OWNER || "nrjdalal"
+  const repoName = process.env.GITHUB_REPOSITORY_NAME || "zerostarter"
 
   const octokit = new Octokit({ auth: token })
 
@@ -66,33 +97,36 @@ async function processChangelog() {
     .map((line) => line.trim())
     .filter((line) => line.startsWith("- "))
 
-  // Fetch user info from GitHub and format
+  // Process each contributor entry
   const formattedContributors = await Promise.all(
     contributorEntries.map(async (entry) => {
-      const username = extractUsername(entry)
-      if (!username) {
-        // If we can't extract username, return the original entry
-        return entry
+      // Extract name from entry
+      const nameMatch = entry.match(/^-\s+(.+?)(?:\s+[@<]|$)/)
+      const fallbackName = nameMatch ? nameMatch[1].trim() : ""
+
+      // Extract email or username from entry
+      const { email, username: extractedUsername } = extractEmailAndUsername(entry)
+
+      // Get username: use extracted username or search by email
+      let username = extractedUsername
+      if (!username && email) {
+        username = await findUsernameByEmail(octokit, email, repoOwner, repoName)
       }
 
-      try {
-        const { data: user } = await octokit.rest.users.getByUsername({ username })
-        const fullName = user.name || user.login
-        return `- ${fullName} @${username}`
-      } catch {
-        // If user not found, try to extract name from original entry
-        const nameMatch = entry.match(/^-\s+(.+?)(?:\s+[@<]|$)/)
-        const name = nameMatch ? nameMatch[1].trim() : username
-        return `- ${name} @${username}`
+      // If we have a username, get full name from GitHub
+      if (username) {
+        const fullName = await getFullNameByUsername(octokit, username)
+        return `- ${fullName || fallbackName} @${username}`
       }
+
+      // If we can't find a username, return the original entry
+      return entry
     }),
   )
 
-  console.log(formattedContributors.join("\n"))
+  formattedContributors.forEach((contributor) => {
+    console.log(contributor)
+  })
 }
 
-async function main() {
-  await processChangelog()
-}
-
-main()
+processChangelog()
