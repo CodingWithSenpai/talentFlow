@@ -141,8 +141,8 @@
 
 ### ❤️ Contributors
 
-- Surajgoraicse ([@surajgoraicse](https://github.com/surajgoraicse))
-- Neeraj Dalal ([@nrjdalal](https://github.com/nrjdalal))
+- Suraj Gorai @surajgoraicse
+- Neeraj Dalal @nrjdalal
 
 ## v0.0.8
 
@@ -239,8 +239,8 @@
 ### ❤️ Contributors
 
 - Neeraj Dalal @nrjdalal
-- PrakharSingh ([@PrakharSinghDev](https://github.com/PrakharSinghDev))
-- Surajgoraicse @surajgoraicse
+- Prakhar Singh @PrakharSinghDev
+- Suraj Gorai @surajgoraicse
 
 ## v0.0.6
 
@@ -275,7 +275,7 @@
 ### ❤️ Contributors
 
 - Neeraj Dalal @nrjdalal
-- Surajgoraicse @surajgoraicse
+- Suraj Gorai @surajgoraicse
 
 ## v0.0.5
 
