@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs"
+import { readFileSync, writeFileSync } from "node:fs"
 import { Octokit } from "@octokit/rest"
 
 const CHANGELOG_PATH = "CHANGELOG.md"
@@ -9,26 +9,21 @@ function extractEmailAndUsername(contributorLine: string): {
 } {
   const content = contributorLine.replace(/^-\s+/, "").trim()
 
-  // Match markdown link format: Name ([@username](url))
   const markdownLinkMatch = content.match(/\(\[@(\w+)\]\(https?:\/\/github\.com\/[\w-]+\/?\)\)/)
   if (markdownLinkMatch) {
     return { email: null, username: markdownLinkMatch[1] }
   }
 
-  // Match email format: Name <email@domain.com>
   const emailMatch = content.match(/<([^>]+)>/)
   if (emailMatch) {
     const email = emailMatch[1]
-    // If it's a GitHub noreply email, extract username directly
     const githubEmailMatch = email.match(/^(\d+\+)?(\w+)@users\.noreply\.github\.com$/)
     if (githubEmailMatch) {
       return { email: null, username: githubEmailMatch[2] }
     }
-    // Regular email - return email to search commits
     return { email, username: null }
   }
 
-  // Match direct @username format: Name @username
   const directMatch = content.match(/@(\w+)/)
   if (directMatch) {
     return { email: null, username: directMatch[1] }
@@ -88,45 +83,46 @@ async function processChangelog() {
     return
   }
 
-  const sectionLines = lines.slice(firstContributorSection + 1)
-  const nextSectionIndex = sectionLines.findIndex((line) => line.trim().startsWith("##"))
-  const contributorLines =
-    nextSectionIndex === -1 ? sectionLines : sectionLines.slice(0, nextSectionIndex)
+  const contributorIndices: number[] = []
+  const contributorEntries: string[] = []
 
-  const contributorEntries = contributorLines
-    .map((line) => line.trim())
-    .filter((line) => line.startsWith("- "))
+  for (let i = firstContributorSection + 1; i < lines.length; i++) {
+    const line = lines[i].trim()
+    if (line.startsWith("##")) {
+      break
+    }
+    if (line.startsWith("- ")) {
+      contributorIndices.push(i)
+      contributorEntries.push(line)
+    }
+  }
 
-  // Process each contributor entry
   const formattedContributors = await Promise.all(
     contributorEntries.map(async (entry) => {
-      // Extract name from entry
       const nameMatch = entry.match(/^-\s+(.+?)(?:\s+[@<]|$)/)
       const fallbackName = nameMatch ? nameMatch[1].trim() : ""
 
-      // Extract email or username from entry
       const { email, username: extractedUsername } = extractEmailAndUsername(entry)
 
-      // Get username: use extracted username or search by email
       let username = extractedUsername
       if (!username && email) {
         username = await findUsernameByEmail(octokit, email, repoOwner, repoName)
       }
 
-      // If we have a username, get full name from GitHub
       if (username) {
         const fullName = await getFullNameByUsername(octokit, username)
         return `- ${fullName || fallbackName} @${username}`
       }
 
-      // If we can't find a username, return the original entry
       return entry
     }),
   )
 
-  formattedContributors.forEach((contributor) => {
-    console.log(contributor)
+  formattedContributors.forEach((formatted, index) => {
+    lines[contributorIndices[index]] = formatted
   })
+
+  writeFileSync(CHANGELOG_PATH, lines.join("\n"), "utf-8")
 }
 
 processChangelog()
