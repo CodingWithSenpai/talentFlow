@@ -1,6 +1,96 @@
+## v0.0.10
+
+[compare changes](https://github.com/nrjdalal/zerostarter/compare/v0.0.9...v0.0.10)
+
+### 🚀 Enhancements
+
+- Syntax highlighting to landing page ([1136a4f](https://github.com/nrjdalal/zerostarter/commit/1136a4f))
+- Api status on home ([a099447](https://github.com/nrjdalal/zerostarter/commit/a099447))
+- Add infisical docs ([9e06359](https://github.com/nrjdalal/zerostarter/commit/9e06359))
+- Switch to lefthook ([f1ed154](https://github.com/nrjdalal/zerostarter/commit/f1ed154))
+- Added the package for react-icons ([b023040](https://github.com/nrjdalal/zerostarter/commit/b023040))
+- Added the global css changes ([9c3268e](https://github.com/nrjdalal/zerostarter/commit/9c3268e))
+- Added the marquee list component in the page.tsx ([fe8fc64](https://github.com/nrjdalal/zerostarter/commit/fe8fc64))
+- Added the icon for tanstack ([9e47514](https://github.com/nrjdalal/zerostarter/commit/9e47514))
+- Added the icon for better auth ([4cbbca8](https://github.com/nrjdalal/zerostarter/commit/4cbbca8))
+- Changes for the marquee list and tanstack icon ([f6da748](https://github.com/nrjdalal/zerostarter/commit/f6da748))
+- Added the drizzle icon in the marquee list ([4c6ec80](https://github.com/nrjdalal/zerostarter/commit/4c6ec80))
+- Deletion of misplaced files and unwanted component ([87f787e](https://github.com/nrjdalal/zerostarter/commit/87f787e))
+- Added the icons to the public/landing folder ([e62e2ef](https://github.com/nrjdalal/zerostarter/commit/e62e2ef))
+- Updated the page.tsx file and removed the code from global.css ([0f2d162](https://github.com/nrjdalal/zerostarter/commit/0f2d162))
+- Introduced the svg file for all icons and changes logic in the page.tsx file ([0dfc7d0](https://github.com/nrjdalal/zerostarter/commit/0dfc7d0))
+- Changes for the code rabbit comment ([25a6c1a](https://github.com/nrjdalal/zerostarter/commit/25a6c1a))
+
+### 🩹 Fixes
+
+- Underline on accordin ([9298b43](https://github.com/nrjdalal/zerostarter/commit/9298b43))
+- Changelog username v1 ([a3dea9d](https://github.com/nrjdalal/zerostarter/commit/a3dea9d))
+- Changelog username v2 ([eec0d26](https://github.com/nrjdalal/zerostarter/commit/eec0d26))
+- Changelog username v3 ([7322fb3](https://github.com/nrjdalal/zerostarter/commit/7322fb3))
+- Changelog username v4 ([6128970](https://github.com/nrjdalal/zerostarter/commit/6128970))
+- Changelog username v5 ([22c045d](https://github.com/nrjdalal/zerostarter/commit/22c045d))
+- Changelog username v6 ([aad8726](https://github.com/nrjdalal/zerostarter/commit/aad8726))
+
+### 💅 Refactors
+
+- Fe files and structure ([c3d941d](https://github.com/nrjdalal/zerostarter/commit/c3d941d))
+- Add --ignore-scripts to dockerfile ([f64d500](https://github.com/nrjdalal/zerostarter/commit/f64d500))
+
+### 🏡 Chore
+
+- Switch from userjot widget to url ([1e78521](https://github.com/nrjdalal/zerostarter/commit/1e78521))
+- Add docs and userjot links ([b3e544a](https://github.com/nrjdalal/zerostarter/commit/b3e544a))
+- @ at imports ([4dafd52](https://github.com/nrjdalal/zerostarter/commit/4dafd52))
+- Sync ([e9bf13b](https://github.com/nrjdalal/zerostarter/commit/e9bf13b))
+- Update deps ([ddaae59](https://github.com/nrjdalal/zerostarter/commit/ddaae59))
+- Added ai review to have a look later ([6f16240](https://github.com/nrjdalal/zerostarter/commit/6f16240))
+- Split roadmap ([c6da1ed](https://github.com/nrjdalal/zerostarter/commit/c6da1ed))
+- Correct readme ([81d2b4f](https://github.com/nrjdalal/zerostarter/commit/81d2b4f))
+- Use aliases at imports ([4327c1d](https://github.com/nrjdalal/zerostarter/commit/4327c1d))
+- Init posthog ([3477b19](https://github.com/nrjdalal/zerostarter/commit/3477b19))
+- Add env to .env.example ([1119d51](https://github.com/nrjdalal/zerostarter/commit/1119d51))
+- Minor grouping ([5f3ef6d](https://github.com/nrjdalal/zerostarter/commit/5f3ef6d))
+- All envs using env pkg ([1a54b2c](https://github.com/nrjdalal/zerostarter/commit/1a54b2c))
+- Set next node env using node env ([cb1eacf](https://github.com/nrjdalal/zerostarter/commit/cb1eacf))
+- Log name with app ([77cfb84](https://github.com/nrjdalal/zerostarter/commit/77cfb84))
+- One liner, and off for today ([8cd7515](https://github.com/nrjdalal/zerostarter/commit/8cd7515))
+- Add infisical config ([1a2748c](https://github.com/nrjdalal/zerostarter/commit/1a2748c))
+- Not found and error logging at hono ([562bd9c](https://github.com/nrjdalal/zerostarter/commit/562bd9c))
+- Enhance api/hono ([fd2a9be](https://github.com/nrjdalal/zerostarter/commit/fd2a9be))
+- Sync ([fcf93a2](https://github.com/nrjdalal/zerostarter/commit/fcf93a2))
+- Port default for hono ([239f71f](https://github.com/nrjdalal/zerostarter/commit/239f71f))
+- Coerce hono port ([95d6015](https://github.com/nrjdalal/zerostarter/commit/95d6015))
+- Sync docs ([d4bd42b](https://github.com/nrjdalal/zerostarter/commit/d4bd42b))
+- Sync docs ([424f03e](https://github.com/nrjdalal/zerostarter/commit/424f03e))
+- Wrong-convention: testing wrong convention ([4fd66a0](https://github.com/nrjdalal/zerostarter/commit/4fd66a0))
+- Append bunx to prepare ([fe16e68](https://github.com/nrjdalal/zerostarter/commit/fe16e68))
+- Rearrange ([66d0543](https://github.com/nrjdalal/zerostarter/commit/66d0543))
+- Cleanup ([42d83bd](https://github.com/nrjdalal/zerostarter/commit/42d83bd))
+- Cleanup v2 ([fa3e8b3](https://github.com/nrjdalal/zerostarter/commit/fa3e8b3))
+- Cleanup v3 ([34f686c](https://github.com/nrjdalal/zerostarter/commit/34f686c))
+- Cleanup v4 ([5f436e5](https://github.com/nrjdalal/zerostarter/commit/5f436e5))
+- Cleanup v5 ([d6a702d](https://github.com/nrjdalal/zerostarter/commit/d6a702d))
+- Cleanup v6 ([1246543](https://github.com/nrjdalal/zerostarter/commit/1246543))
+- Casing fix ([0c4f5f3](https://github.com/nrjdalal/zerostarter/commit/0c4f5f3))
+- Casing fix v2 ([fc2cc32](https://github.com/nrjdalal/zerostarter/commit/fc2cc32))
+- Reorder icons ([ffac975](https://github.com/nrjdalal/zerostarter/commit/ffac975))
+- Oxlint real logo ([65fa78b](https://github.com/nrjdalal/zerostarter/commit/65fa78b))
+- Cleanup ([08069bd](https://github.com/nrjdalal/zerostarter/commit/08069bd))
+- Correct fumadocs icon ([be9701d](https://github.com/nrjdalal/zerostarter/commit/be9701d))
+- Correct lefthook output ([e2e9bd2](https://github.com/nrjdalal/zerostarter/commit/e2e9bd2))
+- Enhance username api for changelog ([8205883](https://github.com/nrjdalal/zerostarter/commit/8205883))
+- Enhance username api for changelog ([13d4baf](https://github.com/nrjdalal/zerostarter/commit/13d4baf))
+- Enhance username api for changelog ([717a50d](https://github.com/nrjdalal/zerostarter/commit/717a50d))
+- Enhance username api for changelog ([9a385d0](https://github.com/nrjdalal/zerostarter/commit/9a385d0))
+
+### ❤️ Contributors
+
+- Neeraj Dalal @nrjdalal
+- Siddharth Gaikwad @sidgaikwad
+
 ## v0.0.9
 
-[compare changes](https://github.com/nrjdalal/zerostarter/compare/df7eacb268c5f500a23ab34cb367a612d52d51be...v0.0.9)
+[compare changes](https://github.com/nrjdalal/zerostarter/compare/v0.0.8...v0.0.9)
 
 ### 🚀 Enhancements
 
@@ -51,12 +141,12 @@
 
 ### ❤️ Contributors
 
-- Surajgoraicse ([@surajgoraicse](https://github.com/surajgoraicse))
-- Neeraj Dalal ([@nrjdalal](https://github.com/nrjdalal))
+- Suraj Gorai @surajgoraicse
+- Neeraj Dalal @nrjdalal
 
 ## v0.0.8
 
-[compare changes](https://github.com/nrjdalal/zerostarter/compare/d03a1acf4869778a8b5231a04a8e2cad61872cb5...v0.0.8)
+[compare changes](https://github.com/nrjdalal/zerostarter/compare/v0.0.7...v0.0.8)
 
 ### 🚀 Enhancements
 
@@ -108,7 +198,7 @@
 
 ## v0.0.7
 
-[compare changes](https://github.com/nrjdalal/zerostarter/compare/23cb47f3fe9e526ae5a5bde5ad39cfeeede788f3...v0.0.7)
+[compare changes](https://github.com/nrjdalal/zerostarter/compare/v0.0.6...v0.0.7)
 
 ### 🚀 Enhancements
 
@@ -149,12 +239,12 @@
 ### ❤️ Contributors
 
 - Neeraj Dalal @nrjdalal
-- PrakharSingh ([@PrakharSinghDev](https://github.com/PrakharSinghDev))
-- Surajgoraicse @surajgoraicse
+- Prakhar Singh @PrakharSinghDev
+- Suraj Gorai @surajgoraicse
 
 ## v0.0.6
 
-[compare changes](https://github.com/nrjdalal/zerostarter/compare/e5ed86215f9d805e196e0df12cf329c6dfb52e5e...v0.0.6)
+[compare changes](https://github.com/nrjdalal/zerostarter/compare/v0.0.5...v0.0.6)
 
 ### 🚀 Enhancements
 
@@ -185,11 +275,11 @@
 ### ❤️ Contributors
 
 - Neeraj Dalal @nrjdalal
-- Surajgoraicse @surajgoraicse
+- Suraj Gorai @surajgoraicse
 
 ## v0.0.5
 
-[compare changes](https://github.com/nrjdalal/zerostarter/compare/746a234a5aafcda90c6f15af49bd2911b7683580...v0.0.5)
+[compare changes](https://github.com/nrjdalal/zerostarter/compare/v0.0.4...v0.0.5)
 
 ### 🚀 Enhancements
 
@@ -232,7 +322,7 @@
 
 ## v0.0.4
 
-[compare changes](https://github.com/nrjdalal/zerostarter/compare/7a140fd48bff9e0c82e3918995a848eb656efc99...v0.0.4)
+[compare changes](https://github.com/nrjdalal/zerostarter/compare/v0.0.3...v0.0.4)
 
 ### 📖 Documentation
 
@@ -252,7 +342,7 @@
 
 ## v0.0.3
 
-[compare changes](https://github.com/nrjdalal/zerostarter/compare/8109f98b2a934d5180c13112814d0d8296c46b06...v0.0.3)
+[compare changes](https://github.com/nrjdalal/zerostarter/compare/v0.0.2...v0.0.3)
 
 ### 🏡 Chore
 
