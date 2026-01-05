@@ -61,21 +61,7 @@ async function getFullNameByUsername(octokit: Octokit, username: string): Promis
   }
 }
 
-async function processChangelog() {
-  const token = process.env.GITHUB_TOKEN
-  if (!token) {
-    console.error("GITHUB_TOKEN environment variable is required")
-    process.exit(1)
-  }
-
-  const repoOwner = process.env.GITHUB_REPOSITORY_OWNER || "nrjdalal"
-  const repoName = process.env.GITHUB_REPOSITORY_NAME || "zerostarter"
-
-  const octokit = new Octokit({ auth: token })
-
-  const content = readFileSync(CHANGELOG_PATH, "utf-8")
-  const lines = content.split("\n")
-
+function updateCompareLinks(lines: string[], repoOwner: string, repoName: string): void {
   const versionSections: number[] = []
   for (let i = 0; i < lines.length; i++) {
     if (lines[i].trim().match(/^## v\d+\.\d+\.\d+/)) {
@@ -89,13 +75,13 @@ async function processChangelog() {
     if (!currentVersionMatch) continue
 
     const currentVersion = currentVersionMatch[1]
-    const compareLineIndex = versionSectionIndex + 1
+    const compareLineIndex = versionSectionIndex + 2
 
     if (compareLineIndex >= lines.length) continue
 
-    const compareLine = lines[compareLineIndex]
+    const compareLine = lines[compareLineIndex].trim()
     const compareMatch = compareLine.match(
-      /\[compare changes\]\(https:\/\/github\.com\/[\w-]+\/[\w-]+\/compare\/([\da-f]+)\.\.\.([\w.]+)\)/,
+      /\[compare changes\]\(https:\/\/github\.com\/[\w-]+\/[\w-]+\/compare\/([\da-f]+)\.\.\.([\w.-]+)\)/,
     )
 
     if (!compareMatch) continue
@@ -110,6 +96,24 @@ async function processChangelog() {
       }
     }
   }
+}
+
+async function processChangelog() {
+  const repoOwner = process.env.GITHUB_REPOSITORY_OWNER || "nrjdalal"
+  const repoName = process.env.GITHUB_REPOSITORY_NAME || "zerostarter"
+
+  const content = readFileSync(CHANGELOG_PATH, "utf-8")
+  const lines = content.split("\n")
+
+  updateCompareLinks(lines, repoOwner, repoName)
+
+  const token = process.env.GITHUB_TOKEN
+  if (!token) {
+    writeFileSync(CHANGELOG_PATH, lines.join("\n"), "utf-8")
+    return
+  }
+
+  const octokit = new Octokit({ auth: token })
 
   const firstContributorSection = lines.findIndex((line) => line.trim() === "### ❤️ Contributors")
 
