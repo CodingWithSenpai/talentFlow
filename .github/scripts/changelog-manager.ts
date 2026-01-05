@@ -76,6 +76,41 @@ async function processChangelog() {
   const content = readFileSync(CHANGELOG_PATH, "utf-8")
   const lines = content.split("\n")
 
+  const versionSections: number[] = []
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].trim().match(/^## v\d+\.\d+\.\d+/)) {
+      versionSections.push(i)
+    }
+  }
+
+  for (let i = 0; i < versionSections.length; i++) {
+    const versionSectionIndex = versionSections[i]
+    const currentVersionMatch = lines[versionSectionIndex].trim().match(/^## (v\d+\.\d+\.\d+)/)
+    if (!currentVersionMatch) continue
+
+    const currentVersion = currentVersionMatch[1]
+    const compareLineIndex = versionSectionIndex + 1
+
+    if (compareLineIndex >= lines.length) continue
+
+    const compareLine = lines[compareLineIndex]
+    const compareMatch = compareLine.match(
+      /\[compare changes\]\(https:\/\/github\.com\/[\w-]+\/[\w-]+\/compare\/([\da-f]+)\.\.\.([\w.]+)\)/,
+    )
+
+    if (!compareMatch) continue
+
+    if (i + 1 < versionSections.length) {
+      const nextVersionSectionIndex = versionSections[i + 1]
+      const prevVersionMatch = lines[nextVersionSectionIndex].trim().match(/^## (v\d+\.\d+\.\d+)/)
+      if (prevVersionMatch) {
+        const prevVersion = prevVersionMatch[1]
+        const newCompareLink = `[compare changes](https://github.com/${repoOwner}/${repoName}/compare/${prevVersion}...${currentVersion})`
+        lines[compareLineIndex] = newCompareLink
+      }
+    }
+  }
+
   const firstContributorSection = lines.findIndex((line) => line.trim() === "### ❤️ Contributors")
 
   if (firstContributorSection === -1) {
