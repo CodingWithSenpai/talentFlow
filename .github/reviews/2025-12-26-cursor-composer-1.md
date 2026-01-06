@@ -42,11 +42,13 @@ ZeroStarter is a well-structured monorepo SaaS starter template with solid archi
 ### ✅ Strengths
 
 1. **Monorepo Organization**
+
    - Clear separation: `api/`, `web/`, `packages/`
    - Well-organized workspace structure
    - Proper use of Turborepo for build orchestration
 
 2. **Type Safety**
+
    - End-to-end type safety with Hono RPC
    - Proper TypeScript configuration
    - Type inference from backend to frontend
@@ -58,11 +60,13 @@ ZeroStarter is a well-structured monorepo SaaS starter template with solid archi
 ### ⚠️ Areas for Improvement
 
 1. **Missing Error Handling Layer**
+
    - No global error handler middleware
    - Errors are not standardized
    - No error logging/monitoring integration
 
 2. **API Structure**
+
    - Limited route organization (only `/auth` and `/v1`)
    - No versioning strategy beyond `/v1`
    - Missing API documentation generation (OpenAPI/Swagger)
@@ -90,6 +94,7 @@ ZeroStarter is a well-structured monorepo SaaS starter template with solid archi
    **Fix:** Only expose safe, non-sensitive values
 
 2. **Missing Security Headers**
+
    - No Helmet.js or security headers middleware
    - Missing CSP, HSTS, X-Frame-Options headers
    - No request size limits
@@ -105,6 +110,7 @@ ZeroStarter is a well-structured monorepo SaaS starter template with solid archi
    **Issue:** No CORS preflight caching optimization
 
 4. **No Rate Limiting**
+
    - API endpoints are unprotected against brute force
    - No DDoS protection
    - Auth endpoints especially vulnerable
@@ -129,11 +135,13 @@ ZeroStarter is a well-structured monorepo SaaS starter template with solid archi
 ### ⚠️ Medium Priority Security Issues
 
 1. **Input Validation**
+
    - Using Zod validators (good!)
    - But no sanitization middleware
    - No SQL injection protection beyond ORM
 
 2. **Authentication**
+
    - Better Auth is good, but no 2FA/MFA support visible
    - No account lockout after failed attempts
    - Missing password strength requirements
@@ -150,18 +158,20 @@ ZeroStarter is a well-structured monorepo SaaS starter template with solid archi
 ### ✅ Good Practices
 
 1. **TypeScript Configuration**
+
    - Strict mode enabled
    - Proper path aliases
    - Consistent tsconfig inheritance
 
 2. **Code Organization**
+
    - Clear separation of concerns
    - Consistent naming conventions
    - Good use of barrel exports
 
-3. **Prettier/ESLint**
+3. **Oxfmt/Oxlint**
    - Consistent formatting
-   - Import sorting configured
+   - Formatting configured
    - Lint-staged hooks
 
 ### ⚠️ Issues Found
@@ -207,7 +217,9 @@ ZeroStarter is a well-structured monorepo SaaS starter template with solid archi
 
    ```typescript
    // web/next/src/app/providers.tsx:18
-   {!isProduction(process.env.NODE_ENV) && <DevTools />}
+   {
+     !isProduction(process.env.NODE_ENV) && <DevTools />
+   }
    ```
 
    **Issue:** Direct `process.env.NODE_ENV` access instead of using env package
@@ -230,6 +242,7 @@ ZeroStarter is a well-structured monorepo SaaS starter template with solid archi
 ### ✅ Strengths
 
 1. **Environment Validation**
+
    - Using `@t3-oss/env-core` (excellent choice!)
    - Type-safe environment variables
    - Runtime validation
@@ -241,6 +254,7 @@ ZeroStarter is a well-structured monorepo SaaS starter template with solid archi
 ### ⚠️ Issues
 
 1. **Missing .env.example**
+
    - No `.env.example` file found
    - Users don't know what variables are required
    - Documentation mentions it but file doesn't exist
@@ -280,6 +294,7 @@ ZeroStarter is a well-structured monorepo SaaS starter template with solid archi
 ### 🔴 Critical Issues
 
 1. **No Global Error Handler**
+
    - Unhandled errors will crash the server
    - No error recovery mechanism
    - No error reporting integration
@@ -296,6 +311,7 @@ ZeroStarter is a well-structured monorepo SaaS starter template with solid archi
    **Issue:** Makes frontend error handling difficult
 
 3. **No Error Logging**
+
    - Errors not logged anywhere
    - No error tracking (Sentry, etc.)
    - Difficult to debug production issues
@@ -315,7 +331,7 @@ export class AppError extends Error {
     public code: string,
     public statusCode: number,
     message: string,
-    public details?: unknown,
+    public details?: unknown
   ) {
     super(message)
   }
@@ -353,11 +369,13 @@ export const errorHandler = createMiddleware(async (c, next) => {
    **Issue:** Could lead to connection exhaustion
 
 2. **No Caching Strategy**
+
    - No Redis or caching layer
    - No API response caching
    - No database query caching
 
 3. **Bundle Size Optimization**
+
    - No bundle analysis visible
    - No code splitting strategy documented
    - Could benefit from dynamic imports
@@ -376,11 +394,13 @@ export const errorHandler = createMiddleware(async (c, next) => {
 **No tests found in the codebase!**
 
 1. **Missing Test Infrastructure**
+
    - No test files (`.test.ts`, `.spec.ts`)
    - No test framework configured
    - No CI/CD test pipeline
 
 2. **What Should Be Tested**
+
    - API endpoints (unit + integration)
    - Authentication flows
    - Database operations
@@ -405,6 +425,7 @@ export const errorHandler = createMiddleware(async (c, next) => {
 ### ✅ Strengths
 
 1. **Comprehensive README**
+
    - Clear project description
    - Good architecture overview
    - Installation instructions
@@ -417,11 +438,13 @@ export const errorHandler = createMiddleware(async (c, next) => {
 ### ⚠️ Gaps
 
 1. **API Documentation**
+
    - No OpenAPI/Swagger spec
    - Better Auth has OpenAPI plugin but not exposed
    - No API endpoint documentation
 
 2. **Code Comments**
+
    - Minimal inline documentation
    - No JSDoc comments
    - Complex logic not explained
@@ -438,6 +461,7 @@ export const errorHandler = createMiddleware(async (c, next) => {
 ### ✅ Good Practices
 
 1. **Dependency Management**
+
    - Using Bun (fast!)
    - Catalog pattern for version management
    - Lock file present
@@ -449,6 +473,7 @@ export const errorHandler = createMiddleware(async (c, next) => {
 ### ⚠️ Concerns
 
 1. **Security Audit Needed**
+
    - No `npm audit` or security scanning visible
    - Should run regular dependency audits
    - Consider Dependabot/Renovate
@@ -483,6 +508,7 @@ export const errorHandler = createMiddleware(async (c, next) => {
    **Fix:** Only expose safe values, never entire env object
 
 3. **Missing Error Handling**
+
    - Add global error handler middleware
    - Standardize error responses
    - Add error logging
@@ -504,6 +530,7 @@ export const errorHandler = createMiddleware(async (c, next) => {
    **Fix:** Use more robust path resolution
 
 2. **Missing Security Headers**
+
    - Add Helmet.js or security headers middleware
    - Configure CSP, HSTS, etc.
 
@@ -526,16 +553,19 @@ export const errorHandler = createMiddleware(async (c, next) => {
 ### 💡 Low Priority / Enhancements
 
 1. **Add API Documentation**
+
    - Expose OpenAPI spec
    - Add Swagger UI
    - Document all endpoints
 
 2. **Add Monitoring**
+
    - Error tracking (Sentry)
    - Performance monitoring
    - Health checks
 
 3. **Add Caching**
+
    - Redis integration
    - Response caching
    - Query result caching
@@ -612,7 +642,7 @@ export const errorHandler = createMiddleware(async (c, next) => {
           message: "An unexpected error occurred",
         },
       },
-      500,
+      500
     )
   }
 })

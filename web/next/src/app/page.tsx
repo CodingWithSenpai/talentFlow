@@ -105,10 +105,10 @@ export const techStack: Tech[] = [
     },
   },
   {
-    name: "Prettier",
+    name: "Oxfmt",
     icon: {
-      light: "/landing/prettier-light.svg",
-      dark: "/landing/prettier-dark.svg",
+      light: "/landing/oxlint.svg",
+      dark: "/landing/oxlint.svg",
     },
   },
   {
