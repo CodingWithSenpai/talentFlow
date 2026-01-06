@@ -10,8 +10,7 @@
   "exports": "./dist/index.mjs",
   "scripts": {
     "build": "tsdown",
-    "check-types": "SKIP_ENV_VALIDATION=true turbo build --filter=@packages/db && tsc --noEmit",
-    "lint": "oxlint"
+    "check-types": "SKIP_ENV_VALIDATION=true turbo build --filter=@packages/db && tsc --noEmit"
   },
   "dependencies": {
     "@packages/db": "workspace:*",
@@ -24,12 +23,5 @@
     "@types/node": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:"
-  },
-  "prettier": {
-    "plugins": [
-      "@ianvs/prettier-plugin-sort-imports"
-    ],
-    "printWidth": 100,
-    "semi": false
   }
 }

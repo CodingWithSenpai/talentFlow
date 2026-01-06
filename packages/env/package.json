@@ -30,8 +30,7 @@
   },
   "scripts": {
     "build": "tsdown",
-    "check-types": "tsc --noEmit",
-    "lint": "oxlint"
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@t3-oss/env-core": "catalog:",
@@ -44,12 +43,5 @@
     "@types/node": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:"
-  },
-  "prettier": {
-    "plugins": [
-      "@ianvs/prettier-plugin-sort-imports"
-    ],
-    "printWidth": 100,
-    "semi": false
   }
 }
