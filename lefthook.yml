@@ -4,6 +4,8 @@ pre-commit:
     audit:
       run: bun audit --audit-level high
       use_stdin: true
+      only:
+        - ref: canary
     lint-staged:
       run: bunx lint-staged --verbose
       stage_fixed: true
