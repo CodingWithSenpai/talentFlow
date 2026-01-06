@@ -2,23 +2,16 @@
   "name": "@packages/auth",
   "version": "0.0.1",
   "private": true,
-  "type": "module",
-  "exports": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
   "files": [
     "dist"
   ],
+  "type": "module",
+  "types": "./dist/index.d.mts",
+  "exports": "./dist/index.mjs",
   "scripts": {
     "build": "tsdown",
     "check-types": "SKIP_ENV_VALIDATION=true turbo build --filter=@packages/db && tsc --noEmit",
     "lint": "oxlint"
-  },
-  "prettier": {
-    "plugins": [
-      "@ianvs/prettier-plugin-sort-imports"
-    ],
-    "printWidth": 100,
-    "semi": false
   },
   "dependencies": {
     "@packages/db": "workspace:*",
@@ -31,5 +24,12 @@
     "@types/node": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:"
+  },
+  "prettier": {
+    "plugins": [
+      "@ianvs/prettier-plugin-sort-imports"
+    ],
+    "printWidth": 100,
+    "semi": false
   }
 }

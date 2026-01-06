@@ -6,43 +6,9 @@
     "build": "next build",
     "check-types": "SKIP_ENV_VALIDATION=true turbo build --filter=@api/hono && tsc --noEmit",
     "dev": "next dev",
-    "format": "prettier --write --ignore-unknown *",
+    "format": "oxfmt",
     "lint": "oxlint",
     "start": "next start"
-  },
-  "lint-staged": {
-    "*": [
-      "prettier --write --ignore-unknown",
-      "oxlint"
-    ],
-    "package.json": [
-      "sort-package-json"
-    ]
-  },
-  "prettier": {
-    "importOrder": [
-      "<BUILTIN_MODULES>",
-      "",
-      "^react/(.*)$|^react$",
-      "^next/(.*)$|^next$",
-      "",
-      "<THIRD_PARTY_MODULES>",
-      "",
-      "^@/types/(.*)$",
-      "^@/lib/(.*)$",
-      "^@/hooks/(.*)$",
-      "^@/components/ui/(.*)$",
-      "^@/components/(.*)$",
-      "^@/app/(.*)$",
-      "",
-      "^[./]"
-    ],
-    "plugins": [
-      "@ianvs/prettier-plugin-sort-imports",
-      "prettier-plugin-tailwindcss"
-    ],
-    "printWidth": 100,
-    "semi": false
   },
   "dependencies": {
     "@api/hono": "workspace:*",
@@ -98,5 +64,36 @@
     "tailwindcss": "catalog:",
     "tw-animate-css": "catalog:",
     "typescript": "catalog:"
+  },
+  "lint-staged": {
+    "*": [
+      "oxfmt",
+      "oxlint"
+    ]
+  },
+  "prettier": {
+    "importOrder": [
+      "<BUILTIN_MODULES>",
+      "",
+      "^react/(.*)$|^react$",
+      "^next/(.*)$|^next$",
+      "",
+      "<THIRD_PARTY_MODULES>",
+      "",
+      "^@/types/(.*)$",
+      "^@/lib/(.*)$",
+      "^@/hooks/(.*)$",
+      "^@/components/ui/(.*)$",
+      "^@/components/(.*)$",
+      "^@/app/(.*)$",
+      "",
+      "^[./]"
+    ],
+    "plugins": [
+      "@ianvs/prettier-plugin-sort-imports",
+      "prettier-plugin-tailwindcss"
+    ],
+    "printWidth": 100,
+    "semi": false
   }
 }
