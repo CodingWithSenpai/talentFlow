@@ -1,12 +1,15 @@
 pre-commit:
-  parallel: true
+  piped: true
   commands:
+    audit:
+      run: bun audit --audit-level high
+      use_stdin: true
     lint-staged:
       run: bunx lint-staged --verbose
       stage_fixed: true
     build:
       run: bun run build
-      interactive: true
+      use_stdin: true
 
 commit-msg:
   commands:
