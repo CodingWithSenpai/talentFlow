@@ -12,6 +12,9 @@ pre-commit:
     build:
       run: bun run build
       use_stdin: true
+    check-types:
+      run: bun run check-types
+      use_stdin: true
 
 commit-msg:
   commands:

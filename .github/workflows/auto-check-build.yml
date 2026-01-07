@@ -28,7 +28,8 @@ jobs:
 
       - name: Lint, Build, and Check Types
         run: |
-          bun run lint
+          bun audit --audit-level high
+          bun run lint --verbose
           bun run build
           bun run check-types
         env:
