@@ -47,11 +47,9 @@
     "oxlint": "catalog:",
     "turbo": "catalog:"
   },
-  "overrides": {
-    "preact": ">=10.28.2"
-  },
   "lint-staged": {
     "*": [
+      "oxfmt",
       "oxlint"
     ],
     "package.json": [
@@ -95,9 +93,9 @@
     "drizzle-kit": "^0.31.8",
     "drizzle-orm": "^0.45.1",
     "embla-carousel-react": "^8.6.0",
-    "fumadocs-core": "^16.4.4",
+    "fumadocs-core": "^16.4.6",
     "fumadocs-mdx": "^14.2.4",
-    "fumadocs-ui": "^16.4.4",
+    "fumadocs-ui": "^16.4.6",
     "globby": "^16.1.0",
     "hono": "^4.11.3",
     "input-otp": "^1.4.2",
@@ -109,7 +107,7 @@
     "oxfmt": "^0.23.0",
     "oxlint": "^1.38.0",
     "postgres": "^3.4.8",
-    "posthog-js": "^1.315.1",
+    "posthog-js": "^1.317.0",
     "radix-ui": "^1.4.3",
     "react": "^19.2.3",
     "react-day-picker": "^9.13.0",
