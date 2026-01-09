@@ -29,7 +29,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { ApiStatus } from "@/components/api-status"
 
 type Tech = {
@@ -91,10 +96,10 @@ export const techStack: Tech[] = [
     },
   },
   {
-    name: "Oxlint",
+    name: "Oxc",
     icon: {
-      light: "/landing/oxlint.svg",
-      dark: "/landing/oxlint.svg",
+      light: "/landing/oxc.svg",
+      dark: "/landing/oxc.svg",
     },
   },
   {
@@ -102,13 +107,6 @@ export const techStack: Tech[] = [
     icon: {
       light: "/landing/postgresql.svg",
       dark: "/landing/postgresql.svg",
-    },
-  },
-  {
-    name: "Oxfmt",
-    icon: {
-      light: "/landing/oxlint.svg",
-      dark: "/landing/oxlint.svg",
     },
   },
   {
@@ -242,16 +240,26 @@ bun dev`
               </span>
             </h1>
             <p className="text-muted-foreground mb-8 text-lg sm:text-xl lg:text-2xl">
-              {config.app.description} Deploy with one click and start building features on day one.
+              {config.app.description} Deploy with one click and start building
+              features on day one.
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button asChild size="lg" className="group h-12 px-8 text-base">
-                <a href={config.social.github} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={config.social.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <RiGithubFill className="size-5" />
                   Get ZeroStarter
                 </a>
               </Button>
-              <Button asChild size="lg" variant="outline" className="group h-12 px-8 text-base">
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="group h-12 px-8 text-base"
+              >
                 <Link href="/docs">
                   Documentation
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
@@ -276,8 +284,18 @@ bun dev`
                 className="text-muted-foreground hover:text-foreground flex items-center gap-2 whitespace-nowrap transition-colors"
               >
                 <span className="relative h-5 w-5 shrink-0">
-                  <Image src={tech.icon.light} alt={tech.name} fill className="block dark:hidden" />
-                  <Image src={tech.icon.dark} alt={tech.name} fill className="hidden dark:block" />
+                  <Image
+                    src={tech.icon.light}
+                    alt={tech.name}
+                    fill
+                    className="block dark:hidden"
+                  />
+                  <Image
+                    src={tech.icon.dark}
+                    alt={tech.name}
+                    fill
+                    className="hidden dark:block"
+                  />
                 </span>
 
                 <span className="text-sm font-medium">{tech.name}</span>
@@ -316,8 +334,9 @@ bun dev`
               </span>
             </h2>
             <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
-              Everything you need to launch your SaaS in no time. Get all the core functionalities
-              and integrations out of the box, so you can focus on the business.
+              Everything you need to launch your SaaS in no time. Get all the
+              core functionalities and integrations out of the box, so you can
+              focus on the business.
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -328,8 +347,9 @@ bun dev`
                 </div>
                 <CardTitle>Type-Safe API Client</CardTitle>
                 <CardDescription>
-                  End-to-end type safety with Hono RPC. Your frontend knows exactly what your
-                  backend returns. Catch errors at compile time.
+                  End-to-end type safety with Hono RPC. Your frontend knows
+                  exactly what your backend returns. Catch errors at compile
+                  time.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -340,8 +360,8 @@ bun dev`
                 </div>
                 <CardTitle>Authentication</CardTitle>
                 <CardDescription>
-                  Better Auth integration with GitHub OAuth, email/password, magic links, and more.
-                  Add providers in minutes.
+                  Better Auth integration with GitHub OAuth, email/password,
+                  magic links, and more. Add providers in minutes.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -352,8 +372,8 @@ bun dev`
                 </div>
                 <CardTitle>Database & ORM</CardTitle>
                 <CardDescription>
-                  PostgreSQL with Drizzle ORM. Migrations and type-safe queries out of the box.
-                  Production-ready schema.
+                  PostgreSQL with Drizzle ORM. Migrations and type-safe queries
+                  out of the box. Production-ready schema.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -364,8 +384,8 @@ bun dev`
                 </div>
                 <CardTitle>High Performance</CardTitle>
                 <CardDescription>
-                  Built on Bun runtime and Turborepo for lightning-fast development and builds.
-                  Optimized for production.
+                  Built on Bun runtime and Turborepo for lightning-fast
+                  development and builds. Optimized for production.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -376,8 +396,8 @@ bun dev`
                 </div>
                 <CardTitle>Modern UI Components</CardTitle>
                 <CardDescription>
-                  Shadcn UI components with Tailwind CSS. Beautiful, accessible, and customizable.
-                  Ready to use or customize.
+                  Shadcn UI components with Tailwind CSS. Beautiful, accessible,
+                  and customizable. Ready to use or customize.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -388,8 +408,8 @@ bun dev`
                 </div>
                 <CardTitle>Monorepo Architecture</CardTitle>
                 <CardDescription>
-                  Shared packages for auth, database, and env. Scale your codebase efficiently with
-                  clean separation of concerns.
+                  Shared packages for auth, database, and env. Scale your
+                  codebase efficiently with clean separation of concerns.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -400,8 +420,8 @@ bun dev`
                 </div>
                 <CardTitle>One-Click Deployment</CardTitle>
                 <CardDescription>
-                  Docker and Vercel configurations included. Deploy to production in minutes, not
-                  days. Pre-configured CI/CD.
+                  Docker and Vercel configurations included. Deploy to
+                  production in minutes, not days. Pre-configured CI/CD.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -412,8 +432,8 @@ bun dev`
                 </div>
                 <CardTitle>Documentation & llms.txt</CardTitle>
                 <CardDescription>
-                  Fumadocs with auto-generated llms.txt endpoint. Full-text search and structured
-                  content for AI assistants.
+                  Fumadocs with auto-generated llms.txt endpoint. Full-text
+                  search and structured content for AI assistants.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -424,8 +444,8 @@ bun dev`
                 </div>
                 <CardTitle>Type-Safe Environment</CardTitle>
                 <CardDescription>
-                  Centralized environment variables with validation. One env file, selective access
-                  per package. Never miss a variable.
+                  Centralized environment variables with validation. One env
+                  file, selective access per package. Never miss a variable.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -436,8 +456,8 @@ bun dev`
                 </div>
                 <CardTitle>Full-Text Search</CardTitle>
                 <CardDescription>
-                  Built-in search for docs and blog powered by Fumadocs. Fast and accurate content
-                  discovery.
+                  Built-in search for docs and blog powered by Fumadocs. Fast
+                  and accurate content discovery.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -448,8 +468,8 @@ bun dev`
                 </div>
                 <CardTitle>SEO & Marketing</CardTitle>
                 <CardDescription>
-                  Meta tags, social media images, sitemaps, robots.txt, and more. SEO optimized out
-                  of the box.
+                  Meta tags, social media images, sitemaps, robots.txt, and
+                  more. SEO optimized out of the box.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -460,8 +480,8 @@ bun dev`
                 </div>
                 <CardTitle>Automated Releases</CardTitle>
                 <CardDescription>
-                  Automated changelog generation and release workflow. Draft PRs for canary to main
-                  and changelog updates.
+                  Automated changelog generation and release workflow. Draft PRs
+                  for canary to main and changelog updates.
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -473,10 +493,13 @@ bun dev`
       <section className="bg-muted/30 border-b py-24">
         <div className="container mx-auto max-w-6xl px-5">
           <div className="mb-16 text-center">
-            <h2 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">Why ZeroStarter?</h2>
+            <h2 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
+              Why ZeroStarter?
+            </h2>
             <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
-              Architecture & Best Practices as a Service — ZeroStarter isn't just a starter
-              template, it's a complete blueprint for building production-ready SaaS applications.
+              Architecture & Best Practices as a Service — ZeroStarter isn't
+              just a starter template, it's a complete blueprint for building
+              production-ready SaaS applications.
             </p>
           </div>
           <div className="grid gap-8 md:grid-cols-2">
@@ -486,10 +509,13 @@ bun dev`
                   <CheckCircle2 className="text-primary size-5" />
                 </div>
                 <div>
-                  <h3 className="mb-2 text-lg font-semibold">Modular Architecture</h3>
+                  <h3 className="mb-2 text-lg font-semibold">
+                    Modular Architecture
+                  </h3>
                   <p className="text-muted-foreground text-sm">
-                    Clean, plug-and-play packages that work independently or together. Swap
-                    components, extend functionality, or customize without breaking the system.
+                    Clean, plug-and-play packages that work independently or
+                    together. Swap components, extend functionality, or
+                    customize without breaking the system.
                   </p>
                 </div>
               </div>
@@ -498,10 +524,12 @@ bun dev`
                   <CheckCircle2 className="text-primary size-5" />
                 </div>
                 <div>
-                  <h3 className="mb-2 text-lg font-semibold">End-to-End Type Safety</h3>
+                  <h3 className="mb-2 text-lg font-semibold">
+                    End-to-End Type Safety
+                  </h3>
                   <p className="text-muted-foreground text-sm">
-                    Hono RPC ensures type safety from database to frontend. Catch errors at compile
-                    time, ship with confidence.
+                    Hono RPC ensures type safety from database to frontend.
+                    Catch errors at compile time, ship with confidence.
                   </p>
                 </div>
               </div>
@@ -510,10 +538,12 @@ bun dev`
                   <CheckCircle2 className="text-primary size-5" />
                 </div>
                 <div>
-                  <h3 className="mb-2 text-lg font-semibold">Production-Ready Performance</h3>
+                  <h3 className="mb-2 text-lg font-semibold">
+                    Production-Ready Performance
+                  </h3>
                   <p className="text-muted-foreground text-sm">
-                    Optimized with Bun runtime and Turborepo for blazing-fast development and
-                    builds. Built for scale.
+                    Optimized with Bun runtime and Turborepo for blazing-fast
+                    development and builds. Built for scale.
                   </p>
                 </div>
               </div>
@@ -524,10 +554,12 @@ bun dev`
                   <CheckCircle2 className="text-primary size-5" />
                 </div>
                 <div>
-                  <h3 className="mb-2 text-lg font-semibold">Beautiful UI Out of the Box</h3>
+                  <h3 className="mb-2 text-lg font-semibold">
+                    Beautiful UI Out of the Box
+                  </h3>
                   <p className="text-muted-foreground text-sm">
-                    Shadcn UI components with Tailwind CSS, ready to customize or use as-is. Modern
-                    design system included.
+                    Shadcn UI components with Tailwind CSS, ready to customize
+                    or use as-is. Modern design system included.
                   </p>
                 </div>
               </div>
@@ -536,10 +568,12 @@ bun dev`
                   <CheckCircle2 className="text-primary size-5" />
                 </div>
                 <div>
-                  <h3 className="mb-2 text-lg font-semibold">Enterprise-Grade Auth</h3>
+                  <h3 className="mb-2 text-lg font-semibold">
+                    Enterprise-Grade Auth
+                  </h3>
                   <p className="text-muted-foreground text-sm">
-                    Better Auth integration with GitHub, Google, and more — fully configured and
-                    ready to extend. Secure by default.
+                    Better Auth integration with GitHub, Google, and more —
+                    fully configured and ready to extend. Secure by default.
                   </p>
                 </div>
               </div>
@@ -548,10 +582,12 @@ bun dev`
                   <CheckCircle2 className="text-primary size-5" />
                 </div>
                 <div>
-                  <h3 className="mb-2 text-lg font-semibold">Comprehensive Documentation</h3>
+                  <h3 className="mb-2 text-lg font-semibold">
+                    Comprehensive Documentation
+                  </h3>
                   <p className="text-muted-foreground text-sm">
-                    Every pattern, practice, and decision documented with Fumadocs and AI-optimized
-                    llms.txt. Learn as you build.
+                    Every pattern, practice, and decision documented with
+                    Fumadocs and AI-optimized llms.txt. Learn as you build.
                   </p>
                 </div>
               </div>
@@ -568,8 +604,8 @@ bun dev`
               Type-Safe API Calls
             </h2>
             <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
-              Full type inference from backend to frontend. No more manual type definitions. See the
-              magic happen.
+              Full type inference from backend to frontend. No more manual type
+              definitions. See the magic happen.
             </p>
           </div>
         </div>
@@ -594,15 +630,17 @@ bun dev`
               Loved by developers worldwide
             </h2>
             <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
-              See why developers are choosing ZeroStarter to accelerate their product launches.
+              See why developers are choosing ZeroStarter to accelerate their
+              product launches.
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardHeader>
                 <CardDescription className="mb-4 text-base">
-                  "ZeroStarter sped up my development process significantly. The type-safe API
-                  client alone saved me hours of debugging. Highly recommended!"
+                  "ZeroStarter sped up my development process significantly. The
+                  type-safe API client alone saved me hours of debugging. Highly
+                  recommended!"
                 </CardDescription>
                 <div className="flex items-center gap-3">
                   <div className="bg-primary/10 flex size-10 items-center justify-center rounded-full">
@@ -610,7 +648,9 @@ bun dev`
                   </div>
                   <div>
                     <div className="font-semibold">Developer</div>
-                    <div className="text-muted-foreground text-sm">Software Engineer</div>
+                    <div className="text-muted-foreground text-sm">
+                      Software Engineer
+                    </div>
                   </div>
                 </div>
               </CardHeader>
@@ -618,8 +658,9 @@ bun dev`
             <Card>
               <CardHeader>
                 <CardDescription className="mb-4 text-base">
-                  "The monorepo architecture is clean and well-organized. Everything just works out
-                  of the box. Best starter kit I've used!"
+                  "The monorepo architecture is clean and well-organized.
+                  Everything just works out of the box. Best starter kit I've
+                  used!"
                 </CardDescription>
                 <div className="flex items-center gap-3">
                   <div className="bg-primary/10 flex size-10 items-center justify-center rounded-full">
@@ -627,7 +668,9 @@ bun dev`
                   </div>
                   <div>
                     <div className="font-semibold">Builder</div>
-                    <div className="text-muted-foreground text-sm">Full Stack Developer</div>
+                    <div className="text-muted-foreground text-sm">
+                      Full Stack Developer
+                    </div>
                   </div>
                 </div>
               </CardHeader>
@@ -635,8 +678,8 @@ bun dev`
             <Card>
               <CardHeader>
                 <CardDescription className="mb-4 text-base">
-                  "Production-ready from day one. The documentation is excellent and the codebase is
-                  maintainable. Exactly what I needed!"
+                  "Production-ready from day one. The documentation is excellent
+                  and the codebase is maintainable. Exactly what I needed!"
                 </CardDescription>
                 <div className="flex items-center gap-3">
                   <div className="bg-primary/10 flex size-10 items-center justify-center rounded-full">
@@ -644,7 +687,9 @@ bun dev`
                   </div>
                   <div>
                     <div className="font-semibold">Creator</div>
-                    <div className="text-muted-foreground text-sm">Indie Hacker</div>
+                    <div className="text-muted-foreground text-sm">
+                      Indie Hacker
+                    </div>
                   </div>
                 </div>
               </CardHeader>
@@ -703,10 +748,11 @@ bun dev`
                 What is ZeroStarter?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
-                ZeroStarter is a modern, type-safe, and high-performance SaaS starter template built
-                with a monorepo architecture. It provides everything you need to launch a
-                production-ready SaaS application, including authentication, database setup,
-                type-safe API client, and beautiful UI components.
+                ZeroStarter is a modern, type-safe, and high-performance SaaS
+                starter template built with a monorepo architecture. It provides
+                everything you need to launch a production-ready SaaS
+                application, including authentication, database setup, type-safe
+                API client, and beautiful UI components.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
@@ -714,10 +760,11 @@ bun dev`
                 How is it different from other starter kits?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
-                ZeroStarter focuses on end-to-end type safety, modular architecture, and
-                production-ready patterns. It uses Hono RPC for type-safe APIs, Bun for performance,
-                and includes comprehensive documentation with AI-optimized llms.txt. Everything is
-                designed to scale and maintain.
+                ZeroStarter focuses on end-to-end type safety, modular
+                architecture, and production-ready patterns. It uses Hono RPC
+                for type-safe APIs, Bun for performance, and includes
+                comprehensive documentation with AI-optimized llms.txt.
+                Everything is designed to scale and maintain.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
@@ -725,9 +772,10 @@ bun dev`
                 Is it production-ready?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
-                Yes! ZeroStarter is currently in Release Candidate (RC) status. All implemented
-                features are stable and production-ready. We're actively adding new features and
-                integrations day-by-day. The codebase follows best practices and is battle-tested.
+                Yes! ZeroStarter is currently in Release Candidate (RC) status.
+                All implemented features are stable and production-ready. We're
+                actively adding new features and integrations day-by-day. The
+                codebase follows best practices and is battle-tested.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-4">
@@ -735,8 +783,9 @@ bun dev`
                 Can I use it for commercial projects?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
-                Absolutely! ZeroStarter is MIT licensed, which means you can use it for any purpose,
-                including commercial projects. Build unlimited projects with it.
+                Absolutely! ZeroStarter is MIT licensed, which means you can use
+                it for any purpose, including commercial projects. Build
+                unlimited projects with it.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-5">
@@ -744,9 +793,9 @@ bun dev`
                 What technologies does it use?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
-                ZeroStarter uses Next.js 16, Hono, Bun, Turborepo, Drizzle ORM, Better Auth, Shadcn
-                UI, TanStack Query, Zod, Fumadocs, and more. All carefully selected for modern SaaS
-                development.
+                ZeroStarter uses Next.js 16, Hono, Bun, Turborepo, Drizzle ORM,
+                Better Auth, Shadcn UI, TanStack Query, Zod, Fumadocs, and more.
+                All carefully selected for modern SaaS development.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -760,17 +809,26 @@ bun dev`
             Ready to Build Your SaaS?
           </h2>
           <p className="text-muted-foreground mb-8 text-lg">
-            Start building your next project with {config.app.name} today. Skip the complex setups
-            and start building features on day one.
+            Start building your next project with {config.app.name} today. Skip
+            the complex setups and start building features on day one.
           </p>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button asChild size="lg" className="group h-12 px-8 text-base">
-              <a href={config.social.github} target="_blank" rel="noopener noreferrer">
+              <a
+                href={config.social.github}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <RiGithubFill className="size-5" />
                 Get ZeroStarter
               </a>
             </Button>
-            <Button asChild size="lg" variant="outline" className="group h-12 px-8 text-base">
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="group h-12 px-8 text-base"
+            >
               <Link href="/docs">
                 Documentation
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
