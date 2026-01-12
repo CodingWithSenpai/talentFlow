@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation"
 import { ImageResponse } from "next/og"
 
-import { config } from "@/lib/config"
 import type { blogSource, docsSource } from "@/lib/source"
+
+import { config } from "@/lib/config"
 
 type Source = typeof blogSource | typeof docsSource
 
