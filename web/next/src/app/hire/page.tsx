@@ -189,7 +189,7 @@ export default function Page() {
           </a>{" "}
           or send an email to{" "}
           <a
-            href="mailto:nrjdalal@gmail.com"
+            href="mailto:nrjdalal.dev@gmail.com"
             className="border-border hover:border-ring border-b transition-colors"
           >
             nrjdalal.dev@gmail.com

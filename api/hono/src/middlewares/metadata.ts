@@ -29,7 +29,7 @@ export const metadataMiddleware = createMiddleware<{
       duration: Math.round(performance.now() - start),
     }
 
-    console.log(JSON.stringify(metadata, null, 2))
+    console.log(JSON.stringify(metadata))
 
     c.res = new Response(
       JSON.stringify({
