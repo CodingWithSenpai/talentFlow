@@ -118,7 +118,7 @@ export default function Page() {
       </div>
 
       {/* Work */}
-      <div className="container mx-auto grid max-w-3xl grid-cols-2 gap-8 px-5">
+      <div className="container mx-auto grid max-w-3xl gap-8 px-5 sm:grid-cols-2">
         {sections.map((section) => (
           <div key={section.title} className="space-y-8">
             <h1 className="font-cursive text-muted-foreground text-3xl font-semibold tracking-wide">
