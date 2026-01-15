@@ -34,6 +34,8 @@ COPY --from=builder /app/packages/auth/package.json ./packages/auth/
 COPY --from=builder /app/packages/env/dist/ ./packages/env/dist/
 COPY --from=builder /app/packages/env/package.json ./packages/env/
 
+RUN mkdir -p .next && chown -R bun:bun .next
+
 USER bun
 CMD ["bun", "run", "start"]
 EXPOSE 3000
