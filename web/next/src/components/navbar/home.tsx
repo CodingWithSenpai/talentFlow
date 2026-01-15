@@ -70,6 +70,7 @@ export function Navbar() {
   const navLinks = [
     { href: "/docs", label: "Documentation" },
     { href: "/blog", label: "Blog" },
+    { href: "/hire", label: "Hire" },
   ]
 
   return (

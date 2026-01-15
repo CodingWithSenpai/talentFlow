@@ -1,17 +1,19 @@
-import type { Session } from "@packages/auth"
-
 import { isLocal } from "@packages/env"
 import { env } from "@packages/env/api-hono"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { logger } from "hono/logger"
+import { requestId } from "hono/request-id"
 import { z } from "zod"
 
+import { metadataMiddleware } from "@/middlewares"
 import { authRouter, v1Router } from "@/routers"
 
-const app = new Hono<{ Variables: Session }>().basePath("/api")
+const app = new Hono().basePath("/api")
 
 app.use(logger())
+app.use("*", requestId())
+app.use("*", metadataMiddleware)
 
 app.use(
   "/*",
