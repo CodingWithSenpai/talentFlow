@@ -1,3 +1,54 @@
+## v0.0.11
+
+[compare changes](https://github.com/nrjdalal/zerostarter/compare/v0.0.10...v0.0.11)
+
+### 🚀 Enhancements
+
+- Oxfmt by cursor ([9e4bfae](https://github.com/nrjdalal/zerostarter/commit/9e4bfae))
+- Oxfmt sync v1 ([3c1b8a2](https://github.com/nrjdalal/zerostarter/commit/3c1b8a2))
+- Oxfmt sync v2 ([2a2f467](https://github.com/nrjdalal/zerostarter/commit/2a2f467))
+- Oxfmt sync v3 ([215595f](https://github.com/nrjdalal/zerostarter/commit/215595f))
+- Oxfmt sync v4 ([759e9c7](https://github.com/nrjdalal/zerostarter/commit/759e9c7))
+- Oxfmt sync v5 ([9c6c17c](https://github.com/nrjdalal/zerostarter/commit/9c6c17c))
+- Oxfmt sync v6 ([51f3966](https://github.com/nrjdalal/zerostarter/commit/51f3966))
+- Oxfmt sync v7 ([101ecea](https://github.com/nrjdalal/zerostarter/commit/101ecea))
+- Init .coderabbit.yaml ([5062f31](https://github.com/nrjdalal/zerostarter/commit/5062f31))
+- Switch from next/og to @takumi-rs/image-response ([#257](https://github.com/nrjdalal/zerostarter/pull/257))
+- Switch from next/og to @takumi-rs/image-response ([#257](https://github.com/nrjdalal/zerostarter/pull/257), [#259](https://github.com/nrjdalal/zerostarter/pull/259))
+
+### 🩹 Fixes
+
+- Posthog audit fail ([6a3bc00](https://github.com/nrjdalal/zerostarter/commit/6a3bc00))
+
+### 📖 Documentation
+
+- Prettier to oxfmt ([1e7380f](https://github.com/nrjdalal/zerostarter/commit/1e7380f))
+- Added AUDIT.md ([ee9a3e0](https://github.com/nrjdalal/zerostarter/commit/ee9a3e0))
+- Fix AUDIT.md ([620561f](https://github.com/nrjdalal/zerostarter/commit/620561f))
+
+### 🏡 Chore
+
+- Temp remove oxfmt from lint-staged ([5fda5d7](https://github.com/nrjdalal/zerostarter/commit/5fda5d7))
+- Update deps and add audit to pre-commit ([93093b9](https://github.com/nrjdalal/zerostarter/commit/93093b9))
+- Run audit only at canary ([bf196f1](https://github.com/nrjdalal/zerostarter/commit/bf196f1))
+- Run audit only at canary v2 ([738f40b](https://github.com/nrjdalal/zerostarter/commit/738f40b))
+- Run audit only at canary v3 ([4da58bf](https://github.com/nrjdalal/zerostarter/commit/4da58bf))
+- Update version ([465cdb7](https://github.com/nrjdalal/zerostarter/commit/465cdb7))
+- Update deps ([5a1f17e](https://github.com/nrjdalal/zerostarter/commit/5a1f17e))
+- Run new formatter ([29cda4d](https://github.com/nrjdalal/zerostarter/commit/29cda4d))
+- Update lefthook config ([d9487bd](https://github.com/nrjdalal/zerostarter/commit/d9487bd))
+- Fix audit ([8f4ec8e](https://github.com/nrjdalal/zerostarter/commit/8f4ec8e))
+- Update deps ([28b742f](https://github.com/nrjdalal/zerostarter/commit/28b742f))
+- Update deps ([40a13f8](https://github.com/nrjdalal/zerostarter/commit/40a13f8))
+
+### ✅ Tests
+
+- Remove changelog.config.ts ([61cb5f3](https://github.com/nrjdalal/zerostarter/commit/61cb5f3))
+
+### ❤️ Contributors
+
+- Neeraj Dalal @nrjdalal
+
 ## v0.0.10
 
 [compare changes](https://github.com/nrjdalal/zerostarter/compare/v0.0.9...v0.0.10)
