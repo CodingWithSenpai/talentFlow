@@ -65,11 +65,12 @@ export function Navbar() {
   const [toDashboard, setToDashboard] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
 
-  if (pathname?.startsWith("/dashboard")) return null
+  if (pathname?.startsWith("/dashboard") || pathname?.startsWith("/author")) return null
 
   const navLinks = [
     { href: "/docs", label: "Documentation" },
     { href: "/blog", label: "Blog" },
+    { href: "/author", label: "Hire" },
   ]
 
   return (
