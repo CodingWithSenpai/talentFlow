@@ -47,15 +47,6 @@
     "oxlint": "catalog:",
     "turbo": "catalog:"
   },
-  "lint-staged": {
-    "*": [
-      "oxfmt",
-      "oxlint"
-    ],
-    "package.json": [
-      "bun .github/scripts/deps-manager.ts"
-    ]
-  },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
