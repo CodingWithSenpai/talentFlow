@@ -1,24 +1,14 @@
 import type { Metadata } from "next"
 
 import { RiArrowRightUpLine, RiTwitterXFill } from "@remixicon/react"
-import { existsSync } from "fs"
 import Link from "next/link"
-import { join } from "path"
 
 import { config } from "@/lib/config"
 
-function getOgImageUrl(): string {
-  const staticOgPath = join(process.cwd(), "public", "og", "hire.png")
-  if (existsSync(staticOgPath)) {
-    return `${config.app.url}/og/hire.png?t=${Date.now()}`
-  }
-  return `${config.app.url}/api/og/hire?t=${Date.now()}`
-}
-
-const ogImageUrl = getOgImageUrl()
+const ogImageUrl = `${config.app.url}/api/og/hire?t=${Date.now()}`
 
 export const metadata: Metadata = {
-  title: "Hire nrjdalal",
+  title: "nrjdalal",
   description:
     "Crafting software that makes a difference. I build developer tools and infrastructure.",
   openGraph: {
