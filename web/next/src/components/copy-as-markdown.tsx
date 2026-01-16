@@ -1,6 +1,6 @@
 "use client"
 
-import { Check, Copy } from "lucide-react"
+import { RiCheckLine, RiFileCopyLine } from "@remixicon/react"
 import { useState } from "react"
 import { toast } from "sonner"
 
@@ -44,17 +44,19 @@ export function CopyAsMarkdown({ url }: CopyAsMarkdownProps) {
 
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon-sm"
-          onClick={handleCopy}
-          disabled={isLoading}
-          className="ml-1 size-8"
-          aria-label="Copy as markdown"
-        >
-          {isCopied ? <Check className="size-4" /> : <Copy className="size-4" />}
-        </Button>
+      <TooltipTrigger
+        render={
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            onClick={handleCopy}
+            disabled={isLoading}
+            className="ml-1 size-8"
+            aria-label="Copy as markdown"
+          />
+        }
+      >
+        {isCopied ? <RiCheckLine className="size-4" /> : <RiFileCopyLine className="size-4" />}
       </TooltipTrigger>
       <TooltipContent>{isCopied ? "Copied as markdown" : "Copy as markdown"}</TooltipContent>
     </Tooltip>

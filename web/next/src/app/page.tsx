@@ -1,21 +1,21 @@
-import { RiGithubFill } from "@remixicon/react"
 import {
-  ArrowRight,
-  BookOpen,
-  CheckCircle2,
-  Code2,
-  Database,
-  GitBranch,
-  Globe,
-  Heart,
-  Lock,
-  Rocket,
-  Search,
-  Shield,
-  Sparkles,
-  Users,
-  Zap,
-} from "lucide-react"
+  RiArrowRightLine,
+  RiBookOpenLine,
+  RiCheckboxCircleLine,
+  RiCodeLine,
+  RiDatabase2Line,
+  RiGitBranchLine,
+  RiGithubFill,
+  RiGlobalLine,
+  RiGroupLine,
+  RiHeartFill,
+  RiLockLine,
+  RiRocketLine,
+  RiSearchLine,
+  RiShieldLine,
+  RiSparklingLine,
+  RiFlashlightLine,
+} from "@remixicon/react"
 import Image from "next/image"
 import Link from "next/link"
 import { codeToHtml } from "shiki"
@@ -237,17 +237,22 @@ bun dev`
               {config.app.description} Deploy with one click and start building features on day one.
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button asChild size="lg" className="group h-12 px-8 text-base">
-                <a href={config.social.github} target="_blank" rel="noopener noreferrer">
-                  <RiGithubFill className="size-5" />
-                  Get ZeroStarter
-                </a>
+              <Button
+                size="lg"
+                className="group h-12 px-8 text-base"
+                render={<a href={config.social.github} target="_blank" rel="noopener noreferrer" />}
+              >
+                <RiGithubFill className="size-5" />
+                Get ZeroStarter
               </Button>
-              <Button asChild size="lg" variant="outline" className="group h-12 px-8 text-base">
-                <Link href="/docs">
-                  Documentation
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                </Link>
+              <Button
+                size="lg"
+                variant="outline"
+                className="group h-12 px-8 text-base"
+                render={<Link href="/docs" />}
+              >
+                Documentation
+                <RiArrowRightLine className="size-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </div>
             <p className="text-muted-foreground mt-6 text-sm">
@@ -316,7 +321,7 @@ bun dev`
             <Card className="hover:border-primary/50 border-2 transition-colors">
               <CardHeader>
                 <div className="bg-primary/10 mb-2 flex size-12 items-center justify-center rounded-lg">
-                  <Code2 className="text-primary size-6" />
+                  <RiCodeLine className="text-primary size-6" />
                 </div>
                 <CardTitle>Type-Safe API Client</CardTitle>
                 <CardDescription>
@@ -328,7 +333,7 @@ bun dev`
             <Card className="hover:border-primary/50 border-2 transition-colors">
               <CardHeader>
                 <div className="bg-primary/10 mb-2 flex size-12 items-center justify-center rounded-lg">
-                  <Lock className="text-primary size-6" />
+                  <RiLockLine className="text-primary size-6" />
                 </div>
                 <CardTitle>Authentication</CardTitle>
                 <CardDescription>
@@ -340,7 +345,7 @@ bun dev`
             <Card className="hover:border-primary/50 border-2 transition-colors">
               <CardHeader>
                 <div className="bg-primary/10 mb-2 flex size-12 items-center justify-center rounded-lg">
-                  <Database className="text-primary size-6" />
+                  <RiDatabase2Line className="text-primary size-6" />
                 </div>
                 <CardTitle>Database & ORM</CardTitle>
                 <CardDescription>
@@ -352,7 +357,7 @@ bun dev`
             <Card className="hover:border-primary/50 border-2 transition-colors">
               <CardHeader>
                 <div className="bg-primary/10 mb-2 flex size-12 items-center justify-center rounded-lg">
-                  <Zap className="text-primary size-6" />
+                  <RiFlashlightLine className="text-primary size-6" />
                 </div>
                 <CardTitle>High Performance</CardTitle>
                 <CardDescription>
@@ -364,7 +369,7 @@ bun dev`
             <Card className="hover:border-primary/50 border-2 transition-colors">
               <CardHeader>
                 <div className="bg-primary/10 mb-2 flex size-12 items-center justify-center rounded-lg">
-                  <CheckCircle2 className="text-primary size-6" />
+                  <RiCheckboxCircleLine className="text-primary size-6" />
                 </div>
                 <CardTitle>Modern UI Components</CardTitle>
                 <CardDescription>
@@ -376,7 +381,7 @@ bun dev`
             <Card className="hover:border-primary/50 border-2 transition-colors">
               <CardHeader>
                 <div className="bg-primary/10 mb-2 flex size-12 items-center justify-center rounded-lg">
-                  <Sparkles className="text-primary size-6" />
+                  <RiSparklingLine className="text-primary size-6" />
                 </div>
                 <CardTitle>Monorepo Architecture</CardTitle>
                 <CardDescription>
@@ -388,7 +393,7 @@ bun dev`
             <Card className="hover:border-primary/50 border-2 transition-colors">
               <CardHeader>
                 <div className="bg-primary/10 mb-2 flex size-12 items-center justify-center rounded-lg">
-                  <Rocket className="text-primary size-6" />
+                  <RiRocketLine className="text-primary size-6" />
                 </div>
                 <CardTitle>One-Click Deployment</CardTitle>
                 <CardDescription>
@@ -400,7 +405,7 @@ bun dev`
             <Card className="hover:border-primary/50 border-2 transition-colors">
               <CardHeader>
                 <div className="bg-primary/10 mb-2 flex size-12 items-center justify-center rounded-lg">
-                  <BookOpen className="text-primary size-6" />
+                  <RiBookOpenLine className="text-primary size-6" />
                 </div>
                 <CardTitle>Documentation & llms.txt</CardTitle>
                 <CardDescription>
@@ -412,7 +417,7 @@ bun dev`
             <Card className="hover:border-primary/50 border-2 transition-colors">
               <CardHeader>
                 <div className="bg-primary/10 mb-2 flex size-12 items-center justify-center rounded-lg">
-                  <Shield className="text-primary size-6" />
+                  <RiShieldLine className="text-primary size-6" />
                 </div>
                 <CardTitle>Type-Safe Environment</CardTitle>
                 <CardDescription>
@@ -424,7 +429,7 @@ bun dev`
             <Card className="hover:border-primary/50 border-2 transition-colors">
               <CardHeader>
                 <div className="bg-primary/10 mb-2 flex size-12 items-center justify-center rounded-lg">
-                  <Search className="text-primary size-6" />
+                  <RiSearchLine className="text-primary size-6" />
                 </div>
                 <CardTitle>Full-Text Search</CardTitle>
                 <CardDescription>
@@ -436,7 +441,7 @@ bun dev`
             <Card className="hover:border-primary/50 border-2 transition-colors">
               <CardHeader>
                 <div className="bg-primary/10 mb-2 flex size-12 items-center justify-center rounded-lg">
-                  <Globe className="text-primary size-6" />
+                  <RiGlobalLine className="text-primary size-6" />
                 </div>
                 <CardTitle>SEO & Marketing</CardTitle>
                 <CardDescription>
@@ -448,7 +453,7 @@ bun dev`
             <Card className="hover:border-primary/50 border-2 transition-colors">
               <CardHeader>
                 <div className="bg-primary/10 mb-2 flex size-12 items-center justify-center rounded-lg">
-                  <GitBranch className="text-primary size-6" />
+                  <RiGitBranchLine className="text-primary size-6" />
                 </div>
                 <CardTitle>Automated Releases</CardTitle>
                 <CardDescription>
@@ -475,7 +480,7 @@ bun dev`
             <div className="space-y-4">
               <div className="flex items-start gap-4">
                 <div className="bg-primary/10 mt-1 flex size-8 shrink-0 items-center justify-center rounded-lg">
-                  <CheckCircle2 className="text-primary size-5" />
+                  <RiCheckboxCircleLine className="text-primary size-5" />
                 </div>
                 <div>
                   <h3 className="mb-2 text-lg font-semibold">Modular Architecture</h3>
@@ -487,7 +492,7 @@ bun dev`
               </div>
               <div className="flex items-start gap-4">
                 <div className="bg-primary/10 mt-1 flex size-8 shrink-0 items-center justify-center rounded-lg">
-                  <CheckCircle2 className="text-primary size-5" />
+                  <RiCheckboxCircleLine className="text-primary size-5" />
                 </div>
                 <div>
                   <h3 className="mb-2 text-lg font-semibold">End-to-End Type Safety</h3>
@@ -499,7 +504,7 @@ bun dev`
               </div>
               <div className="flex items-start gap-4">
                 <div className="bg-primary/10 mt-1 flex size-8 shrink-0 items-center justify-center rounded-lg">
-                  <CheckCircle2 className="text-primary size-5" />
+                  <RiCheckboxCircleLine className="text-primary size-5" />
                 </div>
                 <div>
                   <h3 className="mb-2 text-lg font-semibold">Production-Ready Performance</h3>
@@ -513,7 +518,7 @@ bun dev`
             <div className="space-y-4">
               <div className="flex items-start gap-4">
                 <div className="bg-primary/10 mt-1 flex size-8 shrink-0 items-center justify-center rounded-lg">
-                  <CheckCircle2 className="text-primary size-5" />
+                  <RiCheckboxCircleLine className="text-primary size-5" />
                 </div>
                 <div>
                   <h3 className="mb-2 text-lg font-semibold">Beautiful UI Out of the Box</h3>
@@ -525,7 +530,7 @@ bun dev`
               </div>
               <div className="flex items-start gap-4">
                 <div className="bg-primary/10 mt-1 flex size-8 shrink-0 items-center justify-center rounded-lg">
-                  <CheckCircle2 className="text-primary size-5" />
+                  <RiCheckboxCircleLine className="text-primary size-5" />
                 </div>
                 <div>
                   <h3 className="mb-2 text-lg font-semibold">Enterprise-Grade Auth</h3>
@@ -537,7 +542,7 @@ bun dev`
               </div>
               <div className="flex items-start gap-4">
                 <div className="bg-primary/10 mt-1 flex size-8 shrink-0 items-center justify-center rounded-lg">
-                  <CheckCircle2 className="text-primary size-5" />
+                  <RiCheckboxCircleLine className="text-primary size-5" />
                 </div>
                 <div>
                   <h3 className="mb-2 text-lg font-semibold">Comprehensive Documentation</h3>
@@ -598,7 +603,7 @@ bun dev`
                 </CardDescription>
                 <div className="flex items-center gap-3">
                   <div className="bg-primary/10 flex size-10 items-center justify-center rounded-full">
-                    <Users className="text-primary size-5" />
+                    <RiGroupLine className="text-primary size-5" />
                   </div>
                   <div>
                     <div className="font-semibold">Developer</div>
@@ -615,7 +620,7 @@ bun dev`
                 </CardDescription>
                 <div className="flex items-center gap-3">
                   <div className="bg-primary/10 flex size-10 items-center justify-center rounded-full">
-                    <Users className="text-primary size-5" />
+                    <RiGroupLine className="text-primary size-5" />
                   </div>
                   <div>
                     <div className="font-semibold">Builder</div>
@@ -632,7 +637,7 @@ bun dev`
                 </CardDescription>
                 <div className="flex items-center gap-3">
                   <div className="bg-primary/10 flex size-10 items-center justify-center rounded-full">
-                    <Users className="text-primary size-5" />
+                    <RiGroupLine className="text-primary size-5" />
                   </div>
                   <div>
                     <div className="font-semibold">Creator</div>
@@ -669,11 +674,9 @@ bun dev`
           </div>
         </div>
         <div className="container mx-auto mt-8 max-w-6xl px-5 text-center">
-          <Button asChild size="lg" className="group h-12 px-8 text-base">
-            <Link href="/docs">
-              Documentation
-              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-            </Link>
+          <Button size="lg" className="group h-12 px-8 text-base" render={<Link href="/docs" />}>
+            Documentation
+            <RiArrowRightLine className="size-4 transition-transform group-hover:translate-x-1" />
           </Button>
         </div>
       </section>
@@ -689,7 +692,7 @@ bun dev`
               Have another question? Check out our documentation or reach out.
             </p>
           </div>
-          <Accordion type="single" collapsible className="w-full">
+          <Accordion className="w-full">
             <AccordionItem value="item-1">
               <AccordionTrigger className="text-left hover:no-underline">
                 What is ZeroStarter?
@@ -756,21 +759,26 @@ bun dev`
             and start building features on day one.
           </p>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button asChild size="lg" className="group h-12 px-8 text-base">
-              <a href={config.social.github} target="_blank" rel="noopener noreferrer">
-                <RiGithubFill className="size-5" />
-                Get ZeroStarter
-              </a>
+            <Button
+              size="lg"
+              className="group h-12 px-8 text-base"
+              render={<a href={config.social.github} target="_blank" rel="noopener noreferrer" />}
+            >
+              <RiGithubFill className="size-5" />
+              Get ZeroStarter
             </Button>
-            <Button asChild size="lg" variant="outline" className="group h-12 px-8 text-base">
-              <Link href="/docs">
-                Documentation
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-              </Link>
+            <Button
+              size="lg"
+              variant="outline"
+              className="group h-12 px-8 text-base"
+              render={<Link href="/docs" />}
+            >
+              Documentation
+              <RiArrowRightLine className="size-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </div>
           <div className="text-muted-foreground mt-8 flex items-center justify-center gap-2 text-sm">
-            <Heart className="size-4 fill-red-500/70 text-red-500/70" />
+            <RiHeartFill className="size-4 fill-red-500/70 text-red-500/70" />
             <span>
               Made with love by{" "}
               <a

@@ -1,7 +1,7 @@
 "use client"
 
+import { RiCodeLine, RiExternalLinkLine } from "@remixicon/react"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools/production"
-import { CodeXml, ExternalLink } from "lucide-react"
 import { useEffect, useState } from "react"
 
 const config = {
@@ -62,7 +62,7 @@ export function DevTools() {
                 rel="noreferrer"
               >
                 <span>{title}</span>
-                <ExternalLink className="mb-0.5 size-3" />
+                <RiExternalLinkLine className="mb-0.5 size-3" />
               </a>
             ))}
           </div>
@@ -80,7 +80,7 @@ export function DevTools() {
         </>
       )}
 
-      <CodeXml
+      <RiCodeLine
         className="size-7.5 cursor-pointer p-1.5"
         onClick={() => setExpandDevtools(!expandDevtools)}
       />
