@@ -1,7 +1,44 @@
+import type { Metadata } from "next"
+
 import { RiArrowRightUpLine, RiTwitterXFill } from "@remixicon/react"
+import { existsSync } from "fs"
 import Link from "next/link"
+import { join } from "path"
 
 import { config } from "@/lib/config"
+
+function getOgImageUrl(): string {
+  const staticOgPath = join(process.cwd(), "public", "og", "hire.png")
+  if (existsSync(staticOgPath)) {
+    return `${config.app.url}/og/hire.png?t=${Date.now()}`
+  }
+  return `${config.app.url}/api/og/hire?t=${Date.now()}`
+}
+
+const ogImageUrl = getOgImageUrl()
+
+export const metadata: Metadata = {
+  title: "Hire nrjdalal",
+  description:
+    "Crafting software that makes a difference. I build developer tools and infrastructure.",
+  openGraph: {
+    type: "website",
+    siteName: config.app.name,
+    url: `${config.app.url}/hire`,
+    images: [
+      {
+        url: ogImageUrl,
+        width: 1200,
+        height: 630,
+        alt: "nrjdalal - Crafting software that makes a difference",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [ogImageUrl],
+  },
+}
 
 const sections: {
   title: string
