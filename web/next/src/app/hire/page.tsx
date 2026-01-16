@@ -1,7 +1,34 @@
+import type { Metadata } from "next"
+
 import { RiArrowRightUpLine, RiTwitterXFill } from "@remixicon/react"
 import Link from "next/link"
 
 import { config } from "@/lib/config"
+
+const ogImageUrl = `${config.app.url}/api/og/hire?t=${Date.now()}`
+
+export const metadata: Metadata = {
+  title: "nrjdalal",
+  description:
+    "Crafting software that makes a difference. I build developer tools and infrastructure.",
+  openGraph: {
+    type: "website",
+    siteName: config.app.name,
+    url: `${config.app.url}/hire`,
+    images: [
+      {
+        url: ogImageUrl,
+        width: 1200,
+        height: 630,
+        alt: "nrjdalal - Crafting software that makes a difference",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [ogImageUrl],
+  },
+}
 
 const sections: {
   title: string
