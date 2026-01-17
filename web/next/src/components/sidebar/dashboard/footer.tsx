@@ -29,7 +29,7 @@ export function SidebarDashboardFooter({ user }: { user: User }) {
   const { isMobile } = useSidebar()
 
   return (
-    <SidebarMenu>
+    <SidebarMenu className="space-y-1.5">
       <SidebarMenuItem>
         <SidebarMenuButton render={<Link href="/docs" />}>
           <RiBookLine />

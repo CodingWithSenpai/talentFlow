@@ -596,7 +596,7 @@ bun dev`
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <Card>
-              <CardHeader>
+              <CardHeader className="flex h-full flex-col justify-between">
                 <CardDescription className="mb-4 text-base">
                   "ZeroStarter sped up my development process significantly. The type-safe API
                   client alone saved me hours of debugging. Highly recommended!"
@@ -613,7 +613,7 @@ bun dev`
               </CardHeader>
             </Card>
             <Card>
-              <CardHeader>
+              <CardHeader className="flex h-full flex-col justify-between">
                 <CardDescription className="mb-4 text-base">
                   "The monorepo architecture is clean and well-organized. Everything just works out
                   of the box. Best starter kit I've used!"
@@ -630,7 +630,7 @@ bun dev`
               </CardHeader>
             </Card>
             <Card>
-              <CardHeader>
+              <CardHeader className="flex h-full flex-col justify-between">
                 <CardDescription className="mb-4 text-base">
                   "Production-ready from day one. The documentation is excellent and the codebase is
                   maintainable. Exactly what I needed!"

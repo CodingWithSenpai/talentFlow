@@ -59,7 +59,7 @@ export function Access() {
       >
         Login
       </DialogTrigger>
-      <DialogContent className="max-w-md sm:max-w-md" tabIndex={-1}>
+      <DialogContent className="max-w-md sm:max-w-md" initialFocus={false}>
         <DialogHeader className="sr-only">
           <DialogTitle className="text-center">Sign in/up</DialogTitle>
         </DialogHeader>
