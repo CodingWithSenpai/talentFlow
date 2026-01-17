@@ -32,6 +32,7 @@
     "postinstall": "bun .github/scripts/deps-manager.ts",
     "lint": "turbo lint --summarize",
     "prepare": "bunx lefthook install",
+    "shadcn:update": "bun .github/scripts/shadcn-update.sh",
     "start": "turbo start"
   },
   "devDependencies": {
