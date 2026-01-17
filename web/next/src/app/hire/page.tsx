@@ -9,8 +9,7 @@ const ogImageUrl = `${config.app.url}/api/og/hire?t=${Date.now()}`
 
 export const metadata: Metadata = {
   title: "nrjdalal",
-  description:
-    "Crafting software that makes a difference. I build developer tools and infrastructure.",
+  description: "Crafting software that makes a difference.",
   openGraph: {
     type: "website",
     siteName: config.app.name,
