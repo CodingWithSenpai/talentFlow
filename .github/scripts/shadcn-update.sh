@@ -1,6 +1,6 @@
 #! /bin/bash
 
-cd web/next
+cd web/next || exit 1
 rm -rf components.json src/components/ui
 bunx shadcn@latest create . --preset "https://ui.shadcn.com/init?base=base&style=nova&baseColor=neutral&theme=neutral&iconLibrary=remixicon&font=inter&menuAccent=subtle&menuColor=default&radius=default&template=next" --template next 
 bunx shadcn@latest add -a
