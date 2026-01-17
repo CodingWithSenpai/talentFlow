@@ -57,10 +57,7 @@ export function SidebarDashboardFooter({ user }: { user: User }) {
             <RiExpandUpDownLine className="ml-auto size-4" />
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className={cn(
-              "w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg",
-              isMobile ? "mb-1" : "ml-3",
-            )}
+            className={cn("w-(--anchor-width) min-w-56 rounded-lg", isMobile ? "mb-1" : "ml-3")}
             side={isMobile ? "top" : "right"}
             align="end"
             sideOffset={4}
