@@ -48,7 +48,7 @@ export function SidebarDashboardFooter({ user }: { user: User }) {
           >
             <Avatar className="size-8 rounded-md">
               <AvatarImage src={user.image ?? ""} alt={user.name} />
-              <AvatarFallback className="rounded-md">LS</AvatarFallback>
+              <AvatarFallback className="rounded-md">ND</AvatarFallback>
             </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-medium">{user.name}</span>
