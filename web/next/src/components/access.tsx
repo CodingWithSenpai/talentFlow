@@ -1,8 +1,7 @@
 "use client"
 
-import { RiGithubFill, RiGoogleFill } from "@remixicon/react"
+import { RiGithubFill, RiGoogleFill, RiLayoutGridFill, RiLoaderLine } from "@remixicon/react"
 import { useForm } from "@tanstack/react-form"
-import { GalleryVerticalEnd, Loader2 } from "lucide-react"
 import { useState } from "react"
 import { toast } from "sonner"
 import { z } from "zod"
@@ -55,18 +54,12 @@ export function Access() {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button className="w-24 cursor-pointer" size="sm" variant="outline">
-          Login
-        </Button>
-      </DialogTrigger>
-      <DialogContent
-        className="max-w-md sm:max-w-md"
-        tabIndex={-1}
-        onOpenAutoFocus={(event) => {
-          event.preventDefault()
-        }}
+      <DialogTrigger
+        render={<Button className="w-24 cursor-pointer" size="sm" variant="outline" />}
       >
+        Login
+      </DialogTrigger>
+      <DialogContent className="max-w-md sm:max-w-md" initialFocus={false}>
         <DialogHeader className="sr-only">
           <DialogTitle className="text-center">Sign in/up</DialogTitle>
         </DialogHeader>
@@ -74,7 +67,7 @@ export function Access() {
           <div className="flex flex-col items-center gap-2">
             <div className="flex flex-col items-center gap-2 font-medium">
               <div className="flex size-8 items-center justify-center rounded-md">
-                <GalleryVerticalEnd className="size-6" />
+                <RiLayoutGridFill className="size-6" />
               </div>
               <span className="sr-only">{config.app.name}</span>
             </div>
@@ -120,7 +113,7 @@ export function Access() {
               className="w-full cursor-pointer"
               disabled={loader === "email"}
             >
-              {loader === "email" ? <Loader2 className="size-5 animate-spin" /> : null}
+              {loader === "email" ? <RiLoaderLine className="size-5 animate-spin" /> : null}
               Sign in/up
             </Button>
           </form>
@@ -148,7 +141,7 @@ export function Access() {
               disabled={loader === "github"}
             >
               {loader === "github" ? (
-                <Loader2 className="size-5 animate-spin" />
+                <RiLoaderLine className="size-5 animate-spin" />
               ) : (
                 <RiGithubFill className="size-5" />
               )}
@@ -172,7 +165,7 @@ export function Access() {
               disabled={loader === "google"}
             >
               {loader === "google" ? (
-                <Loader2 className="size-5 animate-spin" />
+                <RiLoaderLine className="size-5 animate-spin" />
               ) : (
                 <RiGoogleFill className="size-5" />
               )}

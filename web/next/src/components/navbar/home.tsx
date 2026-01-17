@@ -1,7 +1,12 @@
 "use client"
 
-import { RiDiscordFill, RiGithubFill, RiTwitterXFill } from "@remixicon/react"
-import { Loader2, Menu } from "lucide-react"
+import {
+  RiDiscordFill,
+  RiGithubFill,
+  RiLoaderLine,
+  RiMenuLine,
+  RiTwitterXFill,
+} from "@remixicon/react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
@@ -39,17 +44,19 @@ function SocialLinks({ onClick }: { onClick?: () => void }) {
     <div className="flex items-center gap-5 md:gap-3">
       {socialLinks.map((link) => (
         <Tooltip key={link.href}>
-          <TooltipTrigger asChild>
-            <a
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-foreground/60 hover:text-foreground transition-colors"
-              aria-label={link.label}
-              onClick={onClick}
-            >
-              <link.icon className="size-6" aria-hidden="true" />
-            </a>
+          <TooltipTrigger
+            render={
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground/60 hover:text-foreground transition-colors"
+                aria-label={link.label}
+                onClick={onClick}
+              />
+            }
+          >
+            <link.icon className="size-6" aria-hidden="true" />
           </TooltipTrigger>
           <TooltipContent>{link.label}</TooltipContent>
         </Tooltip>
@@ -109,15 +116,13 @@ export function Navbar() {
 
           {session?.user ? (
             <Button
-              asChild
               className="w-24 cursor-pointer"
               size="sm"
               variant="outline"
               onClick={() => setToDashboard(true)}
+              render={<Link href="/dashboard" />}
             >
-              <Link href="/dashboard">
-                {toDashboard ? <Loader2 className="animate-spin" /> : "Dashboard"}
-              </Link>
+              {toDashboard ? <RiLoaderLine className="animate-spin" /> : "Dashboard"}
             </Button>
           ) : (
             <Access />
@@ -129,29 +134,33 @@ export function Navbar() {
 
           {/* Mobile Navigation */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild>
-              <Button
-                className="-mr-2.5 size-8 cursor-pointer md:hidden [&_svg]:size-4!"
-                aria-label="Open menu"
-                size="sm"
-                variant="outline"
-              >
-                <Menu aria-hidden="true" />
-              </Button>
+            <SheetTrigger
+              render={
+                <Button
+                  className="-mr-2.5 size-8 cursor-pointer md:hidden [&_svg]:size-4!"
+                  aria-label="Open menu"
+                  size="sm"
+                  variant="outline"
+                />
+              }
+            >
+              <RiMenuLine aria-hidden="true" />
             </SheetTrigger>
             <SheetContent side="right">
               <SheetHeader>
-                <SheetTitle asChild>
-                  <Link
-                    href="/"
-                    className="-mt-1 flex items-center gap-2 text-2xl font-bold"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {config.app.name}
-                    <Badge variant="secondary" className="text-xs">
-                      RC
-                    </Badge>
-                  </Link>
+                <SheetTitle
+                  render={
+                    <Link
+                      href="/"
+                      className="-mt-1 flex items-center gap-2 text-2xl font-bold"
+                      onClick={() => setIsOpen(false)}
+                    />
+                  }
+                >
+                  {config.app.name}
+                  <Badge variant="secondary" className="text-xs">
+                    RC
+                  </Badge>
                 </SheetTitle>
               </SheetHeader>
               <nav className="ml-4 flex flex-col gap-5">
@@ -173,11 +182,16 @@ export function Navbar() {
                     </Link>
                   )
                 })}
-                <Button asChild size="sm" className="mt-2 w-fit" onClick={() => setIsOpen(false)}>
-                  <a href={config.social.github} target="_blank" rel="noopener noreferrer">
-                    <RiGithubFill className="size-4" />
-                    Get ZeroStarter
-                  </a>
+                <Button
+                  size="sm"
+                  className="mt-2 w-fit"
+                  onClick={() => setIsOpen(false)}
+                  render={
+                    <a href={config.social.github} target="_blank" rel="noopener noreferrer" />
+                  }
+                >
+                  <RiGithubFill className="size-4" />
+                  Get ZeroStarter
                 </Button>
               </nav>
               {/* Mobile Social Links */}

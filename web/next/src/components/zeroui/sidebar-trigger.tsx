@@ -1,6 +1,6 @@
 "use client"
 
-import { PanelLeftIcon } from "lucide-react"
+import { RiSideBarLine } from "@remixicon/react"
 import * as React from "react"
 
 import { Button } from "@/components/ui/button"
@@ -28,7 +28,7 @@ function SidebarTrigger({
       }}
       {...props}
     >
-      <PanelLeftIcon />
+      <RiSideBarLine />
       {children && <span className="md:hidden">{children}</span>}
       <span className="sr-only">Toggle Sidebar</span>
     </Button>

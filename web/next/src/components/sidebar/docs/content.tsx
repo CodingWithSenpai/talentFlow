@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronRight } from "lucide-react"
+import { RiArrowRightSLine } from "@remixicon/react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -47,17 +47,20 @@ export function SidebarDocsContent() {
 
                 return (
                   <SidebarMenuItem key={item.url}>
-                    <SidebarMenuButton asChild isActive={isActive}>
-                      <Link
-                        href={item.url}
-                        onClick={() => {
-                          if (isMobile) {
-                            setOpenMobile(false)
-                          }
-                        }}
-                      >
-                        <span>{item.title}</span>
-                      </Link>
+                    <SidebarMenuButton
+                      isActive={isActive}
+                      render={
+                        <Link
+                          href={item.url}
+                          onClick={() => {
+                            if (isMobile) {
+                              setOpenMobile(false)
+                            }
+                          }}
+                        />
+                      }
+                    >
+                      <span>{item.title}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 )
@@ -67,21 +70,25 @@ export function SidebarDocsContent() {
                 const isOpen = isCategoryActive(items)
 
                 return (
-                  <Collapsible key={category} asChild defaultOpen={isOpen} className="group">
-                    <SidebarMenuItem>
-                      <CollapsibleTrigger asChild>
-                        <SidebarMenuButton tooltip={category}>
-                          <ChevronRight className="transition-transform duration-200 group-data-[state=open]:rotate-90" />
-                          <span>{category}</span>
-                        </SidebarMenuButton>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <SidebarMenuSub>
-                          {items.map((item) => {
-                            const isActive = isItemActive(item.url)
-                            return (
-                              <SidebarMenuSubItem key={item.url}>
-                                <SidebarMenuSubButton asChild isActive={isActive}>
+                  <Collapsible
+                    key={category}
+                    defaultOpen={isOpen}
+                    className="group"
+                    render={<SidebarMenuItem />}
+                  >
+                    <CollapsibleTrigger render={<SidebarMenuButton tooltip={category} />}>
+                      <RiArrowRightSLine className="transition-transform duration-200 group-data-[state=open]:rotate-90" />
+                      <span>{category}</span>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent>
+                      <SidebarMenuSub>
+                        {items.map((item) => {
+                          const isActive = isItemActive(item.url)
+                          return (
+                            <SidebarMenuSubItem key={item.url}>
+                              <SidebarMenuSubButton
+                                isActive={isActive}
+                                render={
                                   <Link
                                     href={item.url}
                                     onClick={() => {
@@ -89,16 +96,16 @@ export function SidebarDocsContent() {
                                         setOpenMobile(false)
                                       }
                                     }}
-                                  >
-                                    <span>{item.title}</span>
-                                  </Link>
-                                </SidebarMenuSubButton>
-                              </SidebarMenuSubItem>
-                            )
-                          })}
-                        </SidebarMenuSub>
-                      </CollapsibleContent>
-                    </SidebarMenuItem>
+                                  />
+                                }
+                              >
+                                <span>{item.title}</span>
+                              </SidebarMenuSubButton>
+                            </SidebarMenuSubItem>
+                          )
+                        })}
+                      </SidebarMenuSub>
+                    </CollapsibleContent>
                   </Collapsible>
                 )
               })}

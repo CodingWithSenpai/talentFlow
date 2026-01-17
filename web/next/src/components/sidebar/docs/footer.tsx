@@ -11,10 +11,12 @@ export function SidebarDocsFooter() {
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <SidebarMenuButton asChild>
-          <Link href={env.NEXT_PUBLIC_USERJOT_URL} target="_blank" rel="noopener noreferrer">
-            <span>Feedback</span>
-          </Link>
+        <SidebarMenuButton
+          render={
+            <Link href={env.NEXT_PUBLIC_USERJOT_URL} target="_blank" rel="noopener noreferrer" />
+          }
+        >
+          <span>Feedback</span>
         </SidebarMenuButton>
       </SidebarMenuItem>
     </SidebarMenu>

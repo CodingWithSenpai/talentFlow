@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@api/hono": "workspace:*",
+    "@base-ui/react": "catalog:",
     "@hookform/resolvers": "catalog:",
     "@packages/auth": "workspace:*",
     "@packages/env": "workspace:*",
@@ -29,11 +30,9 @@
     "fumadocs-ui": "catalog:",
     "hono": "catalog:",
     "input-otp": "catalog:",
-    "lucide-react": "catalog:",
     "next": "catalog:",
     "next-themes": "catalog:",
     "posthog-js": "catalog:",
-    "radix-ui": "catalog:",
     "react": "catalog:",
     "react-day-picker": "catalog:",
     "react-dom": "catalog:",
@@ -60,6 +59,7 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "babel-plugin-react-compiler": "catalog:",
+    "shadcn": "catalog:",
     "tailwindcss": "catalog:",
     "tw-animate-css": "catalog:",
     "typescript": "catalog:"
