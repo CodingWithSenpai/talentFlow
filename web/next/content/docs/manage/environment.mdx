@@ -54,11 +54,13 @@ export const env = createEnv({
   server: {
     NODE_ENV, // Centralized enum: local, development, test, staging, production
     HONO_APP_URL: z.url(),
+    HONO_PORT: z.coerce.number().default(4000),
     HONO_TRUSTED_ORIGINS: z.string().transform(...),
   },
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     HONO_APP_URL: process.env.HONO_APP_URL,
+    HONO_PORT: process.env.HONO_PORT,
     HONO_TRUSTED_ORIGINS: process.env.HONO_TRUSTED_ORIGINS,
   },
 })
