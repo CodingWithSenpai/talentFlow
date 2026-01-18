@@ -24,7 +24,11 @@ Creates atomic commits with conventional commit message format.
 1. **Inspect Changes**: Review both staged and unstaged changes
 2. **Stage Changes**: Stage related changes together (one logical unit per commit)
 3. **Commit**: Create commit with conventional message format
-4. **Push (Optional)**: Ask user for confirmation before pushing; only push if explicitly requested
+4. **Push (Optional)**: Only push if user explicitly requests it
+
+**Default Behavior**: The skill stages and commits changes but does **not** push automatically. This prevents accidental pushes to remote branches and gives users control over when changes are shared.
+
+**Push Confirmation**: To push after committing, the user must explicitly request it (e.g., "commit and push", "push the changes", or respond affirmatively when asked). If the user only asks to "commit" or "save changes", the skill stops after creating the commit.
 
 **Message Format**:
 
