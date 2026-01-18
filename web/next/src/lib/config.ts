@@ -74,6 +74,18 @@ export const config = {
         label: "Manage",
         collapsible: true,
         categories: {
+          Analytics: [
+            {
+              title: "PostHog",
+              url: "/docs/manage/analytics",
+            },
+          ],
+          "Code Quality": [
+            {
+              title: "Git Hooks & Linting",
+              url: "/docs/manage/code-quality",
+            },
+          ],
           "Content Management": [
             {
               title: "Blog",
@@ -118,6 +130,10 @@ export const config = {
         label: "Deployment",
         items: [
           {
+            title: "Docker",
+            url: "/docs/deployment/docker",
+          },
+          {
             title: "Vercel",
             url: "/docs/deployment/vercel",
           },
@@ -126,6 +142,14 @@ export const config = {
       {
         label: "Resources",
         items: [
+          {
+            title: "AI Skills",
+            url: "/docs/resources/ai-skills",
+          },
+          {
+            title: "IDE Setup",
+            url: "/docs/resources/ide-setup",
+          },
           {
             title: "Infisical",
             url: "/docs/resources/infisical",
