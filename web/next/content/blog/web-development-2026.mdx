@@ -15,6 +15,8 @@ These practices take years to learn through painful mistakes. Or you can absorb 
 
 **ZeroStarter is practices as a service.** It's a living reference implementation. Study it, modify it, make it yours. The patterns matter more than the specific choices.
 
+> **Ready to dive in?** [Get started with ZeroStarter](https://github.com/nrjdalal/zerostarter) or explore the [documentation](https://zerostarter.dev/docs).
+
 ---
 
 ## Project Architecture
@@ -73,6 +75,8 @@ Before diving into practices, here's what ZeroStarter uses—and why these choic
 | Analytics  | PostHog            | Product analytics, feature flags, session replay        |
 
 **These aren't the only valid choices.** Next.js could be Remix or SvelteKit. Hono could be Express or Fastify. Drizzle could be Prisma. The practices that follow apply regardless of your specific stack.
+
+> **See it in action:** Check out the [Architecture documentation](/docs/getting-started/architecture) to understand how these pieces fit together.
 
 ---
 
@@ -134,6 +138,8 @@ Multiple approaches achieve this:
 - **Shared types package**: Manual but explicit control
 
 The practice is **type safety across the network boundary**. Whether you infer types or generate them, the goal is the same: catch mismatches at compile time.
+
+> **Learn more:** See the [Type-Safe API documentation](/docs/getting-started/type-safe-api) for complete examples and patterns.
 
 ---
 
@@ -274,6 +280,8 @@ Auth approaches vary:
 
 The practice is **secure, tested authentication**. Whether self-hosted or managed, the auth system should be secure by default and auditable.
 
+> **Try it yourself:** Clone ZeroStarter and run `bun dev` - authentication with GitHub and Google OAuth is ready to configure. See the [Installation guide](/docs/getting-started/installation#authentication-setup).
+
 ---
 
 ## Environment Variable Management
@@ -316,6 +324,8 @@ Validation approaches vary:
 - **Platform validation**: Vercel, Railway have built-in checks
 
 The practice is **validated, typed environment configuration**. The specific library matters less than having validation at all. Fail fast, fail clearly.
+
+> **Deep dive:** Learn how ZeroStarter organizes environment variables across packages in the [Environment documentation](/docs/manage/environment).
 
 ---
 
@@ -410,6 +420,8 @@ Everyone uses the same formatter. Formatting debates are over. Code looks the sa
 
 The specific checks vary by project. The practice is **automated quality gates**. Where you place them (pre-commit, pre-push, CI only) depends on how fast they run and how much friction you'll accept.
 
+> **See the full setup:** The [Code Quality documentation](/docs/manage/code-quality) explains every tool, config file, and why they're configured that way.
+
 ---
 
 ## Code Review Automation
@@ -494,6 +506,8 @@ PRs are automatically labeled based on changed files. Approval status is tracked
 ### What you can learn
 
 CI platforms abound. Common checks include linting, type checking, tests, builds, security scanning, and preview deployments. The practice is **automated verification before merge**.
+
+> **Halfway there!** You've learned the core development practices. Ready to see them in action? [Clone ZeroStarter](https://github.com/nrjdalal/zerostarter) and explore the workflows firsthand.
 
 ---
 
@@ -686,6 +700,8 @@ Services communicate via Docker's internal network. Server-side rendering connec
 
 The practice is **reproducible, automated deployments**. Whether containers, serverless, or traditional—deployments should be consistent.
 
+> **Deploy today:** ZeroStarter includes ready-to-use Docker and Vercel configurations. See the [Docker](/docs/deployment/docker) and [Vercel](/docs/deployment/vercel) deployment guides.
+
 ---
 
 ## Developer Experience
@@ -781,6 +797,8 @@ Point an AI at the full docs and it understands your entire project.
 
 The practice is **intentional context for AI tools**. Whether `.skills/`, `AGENTS.md`, or well-structured code—the goal is helping AI understand your patterns.
 
+> **AI-ready from day one:** ZeroStarter's documentation is available at [/llms.txt](https://zerostarter.dev/llms.txt) - point your AI assistant there and it understands the entire project.
+
 ---
 
 ## Getting Started
@@ -808,11 +826,13 @@ Frontend runs on `localhost:3000`. Backend runs on `localhost:4000`. Types flow 
 
 Explore the code. Read the patterns. Modify them for your needs.
 
+> **This is just the beginning.** Every practice in this article is implemented in ZeroStarter, fully documented, and ready for you to learn from. The [complete documentation](https://zerostarter.dev/docs) covers installation, architecture, deployment, and more.
+
 ---
 
-**Documentation**: [zerostarter.dev/docs](https://zerostarter.dev/docs)
-**AI-Ready Docs**: [zerostarter.dev/llms.txt](https://zerostarter.dev/llms.txt)
-**GitHub**: [github.com/nrjdalal/zerostarter](https://github.com/nrjdalal/zerostarter)
-**Updates**: [@nrjdalal](https://twitter.com/nrjdalal)
+- **Documentation**: [zerostarter.dev/docs](https://zerostarter.dev/docs)
+- **AI-Ready Docs**: [zerostarter.dev/llms.txt](https://zerostarter.dev/llms.txt)
+- **GitHub**: [github.com/nrjdalal/zerostarter](https://github.com/nrjdalal/zerostarter)
+- **Updates**: [@nrjdalal](https://x.com/nrjdalal)
 
 MIT Licensed. Learn from it. Modify it. Make it yours.
