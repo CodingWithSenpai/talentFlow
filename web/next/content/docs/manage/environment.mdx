@@ -29,12 +29,12 @@ All environment variables are stored in a single `.env` file at the project root
 
 Each package defines only the environment variables it needs:
 
-- **`api-hono`**: `HONO_APP_URL`, `HONO_TRUSTED_ORIGINS`
+- **`api-hono`**: `HONO_APP_URL`, `HONO_PORT`, `HONO_TRUSTED_ORIGINS`
 - **`auth`**: `BETTER_AUTH_SECRET`, `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `HONO_APP_URL`, `HONO_TRUSTED_ORIGINS`
 - **`db`**: `POSTGRES_URL`
 - **`web-next`**:
-  - **Server**: `INTERNAL_API_URL` (server-side only)
-  - **Client**: `NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_API_URL`, `NEXT_PUBLIC_USERJOT_URL` (exposed to browser)
+  - **Server**: `INTERNAL_API_URL` (server-side only, for internal service-to-service calls)
+  - **Client**: `NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_API_URL`, `NEXT_PUBLIC_POSTHOG_HOST`, `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_USERJOT_URL` (exposed to browser)
 
 **Important**: Server variables cannot be used on the client. Only variables prefixed with `NEXT_PUBLIC_` are exposed to the browser. This prevents sensitive data like secrets and API keys from being exposed in client-side code.
 
@@ -54,11 +54,13 @@ export const env = createEnv({
   server: {
     NODE_ENV, // Centralized enum: local, development, test, staging, production
     HONO_APP_URL: z.url(),
+    HONO_PORT: z.coerce.number().default(4000),
     HONO_TRUSTED_ORIGINS: z.string().transform(...),
   },
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     HONO_APP_URL: process.env.HONO_APP_URL,
+    HONO_PORT: process.env.HONO_PORT,
     HONO_TRUSTED_ORIGINS: process.env.HONO_TRUSTED_ORIGINS,
   },
 })

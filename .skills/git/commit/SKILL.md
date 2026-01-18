@@ -40,13 +40,16 @@ EOF
 )"
 ```
 
-### 4. Push
+### 4. Push (Optional)
 
 ```bash
 git push
 ```
 
-- Push the changes to the remote repository.
+- MUST: Ask user for explicit confirmation before pushing
+- Default behavior: Stage and commit only—do NOT push automatically
+- Only push if user explicitly confirms or requests it
+- If user declines or doesn't respond, skip the push step
 
 #### Message Format
 
