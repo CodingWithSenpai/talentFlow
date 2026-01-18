@@ -1,7 +1,11 @@
 ---
-name: commit
-description: Detects changes and creates well-formed commits with conventional messages.
+name: git-commit
+description: Detects changes and creates well-formed commits with conventional commit messages. Use when the user asks to commit, save changes, or create a commit.
 ---
+
+# Git Commit
+
+Creates atomic commits with conventional message format.
 
 ## Workflow
 

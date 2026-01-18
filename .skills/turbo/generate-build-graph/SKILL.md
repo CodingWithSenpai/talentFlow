@@ -1,7 +1,11 @@
 ---
-name: generate-build-graph
-description: Generates a styled SVG dependency graph of the Turborepo build pipeline.
+name: turbo-build-graph
+description: Generates a styled SVG dependency graph of the Turborepo build pipeline. Use when the user asks to visualize dependencies, generate a build graph, or update the pipeline diagram.
 ---
+
+# Turbo Build Graph
+
+Creates a dark-mode-friendly SVG visualization of Turborepo task dependencies.
 
 ## Workflow
 
