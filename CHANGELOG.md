@@ -1,3 +1,54 @@
+## v0.0.12
+
+[compare changes](https://github.com/nrjdalal/zerostarter/compare/v0.0.11...v0.0.12)
+
+### 🚀 Enhancements
+
+- Better observability ([827cafd](https://github.com/nrjdalal/zerostarter/commit/827cafd))
+- Hire at nav ([28a7cc5](https://github.com/nrjdalal/zerostarter/commit/28a7cc5))
+- Migrate from radix to baseui ([6a3cb61](https://github.com/nrjdalal/zerostarter/commit/6a3cb61))
+- Added agents.md ([e4e6bb9](https://github.com/nrjdalal/zerostarter/commit/e4e6bb9))
+
+### 💅 Refactors
+
+- Rename SKILLS.md to SKILL.md and simplify AGENTS.md ([e51548c](https://github.com/nrjdalal/zerostarter/commit/e51548c))
+
+### 📖 Documentation
+
+- Add skills directory and clean up README ([dbb2c33](https://github.com/nrjdalal/zerostarter/commit/dbb2c33))
+- **skills:** Expand commit and build-graph workflow documentation ([f07a84e](https://github.com/nrjdalal/zerostarter/commit/f07a84e))
+- Add PostHog analytics documentation and update docs ([93af3a9](https://github.com/nrjdalal/zerostarter/commit/93af3a9))
+- Add Docker, code quality, AI skills, and IDE setup guides ([0b4f652](https://github.com/nrjdalal/zerostarter/commit/0b4f652))
+- Update skill and documentation details ([2d8ea13](https://github.com/nrjdalal/zerostarter/commit/2d8ea13))
+- **ai-skills:** Expand optional push behavior documentation ([73a71e6](https://github.com/nrjdalal/zerostarter/commit/73a71e6))
+
+### 🏡 Chore
+
+- Update bun version ([ef84e3a](https://github.com/nrjdalal/zerostarter/commit/ef84e3a))
+- Own .next/cache at build ([d3fe14b](https://github.com/nrjdalal/zerostarter/commit/d3fe14b))
+- Sync links ([38099ef](https://github.com/nrjdalal/zerostarter/commit/38099ef))
+- Review fixes ([586e42c](https://github.com/nrjdalal/zerostarter/commit/586e42c))
+- Mobile view fix ([e8a7540](https://github.com/nrjdalal/zerostarter/commit/e8a7540))
+- Og hire ([cde3d6a](https://github.com/nrjdalal/zerostarter/commit/cde3d6a))
+- Assign og ([4abf33e](https://github.com/nrjdalal/zerostarter/commit/4abf33e))
+- Og hire ([97726ef](https://github.com/nrjdalal/zerostarter/commit/97726ef))
+- Update deps ([4b7b11c](https://github.com/nrjdalal/zerostarter/commit/4b7b11c))
+- Add sync script ([64f73f5](https://github.com/nrjdalal/zerostarter/commit/64f73f5))
+- Sync v1 ([151eb82](https://github.com/nrjdalal/zerostarter/commit/151eb82))
+- Sync v2 ([d9b1507](https://github.com/nrjdalal/zerostarter/commit/d9b1507))
+- Sync v3 ([59d2b47](https://github.com/nrjdalal/zerostarter/commit/59d2b47))
+- Sync v4 ([38211c8](https://github.com/nrjdalal/zerostarter/commit/38211c8))
+- Sync v5 ([e76acd1](https://github.com/nrjdalal/zerostarter/commit/e76acd1))
+- Sync v6 ([bcc28b2](https://github.com/nrjdalal/zerostarter/commit/bcc28b2))
+- Minor update ([6f2fa66](https://github.com/nrjdalal/zerostarter/commit/6f2fa66))
+- Minor touchups ([ecc9c83](https://github.com/nrjdalal/zerostarter/commit/ecc9c83))
+- Minor sync ([7d800d8](https://github.com/nrjdalal/zerostarter/commit/7d800d8))
+- **skills:** Rename turbo-build-graph to turbo-generate-build-graph ([49ce659](https://github.com/nrjdalal/zerostarter/commit/49ce659))
+
+### ❤️ Contributors
+
+- Neeraj Dalal @nrjdalal
+
 ## v0.0.11
 
 [compare changes](https://github.com/nrjdalal/zerostarter/compare/v0.0.10...v0.0.11)
