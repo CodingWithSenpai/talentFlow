@@ -1,9 +1,3 @@
 {
-  "pages": [
-    "index",
-    "getting-started-zero-starter",
-    "type-safe-apis-hono-rpc",
-    "monorepo-architecture-saas",
-    "authentication-better-auth"
-  ]
+  "pages": ["index", "web-development-2026"]
 }
