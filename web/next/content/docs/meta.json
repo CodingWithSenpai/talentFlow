@@ -9,6 +9,7 @@
     "getting-started/roadmap",
     "manage/analytics",
     "manage/blog",
+    "manage/code-quality",
     "manage/documentation",
     "manage/feedback",
     "manage/environment",
@@ -16,7 +17,10 @@
     "manage/llms-txt",
     "manage/robots",
     "manage/sitemap",
+    "deployment/docker",
     "deployment/vercel",
+    "resources/ai-skills",
+    "resources/ide-setup",
     "resources/infisical",
     "contributing"
   ]
