@@ -74,6 +74,12 @@ export const config = {
         label: "Manage",
         collapsible: true,
         categories: {
+          Analytics: [
+            {
+              title: "PostHog",
+              url: "/docs/manage/analytics",
+            },
+          ],
           "Content Management": [
             {
               title: "Blog",

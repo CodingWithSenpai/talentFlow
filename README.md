@@ -22,6 +22,7 @@ A modern, type-safe, and high-performance SaaS starter template built with a mon
 - **RPC**: [Hono Client](https://hono.dev/docs/guides/rpc) for end-to-end type safety with frontend client
 - **Database**: [PostgreSQL](https://www.postgresql.org) with [Drizzle ORM](https://orm.drizzle.team)
 - **Authentication**: [Better Auth](https://better-auth.com)
+- **Analytics**: [PostHog](https://posthog.com) for product analytics, feature flags, and session recordings
 - **Styling**: [Tailwind CSS](https://tailwindcss.com)
 - **UI Components**: [Shadcn UI](https://ui.shadcn.com)
 - **Data Fetching**: [TanStack Query](https://tanstack.com/query/latest)

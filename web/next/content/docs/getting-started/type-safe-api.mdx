@@ -7,14 +7,16 @@ description: Learn how to use the type-safe API client with Hono RPC.
 
 ZeroStarter leverages Hono RPC to provide end-to-end type safety between the backend API and frontend client. This ensures that API calls are fully typed, catching errors at compile time and providing excellent developer experience with autocomplete and type checking.
 
-## Type-Safe API Client
+## How It Works
 
 This starter utilizes [Hono RPC](https://hono.dev/docs/guides/rpc) to provide end-to-end type safety between the backend and frontend.
 
 - **Backend**: Routes defined in `api/hono/src/routers` are exported as `AppType` at `api/hono/src/index.ts`.
 - **Frontend**: The client at `web/next/src/lib/api/client.ts` infers `AppType` request/response types using `hono/client`.
 
-### Usage Example
+## Usage Examples
+
+### Basic Request
 
 ```ts
 import { apiClient } from "@/lib/api/client"
@@ -22,4 +24,108 @@ import { apiClient } from "@/lib/api/client"
 // Fully typed request and response
 const res = await apiClient.health.$get()
 const data = await res.json()
+// data is typed as { message: string, environment: string, metadata: {...} }
 ```
+
+### Authenticated Requests
+
+The API client is pre-configured with `credentials: "include"` for cookie-based authentication:
+
+```ts
+import { apiClient } from "@/lib/api/client"
+
+// Protected route - requires authentication
+const res = await apiClient.v1.session.$get()
+const session = await res.json()
+// session is typed as Session | { message: "Unauthorized" }
+```
+
+### Query Parameters
+
+```ts
+import { apiClient } from "@/lib/api/client"
+
+// With query parameters (type-safe)
+const res = await apiClient.auth["get-session"].$get({
+  query: {
+    select: "user",
+  },
+})
+const user = await res.json()
+```
+
+## Backend Routes
+
+### Adding New Routes
+
+Define routes in `api/hono/src/routers/`:
+
+```ts
+// api/hono/src/routers/v1.ts
+import { Hono } from "hono"
+import { authMiddleware } from "@/middlewares"
+
+const app = new Hono()
+app.use("/*", authMiddleware)
+
+export const v1Router = app
+  .get("/session", (c) => {
+    const session = c.get("session")
+    return c.json(session)
+  })
+  .post("/items", async (c) => {
+    const body = await c.req.json()
+    // Handle creation
+    return c.json({ id: "123", ...body })
+  })
+```
+
+### Request Validation
+
+Use Zod for type-safe request validation:
+
+```ts
+import { zValidator } from "@hono/zod-validator"
+import { z } from "zod"
+
+const createItemSchema = z.object({
+  name: z.string().min(1),
+  description: z.string().optional(),
+})
+
+app.post("/items", zValidator("json", createItemSchema), async (c) => {
+  const { name, description } = c.req.valid("json")
+  // name and description are fully typed
+  return c.json({ id: "123", name, description })
+})
+```
+
+## Client Configuration
+
+The API client is configured in `web/next/src/lib/api/client.ts`:
+
+```ts
+import type { AppType } from "@api/hono"
+import { hc } from "hono/client"
+import { config } from "@/lib/config"
+
+type Client = ReturnType<typeof hc<AppType>>
+const hcWithType = (...args: Parameters<typeof hc>): Client => hc<AppType>(...args)
+
+const url = config.api.internalUrl ? config.api.internalUrl : config.api.url
+
+const honoClient = hcWithType(url, {
+  init: {
+    credentials: "include", // Include cookies for auth
+  },
+})
+
+export const apiClient = honoClient.api
+```
+
+## Benefits
+
+- **Compile-time Type Checking**: Catch API errors before runtime
+- **Autocomplete**: Full IntelliSense support for routes, params, and responses
+- **Refactoring Safety**: Rename routes or change types with confidence
+- **No Code Generation**: Types are inferred directly from your backend code
