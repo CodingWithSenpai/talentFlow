@@ -1,9 +1,30 @@
 import type { Session } from "@packages/auth"
 
-import { zValidator } from "@hono/zod-validator"
 import { auth } from "@packages/auth"
 import { Hono } from "hono"
+import { describeRoute, resolver, validator as zValidator } from "hono-openapi"
 import { z } from "zod"
+
+const sessionSchema = z.object({
+  id: z.string().default("6kpGKXeJAKfB4MERWrfdyFdKd1ZB0Czo"),
+  userId: z.string().default("iO8PZYiiwR6e0o9XDtqyAmUemv1Pc8tc"),
+  token: z.string().default("Ds8MdODZSgu57rbR8hzapFlcv6IwoIgD"),
+  ipAddress: z.string().default("202.9.121.21").nullable(),
+  userAgent: z.string().default("Mozilla/5.0 Chrome/143.0.0.0 Safari/537.36").nullable(),
+  expiresAt: z.string().default("2026-01-28T13:06:25.712Z"),
+  createdAt: z.string().default("2026-01-21T13:06:25.712Z"),
+  updatedAt: z.string().default("2026-01-21T13:06:25.712Z"),
+})
+
+const userSchema = z.object({
+  id: z.string().default("iO8PZYiiwR6e0o9XDtqyAmUemv1Pc8tc"),
+  name: z.string().default("John Doe"),
+  email: z.string().default("user@example.com"),
+  emailVerified: z.boolean().default(true),
+  image: z.string().default("https://example.com/avatar.png").nullable(),
+  createdAt: z.string().default("2025-12-17T14:33:40.317Z"),
+  updatedAt: z.string().default("2025-12-17T14:33:40.317Z"),
+})
 
 const app = new Hono<{
   Variables: Session
@@ -12,11 +33,32 @@ const app = new Hono<{
 export const authRouter = app
   .get(
     "/get-session",
+    describeRoute({
+      tags: ["Authentication"],
+      summary: "Get session, user or both",
+      responses: {
+        200: {
+          description: "OK",
+          content: {
+            "application/json": {
+              schema: resolver(
+                z.union([
+                  z.object({ session: sessionSchema, user: userSchema }),
+                  z.object({ session: sessionSchema }),
+                  z.object({ user: userSchema }),
+                  z.null(),
+                ]),
+              ),
+            },
+          },
+        },
+      },
+    }),
     zValidator(
       "query",
       z
         .object({
-          select: z.string().optional(),
+          select: z.string().default("session,user").optional(),
         })
         .optional(),
     ),
