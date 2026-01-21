@@ -137,26 +137,20 @@ Alternative integration with [SendGrid](https://sendgrid.com) for email delivery
 
 ### Scalar
 
-**Status:** Planned  
+**Status:** ✅ Implemented  
 **Priority:** Medium
 
-**Concept:**
-Integration with [Scalar](https://scalar.com) for beautiful, interactive API documentation generated from OpenAPI/Swagger specs.
+Integration with [Scalar](https://scalar.com) for beautiful, interactive API documentation generated from OpenAPI specs.
 
-**Use Cases:**
+**Features:**
 
-- Auto-generated API documentation
-- Interactive API explorer
-- Code samples and examples
-- API versioning documentation
-- Developer onboarding
+- Auto-generated API documentation at `/api/docs`
+- OpenAPI spec available at `/api/openapi.json`
+- Interactive API explorer with request testing
+- Code samples for multiple languages (defaults to `hono/client`)
+- Full request/response schema documentation from Zod validators
 
-**Implementation Notes:**
-
-- Auto-generation from Hono routes
-- OpenAPI spec generation
-- Customizable themes
-- Integration with authentication for protected docs
+> **Available now:** See the [Type-Safe API documentation](/docs/getting-started/type-safe-api#api-documentation) for usage details.
 
 ---
 
@@ -432,7 +426,7 @@ Integration with [Dodo](https://dodopayments.com) for payment processing service
 
 1. **Vercel AI SDK** - Modern AI capabilities
 2. **Background Tasks** (Inngest/Trigger.dev) - Async processing
-3. **Scalar API Docs** - Developer experience
+3. ~~**Scalar API Docs**~~ - ✅ Implemented
 4. **next-intl** - Internationalization
 
 ### Phase 3 (Lower Priority)
@@ -441,7 +435,7 @@ Integration with [Dodo](https://dodopayments.com) for payment processing service
 2. **i18next** - Advanced i18n features
 3. **SendGrid** - Alternative email provider
 
-> **Note**: PostHog Analytics is already implemented. See the [Analytics documentation](/docs/manage/analytics) for setup instructions.
+> **Note**: PostHog Analytics and Scalar API Docs are already implemented. See the [Analytics documentation](/docs/manage/analytics) and [Type-Safe API documentation](/docs/getting-started/type-safe-api#api-documentation) for details.
 
 ---
 

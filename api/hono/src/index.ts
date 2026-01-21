@@ -133,7 +133,7 @@ const data = await response.json()`,
   .get(
     "/docs",
     Scalar({
-      pageTitle: "Zerostarter API",
+      pageTitle: "API Docs | ZeroStarter",
       url: "/api/openapi.json",
       defaultHttpClient: {
         targetKey: "js",

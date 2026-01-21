@@ -28,6 +28,7 @@ A modern, type-safe, and high-performance SaaS starter template built with a mon
 - **Data Fetching**: [TanStack Query](https://tanstack.com/query/latest)
 - **Validation**: [Zod](https://zod.dev)
 - **Bundling, Linting & Formatting**: [tsdown](https://tsdown.dev), [Oxlint](https://oxc.rs/docs/guide/usage/linter) and [Oxfmt](https://oxc.rs/docs/guide/usage/formatter)
+- **API Documentation**: [Scalar](https://scalar.com) with auto-generated OpenAPI spec at `/api/docs`
 - **Documentation**: [Fumadocs](https://fumadocs.dev) with auto-generated [llms.txt](https://zerostarter.dev/llms.txt)
 - **Automated Releases**: Automatically updated [Changelog](https://github.com/nrjdalal/zerostarter/releases) on release
 
@@ -78,6 +79,7 @@ This starter utilizes [Hono RPC](https://hono.dev/docs/guides/rpc) to provide en
 
 - **Backend**: Routes defined in `api/hono/src/routers` are exported as `AppType` at `api/hono/src/index.ts`.
 - **Frontend**: The client at `web/next/src/lib/api/client.ts` infers `AppType` request/response types using `hono/client`.
+- **API Docs**: Interactive API documentation available at `/api/docs` powered by [Scalar](https://scalar.com).
 
 ### Usage Example
 
