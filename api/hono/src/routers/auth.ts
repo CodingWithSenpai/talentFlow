@@ -58,8 +58,11 @@ const data = await response.json()`,
               schema: resolver(
                 z.union([
                   z.object({ session: sessionSchema, user: userSchema }),
+                  z.object({ session: sessionSchema }),
+                  z.object({ user: userSchema }),
                   sessionSchema,
                   userSchema,
+                  z.object({}),
                   z.null(),
                 ]),
               ),
