@@ -1,6 +1,8 @@
 import { isLocal } from "@packages/env"
 import { env } from "@packages/env/api-hono"
+import { Scalar } from "@scalar/hono-api-reference"
 import { Hono } from "hono"
+import { describeRoute, openAPIRouteHandler, resolver } from "hono-openapi"
 import { cors } from "hono/cors"
 import { logger } from "hono/logger"
 import { requestId } from "hono/request-id"
@@ -28,12 +30,36 @@ app.use(
 )
 
 const routes = app
-  .get("/health", (c) => {
-    return c.json({
-      message: "ok",
-      environment: env.NODE_ENV,
-    })
-  })
+  .get(
+    "/health",
+    describeRoute({
+      tags: ["System"],
+      summary: "Health",
+      responses: {
+        200: {
+          description: "OK",
+          content: {
+            "application/json": {
+              schema: resolver(
+                z.object({
+                  message: z.string().default("ok"),
+                  environment: z
+                    .enum(["local", "development", "test", "staging", "production"])
+                    .default(env.NODE_ENV),
+                }),
+              ),
+            },
+          },
+        },
+      },
+    }),
+    (c) => {
+      return c.json({
+        message: "ok",
+        environment: env.NODE_ENV,
+      })
+    },
+  )
   .route("/auth", authRouter)
   .route("/v1", v1Router)
   .notFound((c) => {
@@ -81,6 +107,26 @@ const routes = app
       500,
     )
   })
+  .get(
+    "/openapi.json",
+    openAPIRouteHandler(app, {
+      documentation: {
+        info: {
+          version: "0.0.1",
+          title: "ZeroStarter API",
+          description:
+            "A modern, type-safe, and high-performance SaaS starter template built with a monorepo architecture.",
+        },
+      },
+    }),
+  )
+  .get(
+    "/docs",
+    Scalar({
+      pageTitle: "Zerostarter API",
+      url: "/api/openapi.json",
+    }),
+  )
 
 export type AppType = typeof routes
 
