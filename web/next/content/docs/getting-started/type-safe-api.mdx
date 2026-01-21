@@ -123,9 +123,61 @@ const honoClient = hcWithType(url, {
 export const apiClient = honoClient.api
 ```
 
+## API Documentation
+
+ZeroStarter includes auto-generated API documentation powered by [Scalar](https://scalar.com) and OpenAPI.
+
+### Endpoints
+
+- **API Docs UI**: `/api/docs` - Interactive API documentation with Scalar
+- **OpenAPI Spec**: `/api/openapi.json` - Raw OpenAPI specification
+
+### Features
+
+The Scalar API documentation provides:
+
+- **Interactive Testing**: Try API endpoints directly from the browser
+- **Code Samples**: Auto-generated examples for multiple languages (defaults to `hono/client`)
+- **Request/Response Schemas**: Full type documentation from Zod validators
+- **Authentication**: Test authenticated endpoints with your session
+
+### Adding Route Documentation
+
+Use `describeRoute` from `hono-openapi` to add OpenAPI metadata to your routes:
+
+```ts
+import { describeRoute, resolver } from "hono-openapi"
+import { z } from "zod"
+
+app.get(
+  "/health",
+  describeRoute({
+    tags: ["System"],
+    summary: "Health Check",
+    responses: {
+      200: {
+        description: "OK",
+        content: {
+          "application/json": {
+            schema: resolver(
+              z.object({
+                message: z.string(),
+                environment: z.string(),
+              }),
+            ),
+          },
+        },
+      },
+    },
+  }),
+  (c) => c.json({ message: "ok", environment: "production" }),
+)
+```
+
 ## Benefits
 
 - **Compile-time Type Checking**: Catch API errors before runtime
 - **Autocomplete**: Full IntelliSense support for routes, params, and responses
 - **Refactoring Safety**: Rename routes or change types with confidence
 - **No Code Generation**: Types are inferred directly from your backend code
+- **Auto-Generated Docs**: OpenAPI documentation from your route definitions

@@ -41,6 +41,13 @@ type Tech = {
 
 export const techStack: Tech[] = [
   {
+    name: "Base UI",
+    icon: {
+      light: "/landing/base-ui-light.svg",
+      dark: "/landing/base-ui-dark.svg",
+    },
+  },
+  {
     name: "Better Auth",
     icon: {
       light: "/landing/better-auth-light.svg",
