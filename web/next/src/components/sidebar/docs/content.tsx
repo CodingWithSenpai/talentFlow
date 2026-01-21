@@ -41,7 +41,7 @@ export function SidebarDocsContent() {
       {config.sidebar.groups.map((group) => (
         <SidebarGroup key={group.label}>
           <SidebarGroupLabel className="pl-2.5">{group.label}</SidebarGroupLabel>
-          <SidebarMenu className="space-y-0.5">
+          <SidebarMenu className={"categories" in group ? "space-y-0" : "space-y-0.5"}>
             {"items" in group &&
               group.items.map((item) => {
                 const isActive = pathname === item.url || pathname === item.url + "/"
