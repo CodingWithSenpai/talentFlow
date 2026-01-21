@@ -35,6 +35,16 @@ const routes = app
     describeRoute({
       tags: ["System"],
       summary: "Health",
+      ...({
+        "x-codeSamples": [
+          {
+            lang: "typescript",
+            label: "hono/client",
+            source: `const response = await apiClient.health.$get()
+const data = await response.json()`,
+          },
+        ],
+      } as object),
       responses: {
         200: {
           description: "OK",
@@ -125,6 +135,11 @@ const routes = app
     Scalar({
       pageTitle: "Zerostarter API",
       url: "/api/openapi.json",
+      defaultHttpClient: {
+        targetKey: "js",
+        clientKey: "hono/client",
+      },
+      defaultOpenAllTags: true,
     }),
   )
 

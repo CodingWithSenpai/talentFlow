@@ -39,6 +39,16 @@ export const v1Router = app
     describeRoute({
       tags: ["v1"],
       summary: "Get session only",
+      ...({
+        "x-codeSamples": [
+          {
+            lang: "typescript",
+            label: "hono/client",
+            source: `const response = await apiClient.v1.session.$get()
+const data = await response.json()`,
+          },
+        ],
+      } as object),
       responses: {
         200: {
           description: "OK",
@@ -63,6 +73,16 @@ export const v1Router = app
     describeRoute({
       tags: ["v1"],
       summary: "Get user only",
+      ...({
+        "x-codeSamples": [
+          {
+            lang: "typescript",
+            label: "hono/client",
+            source: `const response = await apiClient.v1.user.$get()
+const data = await response.json()`,
+          },
+        ],
+      } as object),
       responses: {
         200: {
           description: "OK",
