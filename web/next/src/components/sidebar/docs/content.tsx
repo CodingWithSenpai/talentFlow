@@ -40,7 +40,7 @@ export function SidebarDocsContent() {
       {config.sidebar.groups.map((group) => (
         <SidebarGroup key={group.label}>
           <SidebarGroupLabel className="pl-2.5">{group.label}</SidebarGroupLabel>
-          <SidebarMenu>
+          <SidebarMenu className="space-y-0.5">
             {"items" in group &&
               group.items.map((item) => {
                 const isActive = pathname === item.url || pathname === item.url + "/"
@@ -49,6 +49,7 @@ export function SidebarDocsContent() {
                   <SidebarMenuItem key={item.url}>
                     <SidebarMenuButton
                       isActive={isActive}
+                      className="data-active:font-normal"
                       render={
                         <Link
                           href={item.url}
@@ -67,12 +68,11 @@ export function SidebarDocsContent() {
               })}
             {"categories" in group &&
               Object.entries(group.categories).map(([category, items]) => {
-                const isOpen = isCategoryActive(items)
-
+                const isActive = isCategoryActive(items)
                 return (
                   <Collapsible
-                    key={category}
-                    defaultOpen={isOpen}
+                    key={`${category}-${isActive}`}
+                    defaultOpen={isActive}
                     className="group"
                     render={<SidebarMenuItem />}
                   >
@@ -81,7 +81,7 @@ export function SidebarDocsContent() {
                       <span>{category}</span>
                     </CollapsibleTrigger>
                     <CollapsibleContent>
-                      <SidebarMenuSub>
+                      <SidebarMenuSub className="mr-0 gap-y-0.5 pr-0 pl-2">
                         {items.map((item) => {
                           const isActive = isItemActive(item.url)
                           return (
