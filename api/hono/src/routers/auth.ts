@@ -36,6 +36,20 @@ export const authRouter = app
     describeRoute({
       tags: ["Authentication"],
       summary: "Get session, user or both",
+      ...({
+        "x-codeSamples": [
+          {
+            lang: "typescript",
+            label: "hono/client",
+            source: `const response = await apiClient.auth["get-session"].$get({
+  query: {
+    select: "session,user",
+  },
+})
+const data = await response.json()`,
+          },
+        ],
+      } as object),
       responses: {
         200: {
           description: "OK",
@@ -44,8 +58,8 @@ export const authRouter = app
               schema: resolver(
                 z.union([
                   z.object({ session: sessionSchema, user: userSchema }),
-                  z.object({ session: sessionSchema }),
-                  z.object({ user: userSchema }),
+                  sessionSchema,
+                  userSchema,
                   z.null(),
                 ]),
               ),
