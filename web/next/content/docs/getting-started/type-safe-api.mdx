@@ -40,18 +40,15 @@ const session = await res.json()
 // session is typed as Session | { message: "Unauthorized" }
 ```
 
-### Query Parameters
+### Session Data
 
 ```ts
 import { apiClient } from "@/lib/api/client"
 
-// With query parameters (type-safe)
-const res = await apiClient.auth["get-session"].$get({
-  query: {
-    select: "user",
-  },
-})
-const user = await res.json()
+// Get current session and user
+const res = await apiClient.auth["get-session"].$get()
+const data = await res.json()
+// data is typed as { session: Session, user: User } | null
 ```
 
 ## Backend Routes
