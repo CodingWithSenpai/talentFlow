@@ -38,7 +38,7 @@ export const v1Router = app
     "/session",
     describeRoute({
       tags: ["v1"],
-      summary: "Get session only",
+      summary: "Get current session only",
       ...({
         "x-codeSamples": [
           {
@@ -60,6 +60,15 @@ const data = await response.json()`,
         },
         401: {
           description: "Unauthorized",
+          content: {
+            "application/json": {
+              schema: resolver(
+                z.object({
+                  message: z.string().default("Unauthorized"),
+                }),
+              ),
+            },
+          },
         },
       },
     }),
@@ -72,7 +81,7 @@ const data = await response.json()`,
     "/user",
     describeRoute({
       tags: ["v1"],
-      summary: "Get user only",
+      summary: "Get current user only",
       ...({
         "x-codeSamples": [
           {
@@ -94,6 +103,15 @@ const data = await response.json()`,
         },
         401: {
           description: "Unauthorized",
+          content: {
+            "application/json": {
+              schema: resolver(
+                z.object({
+                  message: z.string().default("Unauthorized"),
+                }),
+              ),
+            },
+          },
         },
       },
     }),
