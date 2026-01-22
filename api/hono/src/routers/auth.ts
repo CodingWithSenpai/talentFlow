@@ -2,7 +2,7 @@ import type { Session } from "@packages/auth"
 
 import { auth } from "@packages/auth"
 import { Hono } from "hono"
-import { describeRoute, resolver, validator as zValidator } from "hono-openapi"
+import { describeRoute, resolver } from "hono-openapi"
 import { z } from "zod"
 
 const sessionSchema = z.object({
@@ -35,17 +35,13 @@ export const authRouter = app
     "/get-session",
     describeRoute({
       tags: ["Authentication"],
-      summary: "Get session, user or both",
+      summary: "Get current session and user",
       ...({
         "x-codeSamples": [
           {
             lang: "typescript",
             label: "hono/client",
-            source: `const response = await apiClient.auth["get-session"].$get({
-  query: {
-    select: "session,user",
-  },
-})
+            source: `const response = await apiClient.auth["get-session"].$get()
 const data = await response.json()`,
           },
         ],
@@ -55,60 +51,18 @@ const data = await response.json()`,
           description: "OK",
           content: {
             "application/json": {
-              schema: resolver(
-                z.union([
-                  z.object({ session: sessionSchema, user: userSchema }),
-                  z.object({ session: sessionSchema }),
-                  z.object({ user: userSchema }),
-                  sessionSchema,
-                  userSchema,
-                  z.object({}),
-                  z.null(),
-                ]),
-              ),
+              schema: resolver(z.object({ session: sessionSchema, user: userSchema }).nullable()),
             },
           },
         },
       },
     }),
-    zValidator(
-      "query",
-      z
-        .object({
-          select: z.string().default("session,user").optional(),
-        })
-        .optional(),
-    ),
     async (c) => {
       const session = await auth.api.getSession({
         headers: c.req.raw.headers,
       })
 
-      if (!session) return c.json(null)
-
-      const { select } = c.req.valid("query") ?? {}
-
-      if (!select) return c.json(session)
-
-      const selections = select
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean)
-
-      if (selections.length === 1) {
-        const key = selections[0]
-        if (key === "session") return c.json(session.session)
-        if (key === "user") return c.json(session.user)
-      }
-
-      const result: Partial<typeof session> = {}
-
-      for (const key of selections) {
-        if (key === "session") result.session = session.session
-        if (key === "user") result.user = session.user
-      }
-
-      return c.json(result)
+      return c.json(session)
     },
   )
   .on(["GET", "POST"], "/*", (c) => auth.handler(c.req.raw))

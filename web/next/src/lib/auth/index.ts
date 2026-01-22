@@ -7,12 +7,9 @@ import { apiClient } from "@/lib/api/client"
 export const auth = {
   api: {
     getSession: async () => {
-      const response = await apiClient.auth["get-session"].$get(
-        {},
-        {
-          headers: Object.fromEntries((await headers()).entries()),
-        },
-      )
+      const response = await apiClient.auth["get-session"].$get(undefined, {
+        headers: Object.fromEntries((await headers()).entries()),
+      })
       return response.json() as Promise<Session | null>
     },
   },
