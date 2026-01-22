@@ -38,7 +38,7 @@ export const v1Router = app
     "/session",
     describeRoute({
       tags: ["v1"],
-      summary: "Get current session only",
+      description: "Get current session only",
       ...({
         "x-codeSamples": [
           {
@@ -81,7 +81,7 @@ const data = await response.json()`,
     "/user",
     describeRoute({
       tags: ["v1"],
-      summary: "Get current user only",
+      description: "Get current user only",
       ...({
         "x-codeSamples": [
           {

@@ -34,7 +34,7 @@ const routes = app
     "/health",
     describeRoute({
       tags: ["System"],
-      summary: "Health",
+      description: "Get the system health",
       ...({
         "x-codeSamples": [
           {
@@ -123,9 +123,9 @@ const data = await response.json()`,
       documentation: {
         info: {
           version: "0.0.1",
-          title: "ZeroStarter API",
-          description:
-            "A modern, type-safe, and high-performance SaaS starter template built with a monorepo architecture.",
+          title: "ZeroStarter",
+          description: `API Reference for your ZeroStarter Instance.
+- Better Auth Instance - ${env.HONO_APP_URL}/api/auth/reference`,
         },
       },
     }),
@@ -133,7 +133,7 @@ const data = await response.json()`,
   .get(
     "/docs",
     Scalar({
-      pageTitle: "API Docs | ZeroStarter",
+      pageTitle: "API Reference | ZeroStarter",
       url: "/api/openapi.json",
       defaultHttpClient: {
         targetKey: "js",
