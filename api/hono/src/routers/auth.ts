@@ -41,8 +41,7 @@ export const authRouter = app
           {
             lang: "typescript",
             label: "hono/client",
-            source: `const response = await apiClient.auth["get-session"].$get()
-const data = await response.json()`,
+            source: `const session = await auth.api.getSession()`,
           },
         ],
       } as object),

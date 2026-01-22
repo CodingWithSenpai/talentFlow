@@ -60,6 +60,15 @@ const data = await response.json()`,
         },
         401: {
           description: "Unauthorized",
+          content: {
+            "application/json": {
+              schema: resolver(
+                z.object({
+                  message: z.string().default("Unauthorized"),
+                }),
+              ),
+            },
+          },
         },
       },
     }),
@@ -94,6 +103,15 @@ const data = await response.json()`,
         },
         401: {
           description: "Unauthorized",
+          content: {
+            "application/json": {
+              schema: resolver(
+                z.object({
+                  message: z.string().default("Unauthorized"),
+                }),
+              ),
+            },
+          },
         },
       },
     }),
