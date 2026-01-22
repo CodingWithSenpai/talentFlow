@@ -81,7 +81,7 @@ const data = await response.json()`,
     "/user",
     describeRoute({
       tags: ["v1"],
-      summary: "Get currentuser only",
+      summary: "Get current user only",
       ...({
         "x-codeSamples": [
           {
