@@ -37,7 +37,7 @@ import { apiClient } from "@/lib/api/client"
 // Protected route - requires authentication
 const res = await apiClient.v1.session.$get()
 const session = await res.json()
-// session is typed as Session | { message: "Unauthorized" }
+// session is typed as Session | { error: { code: string, message: string } }
 ```
 
 ### Session Data

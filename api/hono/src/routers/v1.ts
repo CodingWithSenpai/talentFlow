@@ -64,7 +64,10 @@ const data = await response.json()`,
             "application/json": {
               schema: resolver(
                 z.object({
-                  message: z.string().default("Unauthorized"),
+                  error: z.object({
+                    code: z.string().default("AUTHORIZATION_ERROR"),
+                    message: z.string().default("Unauthorized"),
+                  }),
                 }),
               ),
             },
@@ -107,7 +110,10 @@ const data = await response.json()`,
             "application/json": {
               schema: resolver(
                 z.object({
-                  message: z.string().default("Unauthorized"),
+                  error: z.object({
+                    code: z.string().default("AUTHORIZATION_ERROR"),
+                    message: z.string().default("Unauthorized"),
+                  }),
                 }),
               ),
             },
