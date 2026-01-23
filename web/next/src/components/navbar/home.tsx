@@ -1,6 +1,7 @@
 "use client"
 
 import {
+  RiArrowRightUpLine,
   RiDiscordFill,
   RiGithubFill,
   RiLoaderLine,
@@ -41,7 +42,7 @@ const socialLinks = [
 
 function SocialLinks({ onClick }: { onClick?: () => void }) {
   return (
-    <div className="flex items-center gap-5 md:gap-3">
+    <div className="flex items-center gap-5 lg:gap-3">
       {socialLinks.map((link) => (
         <Tooltip key={link.href}>
           <TooltipTrigger
@@ -76,6 +77,7 @@ export function Navbar() {
 
   const navLinks = [
     { href: "/docs", label: "Documentation" },
+    { href: "/api/docs", label: "API Docs", external: true },
     { href: "/blog", label: "Blog" },
     { href: "/hire", label: "Hire" },
   ]
@@ -91,9 +93,23 @@ export function Navbar() {
         </Link>
         <div className="flex items-center gap-2.5">
           {/* Desktop Navigation */}
-          <nav className="mx-5 hidden items-center gap-7.5 md:flex">
+          <nav className="mx-5 hidden items-center gap-7.5 lg:flex">
             {navLinks.map((link) => {
-              const isActive = pathname?.startsWith(link.href)
+              const isActive = !link.external && pathname?.startsWith(link.href)
+              if (link.external) {
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-foreground/60 hover:text-foreground/80 font-medium transition-colors"
+                  >
+                    {link.label}
+                    <RiArrowRightUpLine className="-mt-3 inline size-3.5" />
+                  </a>
+                )
+              }
               return (
                 <Link
                   key={link.href}
@@ -110,14 +126,13 @@ export function Navbar() {
           </nav>
 
           {/* Social Links */}
-          <div className="mr-5 hidden items-center gap-2.5 md:flex">
+          <div className="mr-5 hidden items-center gap-2.5 lg:flex">
             <SocialLinks />
           </div>
 
           {session?.user ? (
             <Button
               className="w-24 cursor-pointer"
-              size="sm"
               variant="outline"
               onClick={() => setToDashboard(true)}
               render={<Link href="/dashboard" />}
@@ -128,7 +143,7 @@ export function Navbar() {
             <Access />
           )}
 
-          <div className="md:-mr-2.5">
+          <div className="lg:-mr-2.5">
             <ModeToggle />
           </div>
 
@@ -137,7 +152,7 @@ export function Navbar() {
             <SheetTrigger
               render={
                 <Button
-                  className="-mr-2.5 size-8 cursor-pointer md:hidden [&_svg]:size-4!"
+                  className="-mr-2.5 size-8 cursor-pointer lg:hidden [&_svg]:size-4!"
                   aria-label="Open menu"
                   size="sm"
                   variant="outline"
@@ -165,7 +180,22 @@ export function Navbar() {
               </SheetHeader>
               <nav className="ml-4 flex flex-col gap-5">
                 {navLinks.map((link) => {
-                  const isActive = pathname?.startsWith(link.href)
+                  const isActive = !link.external && pathname?.startsWith(link.href)
+                  if (link.external) {
+                    return (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-foreground/60 hover:text-foreground/80 font-medium transition-colors"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {link.label}
+                        <RiArrowRightUpLine className="-mt-3 inline size-3.5" />
+                      </a>
+                    )
+                  }
                   return (
                     <Link
                       key={link.href}
