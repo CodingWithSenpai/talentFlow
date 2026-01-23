@@ -54,9 +54,7 @@ export function Access() {
 
   return (
     <Dialog>
-      <DialogTrigger
-        render={<Button className="w-24 cursor-pointer" size="sm" variant="outline" />}
-      >
+      <DialogTrigger render={<Button className="w-24 cursor-pointer" variant="outline" />}>
         Login
       </DialogTrigger>
       <DialogContent className="max-w-md sm:max-w-md" initialFocus={false}>
