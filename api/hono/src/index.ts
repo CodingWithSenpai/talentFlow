@@ -57,10 +57,10 @@ const data = await response.json()`,
               schema: resolver(
                 z.object({
                   message: z.string().meta({ example: "ok" }),
-                  version: z.string().meta({ example: pkg.version }),
                   environment: z
                     .enum(["local", "development", "test", "staging", "production"])
                     .meta({ example: env.NODE_ENV }),
+                  version: z.string().meta({ example: pkg.version }),
                 }),
               ),
             },

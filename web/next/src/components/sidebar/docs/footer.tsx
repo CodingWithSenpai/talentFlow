@@ -7,9 +7,9 @@ import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui
 import { config } from "@/lib/config"
 
 export function SidebarDocsFooter() {
-  return (
-    <SidebarMenu>
-      {env.NEXT_PUBLIC_USERJOT_URL && (
+  if (env.NEXT_PUBLIC_USERJOT_URL) {
+    return (
+      <SidebarMenu>
         <SidebarMenuItem>
           <SidebarMenuButton
             render={
@@ -17,9 +17,15 @@ export function SidebarDocsFooter() {
             }
           >
             <span>Feedback</span>
+            <span className="text-muted-foreground ml-auto text-xs">v{config.app.version}</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
-      )}
+      </SidebarMenu>
+    )
+  }
+
+  return (
+    <SidebarMenu>
       <SidebarMenuItem>
         <div className="text-muted-foreground px-2 py-1.5 text-xs">v{config.app.version}</div>
       </SidebarMenuItem>
