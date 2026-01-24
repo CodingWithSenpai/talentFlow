@@ -6,16 +6,11 @@ import { apiClient } from "@/lib/api/client"
 
 export const auth = {
   api: {
-    getSession: async (): Promise<Session | null> => {
+    getSession: async () => {
       const response = await apiClient.auth["get-session"].$get(undefined, {
         headers: Object.fromEntries((await headers()).entries()),
       })
-
-      if (!response.ok) {
-        return null
-      }
-
-      return response.json() as unknown as Session
+      return response.json() as Promise<Session | null>
     },
   },
 }
