@@ -23,6 +23,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { signOut } from "@/lib/auth/client"
+import { config } from "@/lib/config"
 import { cn } from "@/lib/utils"
 
 export function SidebarDashboardFooter({ user }: { user: User }) {
@@ -34,6 +35,7 @@ export function SidebarDashboardFooter({ user }: { user: User }) {
         <SidebarMenuButton render={<Link href="/docs" />}>
           <RiBookLine />
           <span>Documentation</span>
+          <span className="text-muted-foreground ml-auto text-xs">v{config.app.version}</span>
         </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>

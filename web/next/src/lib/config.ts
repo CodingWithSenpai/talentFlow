@@ -1,5 +1,7 @@
 import { env } from "@packages/env/web-next"
 
+import pkg from "../../../../package.json"
+
 // Server-only env vars
 const getInternalApiUrl = () => {
   if (typeof window === "undefined") {
@@ -16,6 +18,7 @@ export const config = {
       "A modern, type-safe, and high-performance SaaS starter template built with a monorepo architecture.",
     tagline: "The SaaS Starter",
     url: env.NEXT_PUBLIC_APP_URL,
+    version: pkg.version,
   },
 
   // API configuration
