@@ -40,7 +40,9 @@ const routes = app
           {
             lang: "typescript",
             label: "hono/client",
-            source: `const response = await apiClient.health.$get()
+            source: `import { apiClient } from "@/lib/api/client"
+
+const response = await apiClient.health.$get()
 const data = await response.json()`,
           },
         ],
@@ -52,10 +54,10 @@ const data = await response.json()`,
             "application/json": {
               schema: resolver(
                 z.object({
-                  message: z.string().default("ok"),
+                  message: z.string().meta({ example: "ok" }),
                   environment: z
                     .enum(["local", "development", "test", "staging", "production"])
-                    .default(env.NODE_ENV),
+                    .meta({ example: env.NODE_ENV }),
                 }),
               ),
             },
@@ -125,6 +127,7 @@ const data = await response.json()`,
           version: "0.0.1",
           title: "ZeroStarter",
           description: `API Reference for your ZeroStarter Instance.
+- [hono/client](https://hono.dev/docs/guides/rpc#client) - Type-safe API client for frontend
 - Better Auth Instance - ${env.HONO_APP_URL}/api/auth/reference`,
         },
       },
