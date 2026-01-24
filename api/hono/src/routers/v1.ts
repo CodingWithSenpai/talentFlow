@@ -7,23 +7,23 @@ import { z } from "zod"
 import { authMiddleware } from "@/middlewares"
 
 const sessionSchema = z.object({
-  id: z.string().meta({ example: "6kpGKXeJAKfB4MERWrfdyFdKd1ZB0Czo" }),
-  userId: z.string().meta({ example: "iO8PZYiiwR6e0o9XDtqyAmUemv1Pc8tc" }),
-  token: z.string().meta({ example: "Ds8MdODZSgu57rbR8hzapFlcv6IwoIgD" }),
-  ipAddress: z.string().meta({ example: "202.9.121.21" }).nullable(),
-  userAgent: z.string().meta({ example: "Mozilla/5.0 Chrome/143.0.0.0 Safari/537.36" }).nullable(),
-  expiresAt: z.string().meta({ format: "date-time", example: "2026-01-28T13:06:25.712Z" }),
   createdAt: z.string().meta({ format: "date-time", example: "2026-01-21T13:06:25.712Z" }),
+  expiresAt: z.string().meta({ format: "date-time", example: "2026-01-28T13:06:25.712Z" }),
+  id: z.string().meta({ example: "6kpGKXeJAKfB4MERWrfdyFdKd1ZB0Czo" }),
+  ipAddress: z.string().nullable().meta({ example: "202.9.121.21" }),
+  token: z.string().meta({ example: "Ds8MdODZSgu57rbR8hzapFlcv6IwoIgD" }),
   updatedAt: z.string().meta({ format: "date-time", example: "2026-01-21T13:06:25.712Z" }),
+  userAgent: z.string().nullable().meta({ example: "Mozilla/5.0 Chrome/143.0.0.0 Safari/537.36" }),
+  userId: z.string().meta({ example: "iO8PZYiiwR6e0o9XDtqyAmUemv1Pc8tc" }),
 })
 
 const userSchema = z.object({
-  id: z.string().meta({ example: "iO8PZYiiwR6e0o9XDtqyAmUemv1Pc8tc" }),
-  name: z.string().meta({ example: "John Doe" }),
+  createdAt: z.string().meta({ format: "date-time", example: "2025-12-17T14:33:40.317Z" }),
   email: z.string().meta({ example: "user@example.com" }),
   emailVerified: z.boolean().meta({ example: true }),
-  image: z.string().meta({ example: "https://example.com/avatar.png" }).nullable(),
-  createdAt: z.string().meta({ format: "date-time", example: "2025-12-17T14:33:40.317Z" }),
+  id: z.string().meta({ example: "iO8PZYiiwR6e0o9XDtqyAmUemv1Pc8tc" }),
+  image: z.string().nullable().meta({ example: "https://example.com/avatar.png" }),
+  name: z.string().meta({ example: "John Doe" }),
   updatedAt: z.string().meta({ format: "date-time", example: "2025-12-17T14:33:40.317Z" }),
 })
 
