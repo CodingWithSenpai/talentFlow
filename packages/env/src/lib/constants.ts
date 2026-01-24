@@ -1,5 +1,14 @@
 import { z } from "zod"
 
+// Version info - injected at build time via tsdown define
+declare const __VERSION__: string
+declare const __GIT_SHA__: string
+declare const __BUILD_VERSION__: string
+
+export const VERSION = __VERSION__
+export const GIT_SHA = __GIT_SHA__
+export const BUILD_VERSION = __BUILD_VERSION__
+
 export const NODE_ENV = z.enum(["local", "development", "test", "staging", "production"])
 
 export type NodeEnv = z.infer<typeof NODE_ENV>
