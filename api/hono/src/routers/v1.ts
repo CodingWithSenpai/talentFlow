@@ -7,24 +7,24 @@ import { z } from "zod"
 import { authMiddleware } from "@/middlewares"
 
 const sessionSchema = z.object({
-  id: z.string().default("6kpGKXeJAKfB4MERWrfdyFdKd1ZB0Czo"),
-  userId: z.string().default("iO8PZYiiwR6e0o9XDtqyAmUemv1Pc8tc"),
-  token: z.string().default("Ds8MdODZSgu57rbR8hzapFlcv6IwoIgD"),
-  ipAddress: z.string().default("202.9.121.21").nullable(),
-  userAgent: z.string().default("Mozilla/5.0 Chrome/143.0.0.0 Safari/537.36").nullable(),
-  expiresAt: z.string().default("2026-01-28T13:06:25.712Z"),
-  createdAt: z.string().default("2026-01-21T13:06:25.712Z"),
-  updatedAt: z.string().default("2026-01-21T13:06:25.712Z"),
+  id: z.string().meta({ example: "6kpGKXeJAKfB4MERWrfdyFdKd1ZB0Czo" }),
+  userId: z.string().meta({ example: "iO8PZYiiwR6e0o9XDtqyAmUemv1Pc8tc" }),
+  token: z.string().meta({ example: "Ds8MdODZSgu57rbR8hzapFlcv6IwoIgD" }),
+  ipAddress: z.string().meta({ example: "202.9.121.21" }).nullable(),
+  userAgent: z.string().meta({ example: "Mozilla/5.0 Chrome/143.0.0.0 Safari/537.36" }).nullable(),
+  expiresAt: z.string().meta({ format: "date-time", example: "2026-01-28T13:06:25.712Z" }),
+  createdAt: z.string().meta({ format: "date-time", example: "2026-01-21T13:06:25.712Z" }),
+  updatedAt: z.string().meta({ format: "date-time", example: "2026-01-21T13:06:25.712Z" }),
 })
 
 const userSchema = z.object({
-  id: z.string().default("iO8PZYiiwR6e0o9XDtqyAmUemv1Pc8tc"),
-  name: z.string().default("John Doe"),
-  email: z.string().default("user@example.com"),
-  emailVerified: z.boolean().default(true),
-  image: z.string().default("https://example.com/avatar.png").nullable(),
-  createdAt: z.string().default("2025-12-17T14:33:40.317Z"),
-  updatedAt: z.string().default("2025-12-17T14:33:40.317Z"),
+  id: z.string().meta({ example: "iO8PZYiiwR6e0o9XDtqyAmUemv1Pc8tc" }),
+  name: z.string().meta({ example: "John Doe" }),
+  email: z.string().meta({ example: "user@example.com" }),
+  emailVerified: z.boolean().meta({ example: true }),
+  image: z.string().meta({ example: "https://example.com/avatar.png" }).nullable(),
+  createdAt: z.string().meta({ format: "date-time", example: "2025-12-17T14:33:40.317Z" }),
+  updatedAt: z.string().meta({ format: "date-time", example: "2025-12-17T14:33:40.317Z" }),
 })
 
 const app = new Hono<{
@@ -44,7 +44,9 @@ export const v1Router = app
           {
             lang: "typescript",
             label: "hono/client",
-            source: `const response = await apiClient.v1.session.$get()
+            source: `import { apiClient } from "@/lib/api/client"
+
+const response = await apiClient.v1.session.$get()
 const data = await response.json()`,
           },
         ],
@@ -64,7 +66,10 @@ const data = await response.json()`,
             "application/json": {
               schema: resolver(
                 z.object({
-                  message: z.string().default("Unauthorized"),
+                  error: z.object({
+                    code: z.string().meta({ example: "AUTHORIZATION_ERROR" }),
+                    message: z.string().meta({ example: "Unauthorized" }),
+                  }),
                 }),
               ),
             },
@@ -87,7 +92,9 @@ const data = await response.json()`,
           {
             lang: "typescript",
             label: "hono/client",
-            source: `const response = await apiClient.v1.user.$get()
+            source: `import { apiClient } from "@/lib/api/client"
+
+const response = await apiClient.v1.user.$get()
 const data = await response.json()`,
           },
         ],
@@ -107,7 +114,10 @@ const data = await response.json()`,
             "application/json": {
               schema: resolver(
                 z.object({
-                  message: z.string().default("Unauthorized"),
+                  error: z.object({
+                    code: z.string().meta({ example: "AUTHORIZATION_ERROR" }),
+                    message: z.string().meta({ example: "Unauthorized" }),
+                  }),
                 }),
               ),
             },
