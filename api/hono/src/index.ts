@@ -1,4 +1,4 @@
-import { isLocal } from "@packages/env"
+import { BUILD_VERSION, isLocal } from "@packages/env"
 import { env } from "@packages/env/api-hono"
 import { Scalar } from "@scalar/hono-api-reference"
 import { Hono } from "hono"
@@ -10,8 +10,6 @@ import { z } from "zod"
 
 import { metadataMiddleware } from "@/middlewares"
 import { authRouter, v1Router } from "@/routers"
-
-import pkg from "../../../package.json"
 
 const app = new Hono().basePath("/api")
 
@@ -60,7 +58,7 @@ const data = await response.json()`,
                   environment: z
                     .enum(["local", "development", "test", "staging", "production"])
                     .meta({ example: env.NODE_ENV }),
-                  version: z.string().meta({ example: pkg.version }),
+                  version: z.string().meta({ example: BUILD_VERSION }),
                 }),
               ),
             },
@@ -71,7 +69,7 @@ const data = await response.json()`,
     (c) => {
       return c.json({
         message: "ok",
-        version: pkg.version,
+        version: BUILD_VERSION,
         environment: env.NODE_ENV,
       })
     },
@@ -128,7 +126,7 @@ const data = await response.json()`,
     openAPIRouteHandler(app, {
       documentation: {
         info: {
-          version: pkg.version,
+          version: BUILD_VERSION,
           title: "ZeroStarter",
           description: `API Reference for your ZeroStarter Instance.
 - [hono/client](https://hono.dev/docs/guides/rpc#client) - Type-safe API client for frontend
