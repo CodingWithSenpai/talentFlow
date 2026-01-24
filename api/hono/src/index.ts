@@ -129,8 +129,9 @@ const data = await response.json()`,
           version: BUILD_VERSION,
           title: "ZeroStarter",
           description: `API Reference for your ZeroStarter Instance.
-- [hono/client](https://hono.dev/docs/guides/rpc#client) - Type-safe API client for frontend
-- Better Auth Instance - ${env.HONO_APP_URL}/api/auth/reference`,
+- [Dashboard](/dashboard) - Client-side dashboard application
+- [Better Auth Instance](/api/auth/reference) - Better Auth API reference
+- [hono/client](/docs/getting-started/type-safe-api) - Type-safe API client for frontend`,
         },
       },
     }),
