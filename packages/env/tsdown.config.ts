@@ -7,13 +7,13 @@ const getGitSha = () => {
   try {
     return execSync("git rev-parse --short HEAD", { encoding: "utf-8" }).trim()
   } catch {
-    return "unknown"
+    return ""
   }
 }
 
-const VERSION = pkg.version
+const VERSION = pkg.version as string
 const GIT_SHA = getGitSha()
-const BUILD_VERSION = `${VERSION}-${GIT_SHA}`
+const BUILD_VERSION = GIT_SHA ? `${VERSION}-${GIT_SHA}` : VERSION
 
 const entries = [
   "src/index.ts",
