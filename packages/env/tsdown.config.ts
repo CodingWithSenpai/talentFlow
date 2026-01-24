@@ -1,11 +1,7 @@
 import { execSync } from "node:child_process"
-import { readFileSync } from "node:fs"
-import { dirname, resolve } from "node:path"
-import { fileURLToPath } from "node:url"
 import { defineConfig } from "tsdown"
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
-const pkg = JSON.parse(readFileSync(resolve(__dirname, "../../package.json"), "utf-8"))
+import pkg from "../../package.json" with { type: "json" }
 
 const getGitSha = () => {
   try {
