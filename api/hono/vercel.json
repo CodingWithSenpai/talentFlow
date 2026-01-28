@@ -5,5 +5,5 @@
   "buildCommand": "cd ../.. && turbo build --filter=@api/hono",
   "outputDirectory": "dist",
   "relatedProjects": ["prj_uMeWSgdGT1Rw5moCBrqHcgZycjeK"],
-  "bunVersion": "1.3.6"
+  "bunVersion": "1.3.7"
 }
