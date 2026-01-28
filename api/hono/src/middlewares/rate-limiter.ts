@@ -2,6 +2,7 @@ import { findIp } from "@arcjet/ip"
 import { rateLimiter } from "hono-rate-limiter"
 
 export const rateLimiterMiddleware = rateLimiter({
+  // TODO: add redis or some memory store to store the rate limit data
   limit: 1,
   windowMs: 1000 * 60 * 1,
   keyGenerator: (c) => {
