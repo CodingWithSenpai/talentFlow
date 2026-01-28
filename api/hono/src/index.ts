@@ -1,4 +1,3 @@
-import { findIp } from "@arcjet/ip"
 import { BUILD_VERSION, isLocal } from "@packages/env"
 import { env } from "@packages/env/api-hono"
 import { Scalar } from "@scalar/hono-api-reference"
@@ -72,8 +71,6 @@ const data = await response.json()`,
         message: "ok",
         version: BUILD_VERSION,
         environment: env.NODE_ENV,
-        // TODO: remove this after testing
-        fingerprint: `${findIp(c.req.raw)}:${c.req.header("user-agent")?.replaceAll(" ", "_")}`,
       })
     },
   )
