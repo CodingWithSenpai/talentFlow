@@ -79,7 +79,7 @@
     "@types/node": "^25.0.10",
     "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3",
-    "@typescript/native-preview": "^7.0.0-dev.20260127.1",
+    "@typescript/native-preview": "^7.0.0-dev.20260128.1",
     "babel-plugin-react-compiler": "^1.0.0",
     "better-auth": "^1.4.17",
     "class-variance-authority": "^0.7.1",
