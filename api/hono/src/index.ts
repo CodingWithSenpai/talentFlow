@@ -4,13 +4,12 @@ import { env } from "@packages/env/api-hono"
 import { Scalar } from "@scalar/hono-api-reference"
 import { Hono } from "hono"
 import { describeRoute, openAPIRouteHandler, resolver } from "hono-openapi"
-import { rateLimiter } from "hono-rate-limiter"
 import { cors } from "hono/cors"
 import { logger } from "hono/logger"
 import { requestId } from "hono/request-id"
 import { z } from "zod"
 
-import { metadataMiddleware } from "@/middlewares"
+import { metadataMiddleware, rateLimiterMiddleware } from "@/middlewares"
 import { authRouter, v1Router } from "@/routers"
 
 const app = new Hono().basePath("/api")
@@ -27,15 +26,7 @@ app.use(
   }),
   metadataMiddleware,
   logger(),
-  rateLimiter({
-    limit: 60,
-    windowMs: 1000 * 60 * 1,
-    keyGenerator: (c) => {
-      const clientIp = findIp(c.req.raw)
-      const userAgent = c.req.header("user-agent")
-      return `${clientIp}:${userAgent}`
-    },
-  }),
+  rateLimiterMiddleware,
   requestId(),
 )
 
