@@ -3,6 +3,7 @@ import { env } from "@packages/env/api-hono"
 import { Scalar } from "@scalar/hono-api-reference"
 import { Hono } from "hono"
 import { describeRoute, openAPIRouteHandler, resolver } from "hono-openapi"
+import { rateLimiter } from "hono-rate-limiter"
 import { cors } from "hono/cors"
 import { logger } from "hono/logger"
 import { requestId } from "hono/request-id"
@@ -13,12 +14,19 @@ import { authRouter, v1Router } from "@/routers"
 
 const app = new Hono().basePath("/api")
 
+app.use(
+  "*",
+  rateLimiter({
+    windowMs: 1 * 60 * 1000,
+    limit: 100,
+    keyGenerator: (c) => c.req.header("x-forwarded-for") || "unknown",
+  }),
+)
 app.use(logger())
 app.use("*", requestId())
 app.use("*", metadataMiddleware)
-
 app.use(
-  "/*",
+  "*",
   cors({
     origin: env.HONO_TRUSTED_ORIGINS,
     allowHeaders: ["Content-Type", "Authorization"],
@@ -71,6 +79,8 @@ const data = await response.json()`,
         message: "ok",
         version: BUILD_VERSION,
         environment: env.NODE_ENV,
+        // log all request headers
+        headers: c.req.header(),
       })
     },
   )

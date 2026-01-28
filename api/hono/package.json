@@ -15,12 +15,12 @@
     "start": "bun dist/index.mjs"
   },
   "dependencies": {
-    "@hono/standard-validator": "catalog:",
     "@packages/auth": "workspace:*",
     "@packages/env": "workspace:*",
     "@scalar/hono-api-reference": "catalog:",
     "hono": "catalog:",
     "hono-openapi": "catalog:",
+    "hono-rate-limiter": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
