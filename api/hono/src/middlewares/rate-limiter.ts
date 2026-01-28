@@ -1,6 +1,7 @@
 import type { Context } from "hono"
 
 import { findIp } from "@arcjet/ip"
+import { hash } from "bun"
 import { rateLimiter } from "hono-rate-limiter"
 
 interface RateLimiterConfig {
@@ -25,7 +26,7 @@ function generateRateLimitKey(
   if (getApiKey) {
     const apiKey = getApiKey(c)
     if (apiKey) {
-      return `apikey:${Bun.hash(apiKey).toString(16)}`
+      return `apikey:${hash(apiKey).toString(16)}`
     }
   }
 
