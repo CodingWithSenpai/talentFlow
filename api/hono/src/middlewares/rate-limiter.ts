@@ -1,37 +1,28 @@
 import type { Context } from "hono"
 
 import { findIp } from "@arcjet/ip"
-import { hash } from "bun"
+import { hash, randomUUIDv7 } from "bun"
 import { rateLimiter } from "hono-rate-limiter"
-
-interface RateLimiterConfig {
-  limit?: number
-  windowMs?: number
-  getUserId?: (c: Context) => string | undefined
-  getApiKey?: (c: Context) => string | undefined
-}
 
 function generateRateLimitKey(
   c: Context,
   getUserId?: (c: Context) => string | undefined,
   getApiKey?: (c: Context) => string | undefined,
 ): string {
-  if (getUserId) {
-    const userId = getUserId(c)
-    if (userId) {
-      return `userid:${userId}`
-    }
-  }
+  const userId = getUserId?.(c)
+  if (userId) return `userid:${userId}`
 
-  if (getApiKey) {
-    const apiKey = getApiKey(c)
-    if (apiKey) {
-      return `apikey:${hash(apiKey).toString(16)}`
-    }
-  }
+  const apiKey = getApiKey?.(c)
+  if (apiKey) return `apikey:${hash(apiKey).toString(16)}`
 
-  const clientIp = findIp(c.req.raw)
-  return `ip:${clientIp || "unknown"}`
+  return `ip:${findIp(c.req.raw) || randomUUIDv7()}`
+}
+
+interface RateLimiterConfig {
+  limit?: number
+  windowMs?: number
+  getUserId?: (c: Context) => string | undefined
+  getApiKey?: (c: Context) => string | undefined
 }
 
 export function createRateLimiter(config: RateLimiterConfig = {}) {
