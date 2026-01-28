@@ -73,7 +73,7 @@ const data = await response.json()`,
         version: BUILD_VERSION,
         environment: env.NODE_ENV,
         // TODO: remove this after testing
-        fingerprint: `${findIp(c.req.raw)}:${c.req.header("user-agent")}`,
+        fingerprint: `${findIp(c.req.raw)}:${c.req.header("user-agent")?.replaceAll(" ", "_")}`,
       })
     },
   )
