@@ -1,3 +1,4 @@
+import { findIp } from "@arcjet/ip"
 import { BUILD_VERSION, isLocal } from "@packages/env"
 import { env } from "@packages/env/api-hono"
 import { Scalar } from "@scalar/hono-api-reference"
@@ -16,25 +17,26 @@ const app = new Hono().basePath("/api")
 
 app.use(
   "*",
-  rateLimiter({
-    windowMs: 1 * 60 * 1000,
-    limit: 100,
-    keyGenerator: (c) => c.req.header("x-forwarded-for") || "unknown",
-  }),
-)
-app.use(logger())
-app.use("*", requestId())
-app.use("*", metadataMiddleware)
-app.use(
-  "*",
   cors({
     origin: env.HONO_TRUSTED_ORIGINS,
     allowHeaders: ["Content-Type", "Authorization"],
     allowMethods: ["GET", "POST", "OPTIONS"],
-    exposeHeaders: ["Content-Length"],
+    exposeHeaders: ["Content-Length", "x-rate-limit-key"],
     maxAge: 600,
     credentials: true,
   }),
+  metadataMiddleware,
+  logger(),
+  rateLimiter({
+    limit: 60,
+    windowMs: 1000 * 60 * 1,
+    keyGenerator: (c) => {
+      const clientIp = findIp(c.req.raw)
+      const userAgent = c.req.header("user-agent")
+      return `${clientIp}:${userAgent}`
+    },
+  }),
+  requestId(),
 )
 
 const routes = app
@@ -79,8 +81,8 @@ const data = await response.json()`,
         message: "ok",
         version: BUILD_VERSION,
         environment: env.NODE_ENV,
-        // log all request headers
-        headers: c.req.header(),
+        // TODO: remove this after testing
+        fingerprint: `${findIp(c.req.raw)}:${c.req.header("user-agent")}`,
       })
     },
   )

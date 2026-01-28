@@ -15,6 +15,7 @@
     "start": "bun dist/index.mjs"
   },
   "dependencies": {
+    "@arcjet/ip": "catalog:",
     "@packages/auth": "workspace:*",
     "@packages/env": "workspace:*",
     "@scalar/hono-api-reference": "catalog:",
