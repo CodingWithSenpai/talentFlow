@@ -106,7 +106,7 @@
     "oxfmt": "^0.27.0",
     "oxlint": "^1.42.0",
     "postgres": "^3.4.8",
-    "posthog-js": "^1.336.1",
+    "posthog-js": "^1.336.0",
     "react": "^19.2.4",
     "react-day-picker": "^9.13.0",
     "react-dom": "^19.2.4",
