@@ -1,24 +1,57 @@
+import type { Context } from "hono"
+
 import { findIp } from "@arcjet/ip"
 import { rateLimiter } from "hono-rate-limiter"
 
-export const rateLimiterMiddleware = rateLimiter({
-  // TODO: add redis or some memory store to store the rate limit data
-  limit: 1,
-  windowMs: 1000 * 60 * 1,
-  keyGenerator: (c) => {
-    const clientIp = findIp(c.req.raw)
-    const userAgent = c.req.header("user-agent")
-    return `${clientIp}:${userAgent?.replaceAll(" ", "_")}`
-  },
-  handler: (c) => {
-    return c.json(
-      {
-        error: {
-          code: "RATE_LIMIT_EXCEEDED",
-          message: "Too many requests. Please try again later.",
+interface RateLimiterConfig {
+  limit?: number
+  windowMs?: number
+  getUserId?: (c: Context) => string | undefined
+  getApiKey?: (c: Context) => string | undefined
+}
+
+function generateRateLimitKey(
+  c: Context,
+  getUserId?: (c: Context) => string | undefined,
+  getApiKey?: (c: Context) => string | undefined,
+): string {
+  if (getUserId) {
+    const userId = getUserId(c)
+    if (userId) {
+      return `userid:${userId}`
+    }
+  }
+
+  if (getApiKey) {
+    const apiKey = getApiKey(c)
+    if (apiKey) {
+      return `apikey:${Bun.hash(apiKey).toString(16)}`
+    }
+  }
+
+  const clientIp = findIp(c.req.raw)
+  return `ip:${clientIp || "unknown"}`
+}
+
+export function createRateLimiter(config: RateLimiterConfig = {}) {
+  const { limit = 60, windowMs = 60000, getUserId, getApiKey } = config
+
+  return rateLimiter({
+    limit,
+    windowMs,
+    keyGenerator: (c) => generateRateLimitKey(c, getUserId, getApiKey),
+    handler: (c) => {
+      return c.json(
+        {
+          error: {
+            code: "RATE_LIMIT_EXCEEDED",
+            message: "Too many requests. Please try again later.",
+          },
         },
-      },
-      429,
-    )
-  },
-})
+        429,
+      )
+    },
+  })
+}
+
+export const rateLimiterMiddleware = createRateLimiter()
