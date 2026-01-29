@@ -4,7 +4,7 @@ import { betterAuth } from "better-auth"
 import { drizzleAdapter } from "better-auth/adapters/drizzle"
 import { openAPI } from "better-auth/plugins"
 
-import { getCookieDomain, getCookiePrefix } from "./lib/utils"
+import { getCookieDomain, getCookiePrefix } from "@/lib/utils"
 
 const cookieDomain = getCookieDomain(env.HONO_APP_URL)
 const cookiePrefix = getCookiePrefix(env.HONO_APP_URL)
