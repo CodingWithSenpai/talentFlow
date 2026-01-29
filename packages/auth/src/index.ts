@@ -21,15 +21,6 @@ export const auth = betterAuth({
       verification,
     },
   }),
-  advanced: {
-    ...(cookiePrefix && { cookiePrefix }),
-    ...(cookieDomain && {
-      crossSubDomainCookies: {
-        enabled: true,
-        domain: cookieDomain,
-      },
-    }),
-  },
   socialProviders: {
     github: {
       clientId: env.GITHUB_CLIENT_ID,
@@ -41,6 +32,15 @@ export const auth = betterAuth({
     },
   },
   plugins: [openAPI()],
+  advanced: {
+    ...(cookiePrefix && { cookiePrefix }),
+    ...(cookieDomain && {
+      crossSubDomainCookies: {
+        enabled: true,
+        domain: cookieDomain,
+      },
+    }),
+  },
 })
 
 export type Session = typeof auth.$Infer.Session
