@@ -44,7 +44,7 @@ export const v1Router = new Hono<{
             source: `import { apiClient } from "@/lib/api/client"
 
 const response = await apiClient.v1.session.$get()
-const data = await response.json()`,
+const { data } = await response.json()`,
           },
         ],
       } as object),
@@ -92,7 +92,7 @@ const data = await response.json()`,
             source: `import { apiClient } from "@/lib/api/client"
 
 const response = await apiClient.v1.user.$get()
-const data = await response.json()`,
+const { data } = await response.json()`,
           },
         ],
       } as object),

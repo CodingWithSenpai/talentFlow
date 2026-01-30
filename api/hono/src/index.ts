@@ -52,7 +52,7 @@ const routes = app
             source: `import { apiClient } from "@/lib/api/client"
 
 const response = await apiClient.health.$get()
-const data = await response.json()`,
+const { data } = await response.json()`,
           },
         ],
       } as object),
