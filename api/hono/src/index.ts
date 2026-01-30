@@ -7,7 +7,7 @@ import { cors } from "hono/cors"
 import { logger } from "hono/logger"
 import { z } from "zod"
 
-import { error, errorHandler } from "@/lib/error"
+import { errorHandler } from "@/lib/error"
 import { rateLimiterMiddleware } from "@/middlewares"
 import { authRouter, v1Router } from "@/routers"
 
@@ -28,7 +28,7 @@ app.use(
 )
 
 app.onError(errorHandler)
-app.notFound((c) => error.notFound(c))
+app.notFound((c) => c.json({ error: { code: "NOT_FOUND", message: "Not Found" } }, 404))
 
 const routes = app
   .get("/", (c) => {
@@ -37,7 +37,7 @@ const routes = app
   })
   .get("/headers", (c) => {
     if (env.NODE_ENV !== "local" && env.NODE_ENV !== "development") {
-      return error.forbidden(c)
+      return c.json({ error: { code: "FORBIDDEN", message: "Forbidden" } }, 403)
     }
     const data = c.req.header()
     return c.json({ data })
