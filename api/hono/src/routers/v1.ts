@@ -57,21 +57,6 @@ const { data } = await response.json()`,
             },
           },
         },
-        401: {
-          description: "Unauthorized",
-          content: {
-            "application/json": {
-              schema: resolver(
-                z.object({
-                  error: z.object({
-                    code: z.string().meta({ example: "AUTHORIZATION_ERROR" }),
-                    message: z.string().meta({ example: "Unauthorized" }),
-                  }),
-                }),
-              ),
-            },
-          },
-        },
       },
     }),
     (c) => {
@@ -102,21 +87,6 @@ const { data } = await response.json()`,
           content: {
             "application/json": {
               schema: resolver(z.object({ data: userSchema })),
-            },
-          },
-        },
-        401: {
-          description: "Unauthorized",
-          content: {
-            "application/json": {
-              schema: resolver(
-                z.object({
-                  error: z.object({
-                    code: z.string().meta({ example: "AUTHORIZATION_ERROR" }),
-                    message: z.string().meta({ example: "Unauthorized" }),
-                  }),
-                }),
-              ),
             },
           },
         },
