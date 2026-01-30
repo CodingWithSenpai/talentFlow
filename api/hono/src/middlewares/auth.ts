@@ -5,6 +5,7 @@ import { auth } from "@packages/auth"
 import { env } from "@packages/env/api-hono"
 import { createMiddleware } from "hono/factory"
 
+import { error } from "@/lib/error"
 import { createRateLimiter } from "@/middlewares/rate-limiter"
 
 const userRateLimiter = createRateLimiter({
@@ -17,7 +18,7 @@ export const authMiddleware = createMiddleware<{ Variables: Session }>(async (c,
   const session = await auth.api.getSession({ headers: c.req.raw.headers })
 
   if (!session) {
-    return c.json({ error: { code: "AUTHORIZATION_ERROR", message: "Unauthorized" } }, 401)
+    return error.unauthorized(c)
   }
 
   c.set("session", session.session)
