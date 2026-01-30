@@ -27,13 +27,10 @@ const userSchema = z.object({
   updatedAt: z.string().meta({ format: "date-time", example: "2025-12-17T14:33:40.317Z" }),
 })
 
-const app = new Hono<{
+export const v1Router = new Hono<{
   Variables: Session
 }>()
-
-app.use("/*", authMiddleware)
-
-export const v1Router = app
+  .use("/*", authMiddleware)
   .get(
     "/session",
     describeRoute({
@@ -56,7 +53,7 @@ const data = await response.json()`,
           description: "OK",
           content: {
             "application/json": {
-              schema: resolver(sessionSchema),
+              schema: resolver(z.object({ data: sessionSchema })),
             },
           },
         },
@@ -78,8 +75,8 @@ const data = await response.json()`,
       },
     }),
     (c) => {
-      const session = c.get("session")
-      return c.json(session)
+      const data = c.get("session")
+      return c.json({ data })
     },
   )
   .get(
@@ -104,7 +101,7 @@ const data = await response.json()`,
           description: "OK",
           content: {
             "application/json": {
-              schema: resolver(userSchema),
+              schema: resolver(z.object({ data: userSchema })),
             },
           },
         },
@@ -126,7 +123,7 @@ const data = await response.json()`,
       },
     }),
     (c) => {
-      const user = c.get("user")
-      return c.json(user)
+      const data = c.get("user")
+      return c.json({ data })
     },
   )

@@ -5,10 +5,9 @@ import { Hono } from "hono"
 import { describeRoute, openAPIRouteHandler, resolver } from "hono-openapi"
 import { cors } from "hono/cors"
 import { logger } from "hono/logger"
-import { requestId } from "hono/request-id"
 import { z } from "zod"
 
-import { metadataMiddleware, rateLimiterMiddleware } from "@/middlewares"
+import { rateLimiterMiddleware } from "@/middlewares"
 import { authRouter, v1Router } from "@/routers"
 
 const app = new Hono()
@@ -23,24 +22,21 @@ app.use(
     maxAge: 600,
     credentials: true,
   }),
-  metadataMiddleware,
   logger(),
   rateLimiterMiddleware,
-  requestId(),
 )
 
 const routes = app
   .get("/", (c) => {
-    return c.json({
-      message: "ok",
-      version: BUILD_VERSION,
-      environment: env.NODE_ENV,
-    })
+    const data = { message: "ok", version: BUILD_VERSION, environment: env.NODE_ENV }
+    return c.json({ data })
   })
   .get("/headers", (c) => {
-    return env.NODE_ENV === "local" || env.NODE_ENV === "development"
-      ? c.json(c.req.header())
-      : c.json({ error: { code: "FORBIDDEN", message: "Not allowed in production" } }, 403)
+    if (env.NODE_ENV !== "local" && env.NODE_ENV !== "development") {
+      return c.json({ error: { code: "FORBIDDEN", message: "Not allowed in production" } }, 403)
+    }
+    const data = c.req.header()
+    return c.json({ data })
   })
   .basePath("/api")
   .get(
@@ -67,11 +63,13 @@ const data = await response.json()`,
             "application/json": {
               schema: resolver(
                 z.object({
-                  environment: z
-                    .enum(["local", "development", "test", "staging", "production"])
-                    .meta({ example: env.NODE_ENV }),
-                  message: z.string().meta({ example: "ok" }),
-                  version: z.string().meta({ example: BUILD_VERSION }),
+                  data: z.object({
+                    environment: z
+                      .enum(["local", "development", "test", "staging", "production"])
+                      .meta({ example: env.NODE_ENV }),
+                    message: z.string().meta({ example: "ok" }),
+                    version: z.string().meta({ example: BUILD_VERSION }),
+                  }),
                 }),
               ),
             },
@@ -80,11 +78,8 @@ const data = await response.json()`,
       },
     }),
     (c) => {
-      return c.json({
-        message: "ok",
-        version: BUILD_VERSION,
-        environment: env.NODE_ENV,
-      })
+      const data = { message: "ok", version: BUILD_VERSION, environment: env.NODE_ENV }
+      return c.json({ data })
     },
   )
   .route("/auth", authRouter)
