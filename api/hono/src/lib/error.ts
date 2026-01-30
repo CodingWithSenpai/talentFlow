@@ -49,18 +49,22 @@ export const statuses = {
   511: "Network Authentication Required",
 } as const
 
-const toErrorCode = (status: keyof typeof statuses) =>
+type KnownStatus = keyof typeof statuses
+
+const toErrorCode = (status: KnownStatus) =>
   statuses[status].toUpperCase().replace(/ /g, "_").replace(/'/g, "")
 
 const jsonError =
   <S extends ContentfulStatusCode>(status: S) =>
   (c: Context, message?: string, extra?: { code?: string } & Record<string, unknown>) => {
     const { code, ...rest } = extra ?? {}
+    const knownStatus = status as KnownStatus
+
     return c.json(
       {
         error: {
-          code: code ?? toErrorCode(status as keyof typeof statuses),
-          message: message ?? statuses[status as keyof typeof statuses],
+          code: code ?? toErrorCode(knownStatus),
+          message: message ?? statuses[knownStatus],
           ...rest,
         },
       },
