@@ -9,7 +9,7 @@
   "types": "./dist/index.d.mts",
   "exports": "./dist/index.mjs",
   "scripts": {
-    "build": "bun --cwd ../../packages/db drizzle-kit migrate && tsdown",
+    "build": "tsdown",
     "check-types": "tsc --noEmit",
     "dev": "concurrently \"tsdown --watch\" \"bun --hot src/index.ts\"",
     "start": "bun dist/index.mjs"
