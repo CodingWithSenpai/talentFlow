@@ -15,6 +15,10 @@ export const env = createEnv({
       .string()
       .transform((s) => s.split(",").map((v) => v.trim()))
       .pipe(z.array(z.url())),
+
+    // Optional: waitlist welcome emails
+    RESEND_API_KEY: z.string().optional(),
+    RESEND_FROM_EMAIL: z.string().email().optional(),
   },
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
@@ -23,6 +27,9 @@ export const env = createEnv({
     HONO_RATE_LIMIT: process.env.HONO_RATE_LIMIT,
     HONO_RATE_LIMIT_WINDOW_MS: process.env.HONO_RATE_LIMIT_WINDOW_MS,
     HONO_TRUSTED_ORIGINS: process.env.HONO_TRUSTED_ORIGINS,
+
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
+    RESEND_FROM_EMAIL: process.env.RESEND_FROM_EMAIL,
   },
   emptyStringAsUndefined: true,
   skipValidation: process.env.SKIP_ENV_VALIDATION === "true",

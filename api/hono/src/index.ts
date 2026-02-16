@@ -9,7 +9,7 @@ import { z } from "zod"
 
 import { errorHandler } from "@/lib/error"
 import { rateLimiterMiddleware } from "@/middlewares"
-import { authRouter, v1Router } from "@/routers"
+import { authRouter, v1Router, waitlistRouter } from "@/routers"
 
 const app = new Hono()
 
@@ -88,6 +88,7 @@ const { data } = await response.json()`,
   )
   .route("/auth", authRouter)
   .route("/v1", v1Router)
+  .route("/waitlist", waitlistRouter)
   .get(
     "/openapi.json",
     openAPIRouteHandler(app, {

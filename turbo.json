@@ -32,6 +32,8 @@
     "HONO_APP_URL",
     "HONO_TRUSTED_ORIGINS",
     "POSTGRES_URL",
+    "RESEND_API_KEY",
+    "RESEND_FROM_EMAIL",
     // Client variables
     "NEXT_PUBLIC_API_URL",
     "NEXT_PUBLIC_APP_URL",

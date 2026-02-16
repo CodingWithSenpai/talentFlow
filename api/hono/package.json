@@ -18,11 +18,13 @@
     "@arcjet/ip": "catalog:",
     "@hono/standard-validator": "catalog:",
     "@packages/auth": "workspace:*",
+    "@packages/db": "workspace:*",
     "@packages/env": "workspace:*",
     "@scalar/hono-api-reference": "catalog:",
     "hono": "catalog:",
     "hono-openapi": "catalog:",
     "hono-rate-limiter": "catalog:",
+    "resend": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {

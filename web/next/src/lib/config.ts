@@ -12,10 +12,10 @@ const getInternalApiUrl = () => {
 export const config = {
   // Application configuration
   app: {
-    name: "ZeroStarter",
+    name: "TalentFlow",
     description:
-      "A modern, type-safe, and high-performance SaaS starter template built with a monorepo architecture.",
-    tagline: "The SaaS Starter",
+      "AI hiring CRM with a landing + waitlist first, then a full candidate ranking and application tracking dashboard.",
+    tagline: "AI hiring CRM",
     url: env.NEXT_PUBLIC_APP_URL,
     version: BUILD_VERSION,
   },
@@ -28,7 +28,7 @@ export const config = {
 
   // Social links
   social: {
-    github: "https://github.com/nrjdalal/zerostarter",
+    github: "https://github.com/CodingWithSenpai/talentFlow",
   },
 
   // Feature flags

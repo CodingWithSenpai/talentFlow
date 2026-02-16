@@ -1,4 +1,20 @@
 services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: talentflow
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - talentflow_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d talentflow"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
   api:
     build:
       context: .
@@ -9,6 +25,9 @@ services:
       - INTERNAL_API_URL=http://api:4000
     ports:
       - "4000:4000"
+    depends_on:
+      db:
+        condition: service_healthy
 
   web:
     build:
@@ -20,3 +39,8 @@ services:
       - INTERNAL_API_URL=http://api:4000
     ports:
       - "3000:3000"
+    depends_on:
+      - api
+
+volumes:
+  talentflow_pg:
