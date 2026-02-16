@@ -1,4 +1,5 @@
 FROM oven/bun:latest AS base
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
 FROM base AS prepare
 WORKDIR /app
@@ -12,7 +13,7 @@ COPY --from=prepare /app/.env .
 COPY --from=prepare /app/.github/ ./.github/
 COPY --from=prepare /app/out/json/ .
 COPY --from=prepare /app/out/bun.lock .
-RUN bun install --frozen-lockfile --ignore-scripts
+RUN bun install --ignore-scripts
 COPY --from=prepare /app/out/full/ .
 ENV NODE_ENV=production
 RUN bun run build
