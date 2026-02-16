@@ -1,4 +1,4 @@
-import { ImageResponse } from "@takumi-rs/image-response"
+import { ImageResponse } from "next/og"
 
 export const dynamic = "force-static"
 
